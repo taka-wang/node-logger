@@ -21,10 +21,10 @@ client.on("connect", function(){
         client.on("message", function(topic, payload, packet){
             console.log("Received '" + payload + "' on '" + topic + "'");
             switch (topic) {
-                case "/qr/":
+                case "/lab3/qr/":
                     log["qrcode"] = payload.toString();
                     break;
-                case "/ble/nearest/":
+                case "/lab3/ble/nearest/":
                     log["nearest"] = payload.toString();
                     break;
                 default:
@@ -39,7 +39,7 @@ client.on("connect", function(){
 });
 
 
-var server = app.listen(3000, function () {
+var server = app.listen(3001, function () {
 
   var host = server.address().address
   var port = server.address().port
