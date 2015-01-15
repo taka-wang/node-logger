@@ -1,3 +1,4 @@
+var config = require("./config.json");
 var express = require('express');
 var app = express();
 var mqtt = require('mqtt');
@@ -13,27 +14,30 @@ app.get('/hello', function (req, res) {
   
 });
 
-var client  = mqtt.connect('mqtt://broker.mqttdashboard.com');
-
+var client  = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port });
 
 client.on("connect", function(){
-    client.subscribe("/lab3/#", function(){
+    console.log("connected");
+    client.subscribe(config.topic_sub, function(){
         client.on("message", function(topic, payload, packet){
             console.log("Received '" + payload + "' on '" + topic + "'");
             switch (topic) {
-                case "/lab3/qr/":
+                case config.topic_qr:
                     log["qrcode"] = payload.toString();
                     break;
-                case "/lab3/ble/nearest/":
+                case config.topic_nearest:
                     log["nearest"] = payload.toString();
                     break;
-                case "/lab3/scale/":
+                case config.topic_scale:
                     log["scale"] = payload.toString();
-                    client.publish("/lab3/log/", "hello world", function(){
-                        console.log("message is published");
-                    });
+                    if (config.tainan) {
+                        client.publish(config.topic_log, "hello world", function(){
+                            console.log("message is published");
+                        });
+                    }
                     break;
-                case "/lab3/log/":
+                case config.topic_log:
+                    //write to db
                     break;
                 default:
                     break;
@@ -44,11 +48,11 @@ client.on("connect", function(){
 });
 
 
-var server = app.listen(3001, function () {
+var server = app.listen(config.web_port, function () {
 
   var host = server.address().address
   var port = server.address().port
 
-  console.log('Example app listening at http://%s:%s', host, port)
+  console.log('app listening at http://%s:%s', host, port)
 
 })
