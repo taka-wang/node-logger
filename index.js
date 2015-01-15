@@ -47,7 +47,7 @@ server.listen(port, function(){
 **********************************************************************/
 
 router.get("/", function(req, res) {
-    res.json({ message: "Hello! API works" });  
+    res.json({ message: "API works" });  
 });
 
 router.route("/hello")
@@ -76,7 +76,7 @@ router.route("/items")
         });
         item.save(function(err) {
             if (!err) {
-                res.json({ message: "created" });
+                res.json({ message: "item created" });
             } else {
                 res.json(200, { message: err });
             }
@@ -100,7 +100,7 @@ router.route("/items/:id")
             item.qrcode = req.body.qrcode;
             return item.save(function(err) {
                 if (!err) {
-                    res.json({ message: "updated" });
+                    res.json({ message: "item updated" });
                 } else {
                     res.json(200, { message: err });
                 }
@@ -112,7 +112,7 @@ router.route("/items/:id")
         return Item.findById(req.params.item, function(err, item) {
             return item.remove(function(err) {
                 if (!err) {
-                    res.json({ message: "deleted" });
+                    res.json({ message: "item deleted" });
                 } else {
                     res.json(200, { message: err });
                 }
@@ -139,7 +139,7 @@ router.route("/beacons")
         });
         beacon.save(function(err) {
             if (!err) {
-                res.json({ message: "created" });
+                res.json({ message: "beacon created" });
             } else {
                 res.json(200, { message: err });
             }
@@ -163,7 +163,7 @@ router.route("/beacons/:id")
             beacon.name = req.body.name;
             return beacon.save(function(err) {
                 if (!err) {
-                    res.json({ message: "updated" });
+                    res.json({ message: "beacon updated" });
                 } else {
                     res.json(200, { message: err });
                 }
@@ -176,7 +176,7 @@ router.route("/beacons/:id")
         return Beacon.findById(req.params.id, function(err, beacon) {
             return beacon.remove(function(err) {
                 if (!err) {
-                    res.json({ message: "deleted" });
+                    res.json({ message: "beacon deleted" });
                 } else {
                     res.json(200, { message: err });
                 }
