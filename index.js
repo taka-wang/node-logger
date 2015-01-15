@@ -23,6 +23,10 @@ var express      = require("express")               // call express
         qrcode: ""
     }
 
+/**********************************************************************
+* Express Setup
+**********************************************************************/
+
 app.disable("x-powered-by");
 app.disable("etag");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,6 +38,13 @@ app.use(function(req, res, next) {              // Allow CORS
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
 });
+server.listen(port, function(){
+    console.log("server on port " + port);
+});
+
+/**********************************************************************
+* Restful API router
+**********************************************************************/
 
 router.get("/", function(req, res) {
     res.json({ message: "Hello! API works" });  
@@ -172,10 +183,6 @@ router.route("/beacons/:id")
             });
         });
     });
-
-server.listen(port, function(){
-    console.log("server on port " + port);
-});
 
 /**********************************************************************
 * MQTT
