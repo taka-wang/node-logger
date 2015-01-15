@@ -8,8 +8,8 @@ var express      = require("express")         // call express
     , server     = require("http").Server(app) 
     , bodyParser = require("body-parser") 
     , moment     = require("moment") 
+    , mqtt       = require("mqtt") 
     , config     = require("./config.json") 
-    , mqtt       = require('mqtt') 
     , Log        = require("./model/log")
     , Beacon     = require("./model/beacon")
     , Item       = require("./model/item")
@@ -19,14 +19,10 @@ var express      = require("express")         // call express
         nearest: "",
         qrcode: ""
     }
+    , port = process.env.PORT || config.web_port
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-var port = process.env.PORT || config.web_port; // set our port
-server.listen(port, function(){
-    console.log("server on port " + port);
-});
 
 // Allow CORS
 app.use(function(req, res, next) {
@@ -187,6 +183,10 @@ router.route("/beacons/:id")
 
 //prefix router with /api
 app.use("/api", router);
+
+server.listen(port, function(){
+    console.log("server on port " + port);
+});
 
 /**********************************************************************
 * MQTT
