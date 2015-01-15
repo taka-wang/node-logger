@@ -1,0 +1,29 @@
+{
+    "name": "node-logger",
+    "version": "1.0.0",
+    "description": "node logger",
+    "main": "index.js",
+    "private": "true",
+    "dependencies": {
+        "express": "~4.0.0",
+        "mongoose": "~3.6.13",
+        "body-parser": "~1.0.1",
+        "redis": "0.12.1",
+        "mqtt": "~1.0.1",
+        "moment": "2.8.3"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/taka-wang/node-logger.git"
+    },
+
+    "author": "Taka Wang",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/taka-wang/node-logger/issues"
+    },
+    "homepage": "https://github.com/taka-wang/node-logger"
+}
