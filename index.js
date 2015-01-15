@@ -10,7 +10,6 @@ var express      = require("express")         // call express
     , moment     = require("moment") 
     , config     = require("./config.json") 
     , mqtt       = require('mqtt') 
-
     , Log        = require("./model/log")
     , Beacon     = require("./model/beacon")
     , Item       = require("./model/item")
@@ -43,16 +42,22 @@ app.use(express.static(__dirname + "/public"));
 //routes for api
 var router = express.Router();
 
-// middleware to use for all requests
+/* middleware to use for all requests
 router.use(function(req, res, next) {
     console.log("Something is happening.");
     next();
 });
+*/
+
+router.get("/", function(req, res) {
+    res.json({ message: "Hello! API works" });  
+});
 
 router.route("/hello")
     .get(function(req, res) {
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(log));
+        //res.setHeader("Content-Type", "application/json");
+        //res.end(JSON.stringify(log));
+        res.json(log);
     });
 
 router.route("/items")
@@ -79,7 +84,7 @@ router.route("/items")
                 res.json(200, { message: err });
             }
         });
-    })
+    });
 
 router.route("/items/:id")
     // read a single item by id
@@ -116,7 +121,7 @@ router.route("/items/:id")
                 }
             });
         });
-    })
+    });
 
 router.route("/beacons")
     // read a list of beacons
@@ -142,7 +147,7 @@ router.route("/beacons")
                 res.json(200, { message: err });
             }
         });
-    })
+    });
 
 router.route("/beacons/:id")
     // read a single beacon by id
@@ -180,12 +185,14 @@ router.route("/beacons/:id")
                 }
             });
         });
-    })
+    });
 
 //prefix router with /api
 app.use("/api", router);
 
-/**********************************************************************/
+/**********************************************************************
+* MQTT
+**********************************************************************/
 
 var client  = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port });
 
@@ -210,7 +217,7 @@ client.on("connect", function(){
                     }
                     break;
                 case config.topic_log:
-                    //write to db
+                    //write log to db
                     break;
                 default:
                     break;
