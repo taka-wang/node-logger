@@ -12,14 +12,6 @@
         "mqtt": "~1.0.1",
         "moment": "2.8.3"
     },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/taka-wang/node-logger.git"
-    },
-
     "author": "Taka Wang",
     "license": "MIT",
     "bugs": {
