@@ -36,6 +36,7 @@ app.use(function(req, res, next) {
 
 ## How to install mongodb
 
-[Official Website](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/)
+[X86](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/)
+[ARM](https://github.com/skrabban/mongo-nonx86)
 
 ## MIT License
