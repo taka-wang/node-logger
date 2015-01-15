@@ -16,6 +16,8 @@ app.get('/hello', function (req, res) {
 
 var client  = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port });
 
+
+
 client.on("connect", function(){
     console.log("connected");
     client.subscribe(config.topic_sub, function(){
@@ -44,7 +46,6 @@ client.on("connect", function(){
             }
         });
     });
-
 });
 
 
