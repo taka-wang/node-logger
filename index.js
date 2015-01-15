@@ -46,9 +46,10 @@ server.listen(port, function(){
 * Restful API router
 **********************************************************************/
 
-router.get("/", function(req, res) {
-    res.json({ message: "API works" });  
-});
+router.route("/")
+    .all(function(req, res) {
+        res.json({ message: "API works" });
+    });
 
 router.route("/hello")
     .get(function(req, res) {
