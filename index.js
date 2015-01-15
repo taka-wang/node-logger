@@ -14,13 +14,11 @@ var express      = require("express")         // call express
     , Beacon     = require("./model/beacon")
     , Item       = require("./model/item")
 //    , db         = require("./db") 
-
-
-var log = {
-    scale : "",
-    nearest: "",
-    qrcode: ""
-}
+    , latest     = {
+        scale: 0,
+        nearest: "",
+        qrcode: ""
+    }
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -56,8 +54,8 @@ router.get("/", function(req, res) {
 router.route("/hello")
     .get(function(req, res) {
         //res.setHeader("Content-Type", "application/json");
-        //res.end(JSON.stringify(log));
-        res.json(log);
+        //res.end(JSON.stringify(latest));
+        res.json(latest);
     });
 
 router.route("/items")
@@ -203,23 +201,31 @@ client.on("connect", function(){
             console.log("Received '" + payload + "' on '" + topic + "'");
             switch (topic) {
                 case config.topic_qr:
-                    log["qrcode"] = payload.toString();
+                    latest["qrcode"] = payload.toString();
                     break;
                 case config.topic_nearest:
-                    log["nearest"] = payload.toString();
+                    latest["nearest"] = payload.toString();
                     break;
                 case config.topic_scale:
-                    log["scale"] = payload.toString();
+                    latest["scale"] = payload.toString();
+                    
                     if (config.tainan) {
-                        client.publish(config.topic_log, "hello world", function(){
-                            console.log("message is published");
+                        client.publish(config.topic_log, JSON.stringify(latest), function(){
+                            console.log("pub");
                         });
                     }
                     break;
                 case config.topic_log:
-                    //write log to db
+                    // write log to mongo
+                    var clog = new Log(JSON.parse( payload.toString() ));
+                    clog.save(function(err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
                     break;
                 default:
+                    //do nothing
                     break;
             }
         });
