@@ -14,10 +14,10 @@ app.get('/hello', function (req, res) {
 });
 
 
-var client  = mqtt.connect('mqtt://mqtt.cmwang.net');
+var client  = mqtt.connect('mqtt://broker.mqttdashboard.com');
 
 client.on("connect", function(){
-    client.subscribe("#", function(){
+    client.subscribe("/lab3/#", function(){
         client.on("message", function(topic, payload, packet){
             console.log("Received '" + payload + "' on '" + topic + "'");
             switch (topic) {
