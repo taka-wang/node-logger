@@ -1,6 +1,6 @@
 /**
  * @node-logger
- *
+ * @author Taka Wang
 */
 
 var express    = require("express")           // call express
@@ -10,8 +10,12 @@ var express    = require("express")           // call express
     , moment     = require("moment") 
     , config     = require("./config.json") 
     , mqtt       = require('mqtt') 
-    //, db         = require("./db") 
-    //, Log        = require("./model/log")
+
+    , Log        = require("./model/log")
+    , Beacon     = require("./model/beacon")
+    , Item       = require("./model/item")
+//    , db         = require("./db") 
+
 
 var log = {
     scale : "",
@@ -51,10 +55,137 @@ router.route("/hello")
         res.end(JSON.stringify(log));
     });
 
+router.route("/items")
+    // read a list of items
+    .get(function(req, res) {
+        return Item.find(function(err, items) {
+            if (!err) {
+                return json(items);
+            } else {
+                res.json(200, { message: "fail to get items" });
+            }
+        });
+    })
+    // create a single item
+    .post(function(req, res) {
+        var item = new Item({
+            "qrcode": "hello",
+            "item": "world"
+        });
+        item.save(function(err) {
+            if (!err) {
+                res.json({ message: "created" });
+            } else {
+                res.json(200, { message: err });
+            }
+        });
+    })
+
+router.route("/items/:id")
+    // read a single item by id
+    .get(function(req, res) {
+        return Item.findById(req.params.item, function(err, item) {
+            if (!err) {
+                res.json(item);
+            } else {
+                res.json(200, { message: err });
+            }
+        })
+    })
+    // update a single item by id
+    .put(function(req, res) {
+        return Item.findById(req.params.item, function(err, item) {
+            item.qrcode = req.body.qrcode;
+            return item.save(function(err) {
+                if (!err) {
+                    res.json({ message: "updated" });
+                } else {
+                    res.json(200, { message: err });
+                }
+            })
+        })
+    })
+    // delete a single item by id
+    .delete(function(req, res) {
+        return Item.findById(req.params.item, function(err, item) {
+            return item.remove(function(err) {
+                if (!err) {
+                    res.json({ message: "deleted" });
+                } else {
+                    res.json(200, { message: err });
+                }
+            });
+        });
+    })
+
+router.route("/beacons")
+    // read a list of beacons
+    .get(function(req, res) {
+        return Beacon.find(function(err, beacons) {
+            if (!err) {
+                res.json(beacons);
+            } else {
+                res.json(200, { message: "fail to get beacons" });
+            }
+        });
+    })
+    // create a single beacon
+    .post(function(req, res) {
+        var beacon = new Beacon({
+            "name": "hello",
+            "id": "world"
+        });
+        beacon.save(function(err) {
+            if (!err) {
+                res.json({ message: "created" });
+            } else {
+                res.json(200, { message: err });
+            }
+        });
+    })
+
+router.route("/beacons/:id")
+    // read a single beacon by id
+    .get(function(req, res) {
+        return Beacon.findById(req.params.id, function(err, beacon) {
+            if (!err) {
+                res.json(beacon);
+            } else {
+                res.json(200, { message: err });
+            }
+        });
+    })
+    // update a single beacon by id
+    .put(function(req, res) {
+        return Beacon.findById(req.params.id, function(err, beacon) {
+            beacon.name = req.body.name;
+            return beacon.save(function(err) {
+                if (!err) {
+                    res.json({ message: "updated" });
+                } else {
+                    res.json(200, { message: err });
+                }
+            });
+        });
+
+    })
+    // delete a single beacon by id
+    .delete(function(req, res) {
+        return Beacon.findById(req.params.id, function(err, beacon) {
+            return beacon.remove(function(err) {
+                if (!err) {
+                    res.json({ message: "deleted" });
+                } else {
+                    res.json(200, { message: err });
+                }
+            });
+        });
+    })
+
 //prefix router with /api
 app.use("/api", router);
 
-/********************************************/
+/**********************************************************************/
 
 var client  = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port });
 

@@ -1,16 +1,14 @@
 /**
- * @Log
+ * @Item
  * @author Taka Wang
 */
 var mongoose     = require("mongoose");
 var Schema       = mongoose.Schema;
 
-var LogSchema   = new Schema({
+var ItemSchema   = new Schema({
     qrcode: String,
-    nearest: String,
-    scale: Number,
-    //created_at: Number,
+    item: String,
     created_at: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model("Log", LogSchema);
+module.exports = mongoose.model("Item", ItemSchema);
