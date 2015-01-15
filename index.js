@@ -3,13 +3,16 @@
  * @author Taka Wang
 */
 
-var express      = require("express")         // call express
-    , app        = express()                  // define our app using express
+var express      = require("express")               // call express
+    , app        = express()                        // define our app using express
     , server     = require("http").Server(app) 
     , bodyParser = require("body-parser") 
     , moment     = require("moment") 
     , mqtt       = require("mqtt") 
     , config     = require("./config.json") 
+    , port       = process.env.PORT || config.web_port
+    , router     = express.Router()                 //routes for api
+    , mqttclnt   = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port })
     , Log        = require("./model/log")
     , Beacon     = require("./model/beacon")
     , Item       = require("./model/item")
@@ -19,29 +22,18 @@ var express      = require("express")         // call express
         nearest: "",
         qrcode: ""
     }
-    , port = process.env.PORT || config.web_port
 
+app.disable("x-powered-by");
+app.disable("etag");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-// Allow CORS
-app.use(function(req, res, next) {
+app.use(express.static(__dirname + "/public")); // serve static files
+app.use("/api", router);                        // prefix router with /api
+app.use(function(req, res, next) {              // Allow CORS
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
 });
-
-app.use(express.static(__dirname + "/public"));
-
-//routes for api
-var router = express.Router();
-
-/* middleware to use for all requests
-router.use(function(req, res, next) {
-    console.log("Something is happening.");
-    next();
-});
-*/
 
 router.get("/", function(req, res) {
     res.json({ message: "Hello! API works" });  
@@ -181,9 +173,6 @@ router.route("/beacons/:id")
         });
     });
 
-//prefix router with /api
-app.use("/api", router);
-
 server.listen(port, function(){
     console.log("server on port " + port);
 });
@@ -192,12 +181,10 @@ server.listen(port, function(){
 * MQTT
 **********************************************************************/
 
-var client  = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port });
-
-client.on("connect", function(){
+mqttclnt.on("connect", function(){
     console.log("connected");
-    client.subscribe(config.topic_sub, function(){
-        client.on("message", function(topic, payload, packet){
+    mqttclnt.subscribe(config.topic_sub, function(){
+        mqttclnt.on("message", function(topic, payload, packet){
             console.log("Received '" + payload + "' on '" + topic + "'");
             switch (topic) {
                 case config.topic_qr:
@@ -209,8 +196,8 @@ client.on("connect", function(){
                 case config.topic_scale:
                     latest["scale"] = payload.toString();
                     
-                    if (config.tainan) {
-                        client.publish(config.topic_log, JSON.stringify(latest), function(){
+                    if (config.tainan) { // publish new log
+                        mqttclnt.publish(config.topic_log, JSON.stringify(latest), function(){
                             console.log("pub");
                         });
                     }
