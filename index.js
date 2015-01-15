@@ -13,8 +13,17 @@ app.get('/hello', function (req, res) {
   
 });
 
-
 var client  = mqtt.connect('mqtt://broker.mqttdashboard.com');
+
+var publisher = function() {
+    //save to mongodb
+
+    //publish to broker
+    client.publish("/lab3/log/", "hello world", function(){
+        console.log("message is published");
+    });
+
+}
 
 client.on("connect", function(){
     client.subscribe("/lab3/#", function(){
@@ -27,12 +36,13 @@ client.on("connect", function(){
                 case "/lab3/ble/nearest/":
                     log["nearest"] = payload.toString();
                     break;
+                case "/lab3/scale/":
+                    log["scale"] = payload.toString();
+                    publisher();
+                    break;
                 default:
                     break;
             }
-            client.publish("/log/", "hello world", function(){
-                console.log("message is published");
-            });
         });
     });
 
