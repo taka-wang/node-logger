@@ -2,7 +2,7 @@
     "tainan"        : true,
     "mqtt_server"   : "broker.mqttdashboard.com",
     "mqtt_port"     : 1883,
-    "web_port"      : 3001,
+    "web_port"      : 3002,
     "topic_sub"     : "/lab3/#",
     "topic_qr"      : "/lab3/qr/",
     "topic_nearest" : "/lab3/ble/nearest/",

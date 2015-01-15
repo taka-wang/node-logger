@@ -1,22 +1,62 @@
-var config = require("./config.json");
-var express = require('express');
-var app = express();
-var mqtt = require('mqtt');
+/**
+ * @node-logger
+ *
+*/
+
+var express    = require("express")           // call express
+    , app        = express()                  // define our app using express
+    , server     = require("http").Server(app) 
+    , bodyParser = require("body-parser") 
+    , moment     = require("moment") 
+    , config     = require("./config.json") 
+    , mqtt       = require('mqtt') 
+    //, db         = require("./db") 
+    //, Log        = require("./model/log")
+
 var log = {
     scale : "",
     nearest: "",
     qrcode: ""
 }
 
-app.get('/hello', function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(log));
-  
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+var port = process.env.PORT || config.web_port; // set our port
+server.listen(port, function(){
+    console.log("server on port " + port);
 });
 
+// Allow CORS
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
+
+app.use(express.static(__dirname + "/public"));
+
+//routes for api
+var router = express.Router();
+
+// middleware to use for all requests
+router.use(function(req, res, next) {
+    console.log("Something is happening.");
+    next();
+});
+
+router.route("/hello")
+    .get(function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(log));
+    });
+
+//prefix router with /api
+app.use("/api", router);
+
+/********************************************/
+
 var client  = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port });
-
-
 
 client.on("connect", function(){
     console.log("connected");
@@ -49,11 +89,3 @@ client.on("connect", function(){
 });
 
 
-var server = app.listen(config.web_port, function () {
-
-  var host = server.address().address
-  var port = server.address().port
-
-  console.log('app listening at http://%s:%s', host, port)
-
-})
