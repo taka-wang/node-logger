@@ -7,7 +7,7 @@ var Schema       = mongoose.Schema;
 
 var BeaconSchema   = new Schema({
     name: String,
-    id: String,
+    id: { type : String, unique: true },
     created_at: { type: Date, default: Date.now }
 });
 
