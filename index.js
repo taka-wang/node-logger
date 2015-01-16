@@ -16,7 +16,7 @@ var express      = require("express")               // call express
     , Log        = require("./model/log")
     , Beacon     = require("./model/beacon")
     , Item       = require("./model/item")
-    , db         = require("./db") 
+//    , db         = require("./db") 
     , latest     = {
         scale: 0,
         nearest: "",
