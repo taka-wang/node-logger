@@ -65,23 +65,27 @@ router.route("/items")
             if (!err) {
                 res.json(items);
             } else {
-                res.json(200, { message: "fail to get items" });
+                res.json(500, { message: "fail to get items" });
             }
         });
     })
     // create a single item
     .post(function(req, res) {
-        var item = new Item({
-            "qrcode": "hello",
-            "item": "world"
-        });
-        item.save(function(err) {
-            if (!err) {
-                res.json({ message: "item created" });
-            } else {
-                res.json(200, { message: err });
-            }
-        });
+        if (req.body.qrcode && req.body.item) {
+            var item = new Item({
+                qrcode: req.body.qrcode,
+                item: req.body.item,
+            });
+            item.save(function(err) {
+                if (!err) {
+                    res.json(201, { message: "item created" });
+                } else {
+                    res.json(500, { message: err });
+                }
+            });
+        } else {
+            res.json(400, { message: "bad request" });
+        }
     });
 
 router.route("/items/:id")
