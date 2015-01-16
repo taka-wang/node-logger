@@ -7,7 +7,7 @@ var Schema       = mongoose.Schema;
 
 var ItemSchema   = new Schema({
     qrcode: String,
-    item: String,
+    item: { type : String, unique: true },
     created_at: { type: Date, default: Date.now }
 });
 

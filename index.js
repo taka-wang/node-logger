@@ -88,40 +88,53 @@ router.route("/items")
         }
     });
 
-router.route("/items/:id")
+router.route("/items/:item_name")
     // read a single item by id
     .get(function(req, res) {
-        return Item.findById(req.params.item, function(err, item) {
-            if (!err) {
-                res.json(item);
+        return Item.findOne({ "item" : req.params.item_name}, function(err, item) {
+            if (item) {
+                if (!err) {
+                    res.json(item);
+                } else {
+                    res.json(500, { message: err });
+                }
             } else {
-                res.json(200, { message: err });
+                res.json(404, { message: "Not Found"});
             }
+
         })
     })
     // update a single item by id
     .put(function(req, res) {
-        return Item.findById(req.params.item, function(err, item) {
-            item.qrcode = req.body.qrcode;
-            return item.save(function(err) {
-                if (!err) {
-                    res.json({ message: "item updated" });
-                } else {
-                    res.json(200, { message: err });
-                }
-            })
+        return Item.findOne({ "item" : req.params.item_name}, function(err, item) {
+            if (item && req.body.qrcode) {
+                item.qrcode = req.body.qrcode;
+                return item.save(function(err) {
+                    if (!err) {
+                        res.json({ message: "item updated" });
+                    } else {
+                        res.json(200, { message: err });
+                    }
+                })
+            } else {
+                res.json(400, { message: "bad request" });
+            }
         })
     })
     // delete a single item by id
     .delete(function(req, res) {
-        return Item.findById(req.params.item, function(err, item) {
-            return item.remove(function(err) {
-                if (!err) {
-                    res.json({ message: "item deleted" });
-                } else {
-                    res.json(200, { message: err });
-                }
-            });
+        return Item.findOne({ "item" : req.params.item_name}, function(err, item) {
+            if (item) {
+                return item.remove(function(err) {
+                    if (!err) {
+                        res.json({ message: "item deleted" });
+                    } else {
+                        res.json(200, { message: err });
+                    }
+                });
+            } else {
+                res.json(400, { message: "bad request" });
+            }
         });
     });
 
