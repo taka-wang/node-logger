@@ -51,10 +51,8 @@ router.route("/")
         res.json({ message: "API works" });
     });
 
-router.route("/hello")
+router.route("/last")
     .get(function(req, res) {
-        //res.setHeader("Content-Type", "application/json");
-        //res.end(JSON.stringify(latest));
         res.json(latest);
     });
 
@@ -65,7 +63,7 @@ router.route("/items")
             if (!err) {
                 res.json(items);
             } else {
-                res.json(500, { message: "fail to get items" });
+                res.json(500, { message: "Fail to get items" });
             }
         });
     })
@@ -78,13 +76,13 @@ router.route("/items")
             });
             item.save(function(err) {
                 if (!err) {
-                    res.json(201, { message: "item created" });
+                    res.json(201, { message: "Item created" });
                 } else {
                     res.json(500, { message: err });
                 }
             });
         } else {
-            res.json(400, { message: "bad request" });
+            res.json(400, { message: "Bad request" });
         }
     });
 
@@ -99,7 +97,7 @@ router.route("/items/:item_name")
                     res.json(500, { message: err });
                 }
             } else {
-                res.json(404, { message: "Not Found"});
+                res.json(404, { message: "Not found"});
             }
 
         })
@@ -111,13 +109,13 @@ router.route("/items/:item_name")
                 item.qrcode = req.body.qrcode;
                 return item.save(function(err) {
                     if (!err) {
-                        res.json({ message: "item updated" });
+                        res.json({ message: "Item updated" });
                     } else {
                         res.json(200, { message: err });
                     }
                 });
             } else {
-                res.json(400, { message: "bad request" });
+                res.json(400, { message: "Bad request" });
             }
         })
     })
@@ -127,13 +125,13 @@ router.route("/items/:item_name")
             if (item) {
                 return item.remove(function(err) {
                     if (!err) {
-                        res.json({ message: "item deleted" });
+                        res.json({ message: "Item deleted" });
                     } else {
                         res.json(200, { message: err });
                     }
                 });
             } else {
-                res.json(404, { message: "Not Found" });
+                res.json(404, { message: "Not found" });
             }
         });
     });
@@ -145,7 +143,7 @@ router.route("/beacons")
             if (!err) {
                 res.json(beacons);
             } else {
-                res.json(500, { message: "fail to get beacons" });
+                res.json(500, { message: "Fail to get beacons" });
             }
         });
     })
@@ -158,13 +156,13 @@ router.route("/beacons")
             });
             beacon.save(function(err) {
                 if (!err) {
-                    res.json(201, { message: "beacon created" });
+                    res.json(201, { message: "Beacon created" });
                 } else {
                     res.json(500, { message: err });
                 }
             });
         } else {
-            res.json(400, { message: "bad request" });
+            res.json(400, { message: "Bad request" });
         }
     });
 
@@ -179,7 +177,7 @@ router.route("/beacons/:id")
                     res.json(500, { message: err });
                 }
             } else {
-                res.json(404, { message: "Not Found"});
+                res.json(404, { message: "Not found"});
             }
         });
     })
@@ -190,13 +188,13 @@ router.route("/beacons/:id")
                 beacon.name = req.body.name;
                 return beacon.save(function(err) {
                     if (!err) {
-                        res.json({ message: "beacon updated" });
+                        res.json({ message: "Beacon updated" });
                     } else {
                         res.json(200, { message: err });
                     }
                 });
             } else {
-                res.json(400, { message: "bad request" });
+                res.json(400, { message: "Bad request" });
             }
         });
 
@@ -207,16 +205,38 @@ router.route("/beacons/:id")
             if (beacon) {
                 return beacon.remove(function(err) {
                     if (!err) {
-                        res.json({ message: "beacon deleted" });
+                        res.json({ message: "Beacon deleted" });
                     } else {
                         res.json(200, { message: err });
                     }
                 });
             } else {
-                res.json(404, { message: "Not Found" });
+                res.json(404, { message: "Not found" });
             }
         });
     });
+
+router.route("/logs")
+    // read a list of logs
+    .get(function(req, res) {
+        if (req.query.start && req.query.end) { // date range: new Date().toISOString()
+            return Log.find({created_at: { $gte: req.query.start, $lt: req.query.end }}, function(err, logs) {
+                if (!err) {
+                    res.json(logs);
+                } else {
+                    res.json(500, { message: "Fail to get logs" });
+                }
+            });
+        } else { // all
+            return Log.find(function(err, logs) {
+                if (!err) {
+                    res.json(logs);
+                } else {
+                    res.json(500, { message: "Fail to get logs" });
+                }
+            });
+        }
+    })
 
 /**********************************************************************
 * MQTT
@@ -237,15 +257,13 @@ mqttclnt.on("connect", function(){
                     break;
                 case config.topic_scale:
                     latest["scale"] = payload.toString();
-                    
                     if (config.tainan) { // publish new log
                         mqttclnt.publish(config.topic_log, JSON.stringify(latest), function(){
                             console.log("pub");
                         });
                     }
                     break;
-                case config.topic_log:
-                    // write log to mongo
+                case config.topic_log: // write log to mongo
                     var clog = new Log(JSON.parse( payload.toString() ));
                     clog.save(function(err) {
                         if (err) {
