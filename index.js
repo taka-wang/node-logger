@@ -16,7 +16,7 @@ var express      = require("express")               // call express
     , Log        = require("./model/log")
     , Beacon     = require("./model/beacon")
     , Item       = require("./model/item")
-//    , db         = require("./db") 
+    , db         = require("./db") 
     , latest     = {
         scale: 0,
         nearest: "",
@@ -63,7 +63,7 @@ router.route("/items")
     .get(function(req, res) {
         return Item.find(function(err, items) {
             if (!err) {
-                return json(items);
+                res.json(items);
             } else {
                 res.json(200, { message: "fail to get items" });
             }
