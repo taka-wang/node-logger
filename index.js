@@ -115,7 +115,7 @@ router.route("/items/:item_name")
                     } else {
                         res.json(200, { message: err });
                     }
-                })
+                });
             } else {
                 res.json(400, { message: "bad request" });
             }
@@ -133,7 +133,7 @@ router.route("/items/:item_name")
                     }
                 });
             } else {
-                res.json(400, { message: "bad request" });
+                res.json(404, { message: "Not Found" });
             }
         });
     });
@@ -145,60 +145,76 @@ router.route("/beacons")
             if (!err) {
                 res.json(beacons);
             } else {
-                res.json(200, { message: "fail to get beacons" });
+                res.json(500, { message: "fail to get beacons" });
             }
         });
     })
     // create a single beacon
     .post(function(req, res) {
-        var beacon = new Beacon({
-            "name": "hello",
-            "id": "world"
-        });
-        beacon.save(function(err) {
-            if (!err) {
-                res.json({ message: "beacon created" });
-            } else {
-                res.json(200, { message: err });
-            }
-        });
+        if (req.body.name && req.body.id) {
+            var beacon = new Beacon({
+                name: req.body.name,
+                id: req.body.id
+            });
+            beacon.save(function(err) {
+                if (!err) {
+                    res.json(201, { message: "beacon created" });
+                } else {
+                    res.json(500, { message: err });
+                }
+            });
+        } else {
+            res.json(400, { message: "bad request" });
+        }
     });
 
 router.route("/beacons/:id")
     // read a single beacon by id
     .get(function(req, res) {
-        return Beacon.findById(req.params.id, function(err, beacon) {
-            if (!err) {
-                res.json(beacon);
+        return Beacon.findOne({ "id" : req.params.id }, function(err, beacon) {
+            if (beacon) {
+                if (!err) {
+                    res.json(beacon);
+                } else {
+                    res.json(500, { message: err });
+                }
             } else {
-                res.json(200, { message: err });
+                res.json(404, { message: "Not Found"});
             }
         });
     })
     // update a single beacon by id
     .put(function(req, res) {
-        return Beacon.findById(req.params.id, function(err, beacon) {
-            beacon.name = req.body.name;
-            return beacon.save(function(err) {
-                if (!err) {
-                    res.json({ message: "beacon updated" });
-                } else {
-                    res.json(200, { message: err });
-                }
-            });
+        return Beacon.findOne({ "id" : req.params.id }, function(err, beacon) {
+            if (beacon && req.body.name) {
+                beacon.name = req.body.name;
+                return beacon.save(function(err) {
+                    if (!err) {
+                        res.json({ message: "beacon updated" });
+                    } else {
+                        res.json(200, { message: err });
+                    }
+                });
+            } else {
+                res.json(400, { message: "bad request" });
+            }
         });
 
     })
     // delete a single beacon by id
     .delete(function(req, res) {
-        return Beacon.findById(req.params.id, function(err, beacon) {
-            return beacon.remove(function(err) {
-                if (!err) {
-                    res.json({ message: "beacon deleted" });
-                } else {
-                    res.json(200, { message: err });
-                }
-            });
+        return Beacon.findOne({ "id" : req.params.id }, function(err, beacon) {
+            if (beacon) {
+                return beacon.remove(function(err) {
+                    if (!err) {
+                        res.json({ message: "beacon deleted" });
+                    } else {
+                        res.json(200, { message: err });
+                    }
+                });
+            } else {
+                res.json(404, { message: "Not Found" });
+            }
         });
     });
 
