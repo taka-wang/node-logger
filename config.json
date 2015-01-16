@@ -3,6 +3,7 @@
     "mqtt_server"   : "broker.mqttdashboard.com",
     "mqtt_port"     : 1883,
     "web_port"      : 3002,
+    "mongodb_server": "mongodb://test:test@ds031611.mongolab.com:31611/lab3",
     "topic_sub"     : "/lab3/#",
     "topic_qr"      : "/lab3/qr/",
     "topic_nearest" : "/lab3/ble/nearest/",

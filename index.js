@@ -16,7 +16,7 @@ var express      = require("express")               // call express
     , Log        = require("./model/log")
     , Beacon     = require("./model/beacon")
     , Item       = require("./model/item")
-//    , db         = require("./db") 
+    , db         = require("./db") 
     , latest     = {
         scale: 0,
         nearest: "",
@@ -39,7 +39,7 @@ app.use(function(req, res, next) {              // Allow CORS
     next();
 });
 server.listen(port, function(){
-    console.log("server on port " + port);
+    console.log("Server on port " + port);
 });
 
 /**********************************************************************
@@ -223,7 +223,7 @@ router.route("/beacons/:id")
 **********************************************************************/
 
 mqttclnt.on("connect", function(){
-    console.log("connected");
+    console.log("connected to mqtt broker");
     mqttclnt.subscribe(config.topic_sub, function(){
         mqttclnt.on("message", function(topic, payload, packet){
             console.log("Received '" + payload + "' on '" + topic + "'");
@@ -232,7 +232,8 @@ mqttclnt.on("connect", function(){
                     latest["qrcode"] = payload.toString();
                     break;
                 case config.topic_nearest:
-                    latest["nearest"] = payload.toString();
+                    var nearest = JSON.parse(payload.toString());
+                    latest["nearest"] = nearest.id;
                     break;
                 case config.topic_scale:
                     latest["scale"] = payload.toString();

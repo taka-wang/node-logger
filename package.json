@@ -1,6 +1,6 @@
 {
     "name": "node-logger",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "node logger",
     "main": "index.js",
     "private": "true",

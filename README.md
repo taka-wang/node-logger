@@ -40,3 +40,6 @@ app.use(function(req, res, next) {
 - [ARM](https://github.com/skrabban/mongo-nonx86)
 
 ## MIT License
+
+## Pattern
+Received '{"scale":"206.7","nearest":"213","qrcode":"hello123"}' on '/lab3/log/'
