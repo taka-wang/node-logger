@@ -228,7 +228,7 @@ router.route("/logs")
                 }
             });
         } else { // all
-            return Log.find(function(err, logs) {
+            return Log.find({}, function(err, logs) {
                 if (!err) {
                     res.json(logs);
                 } else {
