@@ -1,9 +1,14 @@
-#scale-payload {
+.scale-main {
     text-align: center;
     font-size: 128px;
     color: #2E9AFE;
 }
-#scale-time {
+.scale-med {
+    text-align: center;
+    font-size: 64px;
+    color: #2E9AFE;
+}
+.scale-sub {
     text-align: center;
     font-size: 36px;
     color: #A4A4A4;
