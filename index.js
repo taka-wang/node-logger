@@ -227,13 +227,24 @@ router.route("/logs")
                 }
             });
         } else { // all
-            return Log.find({}, {limit: 100},function(err, logs) {
+            var q = Log.find({}).sort('created_at', -1).limit(20);
+            return q.execFind(function(err, logs) {
                 if (!err) {
                     res.json(logs);
                 } else {
                     res.json(500, { message: "Fail to get logs" });
                 }
             });
+
+            /*
+            return Log.find({}, function(err, logs) {
+                if (!err) {
+                    res.json(logs);
+                } else {
+                    res.json(500, { message: "Fail to get logs" });
+                }
+            });
+            */
         }
     })
 
