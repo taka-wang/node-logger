@@ -45,10 +45,15 @@ var app = {
     },
     bindEvent: function() {
         console.log("bindEvent");
+
         $(document).on("scale-change", function(e, obj) {
             var context = { payload: obj, time: new Date().toLocaleString() };
             localStorage.setItem("scale", JSON.stringify(context));
             if (app.defaults.active == "scale") app.render_scale();
+        });
+
+        $(document).on("mqtt", function(e, type, obj) {
+
         });
 
         $(document).on("pagechange", function(e, page, obj) {
@@ -68,7 +73,6 @@ var app = {
                     app.render_qrcode();
                     break;
             }
-
         });
 
         app.ctlMap.logger.click(function() {
