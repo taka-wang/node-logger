@@ -12,6 +12,7 @@
 ## Deployment
     cd node-logger
     forever start index.js
+    forever start mqlogger.js
 
 ## How to install node.js and forever on ubuntu
 - sudo apt-get install git
