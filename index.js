@@ -227,7 +227,7 @@ router.route("/logs")
                 }
             });
         } else { // all
-            var q = Log.find({}).sort('-created_at').limit(20);
+            var q = Log.find({}).sort('-created_at').limit(1000);
             return q.execFind(function(err, logs) {
                 if (!err) {
                     res.json(logs);
