@@ -27,4 +27,7 @@ var app = {
 $(function(){
     app.init();
     mqtt.connect();
+    setTimeout(function(){ 
+        mqtt.disconnect();
+    }, 3000);
 });

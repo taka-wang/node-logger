@@ -33,5 +33,8 @@ var mqtt = {
         var topic = message.destinationName;
         var payload = message.payloadString;
         console.log(topic + " : " + payload);
+    },
+    disconnect: function() {
+        this.client.disconnect(); 
     }
 };
