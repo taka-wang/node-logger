@@ -26,5 +26,5 @@ var app = {
 
 $(function(){
     app.init();
-    MQTT.connect();
+    mqtt.connect();
 });

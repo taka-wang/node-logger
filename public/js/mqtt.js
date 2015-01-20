@@ -1,4 +1,4 @@
-var MQTT = {
+var mqtt = {
     client: null,
     connect : function() {    
         this.client = new Paho.MQTT.Client(
@@ -6,8 +6,8 @@ var MQTT = {
                     config.port,
                     "web_" + parseInt(Math.random() * 100,
                     10));
-        this.client.onConnectionLost = MQTT.onConnectionLost;
-        this.client.onMessageArrived = MQTT.onMessageArrived;
+        this.client.onConnectionLost = mqtt.onConnectionLost;
+        this.client.onMessageArrived = mqtt.onMessageArrived;
         that = this;
         this.client.connect({
             timeout: config.timeout,
@@ -17,7 +17,7 @@ var MQTT = {
                 that.client.subscribe(config.topic, {qos: 0});
             },
             onFailure: function (message) {
-                setTimeout(MQTT.connect, config.reconnectTimeout);
+                setTimeout(mqtt.connect, config.reconnectTimeout);
             }
         });
     },
@@ -27,7 +27,7 @@ var MQTT = {
     },
     onConnectionLost: function(response) {
         //console.log(response);
-        setTimeout(MQTT.connect, config.reconnectTimeout);
+        setTimeout(mqtt.connect, config.reconnectTimeout);
     },
     onMessageArrived: function(message) {
         var topic = message.destinationName;
