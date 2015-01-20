@@ -33,8 +33,8 @@ var MQTT = {
                     config.port,
                     "web_" + parseInt(Math.random() * 100,
                     10));
-        this.client.onConnectionLost = this.onConnectionLost;
-        this.client.onMessageArrived = this.onMessageArrived;
+        this.client.onConnectionLost = MQTT.onConnectionLost;
+        this.client.onMessageArrived = MQTT.onMessageArrived;
         if (config.username != null) {
             this.options.userName = config.username;
             this.options.password = config.password;
@@ -44,7 +44,6 @@ var MQTT = {
             timeout: config.timeout,
             useSSL: config.useTLS,
             cleanSession: config.cleansession,
-            //onSuccess: this.onConnect,
             onSuccess: function() {
                 that.client.subscribe(config.topic, {qos: 0});
             },
