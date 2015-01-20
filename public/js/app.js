@@ -21,8 +21,12 @@ var app = {
         scale:  Handlebars.compile($("#scale-template").html()),
         qrcode: Handlebars.compile($("#qrcode-template").html())
     },
+    clear_storage: function() {
+        localStorage.removeItem("scale");
+    },
     init: function() {
         console.log("init");
+        app.clear_storage();
         app.bindEvent();
         //render default
         app.ctlMap.container.html(app.template.mytemplate({title: "Hello World"}));
