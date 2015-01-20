@@ -1,6 +1,6 @@
 {
     "tainan"        : true,
-    "mqtt_server"   : "broker.mqttdashboard.com",
+    "mqtt_server"   : "localhost",
     "mqtt_port"     : 1883,
     "web_port"      : 3002,
     "mongodb_server": "mongodb://localhost/lab3",
