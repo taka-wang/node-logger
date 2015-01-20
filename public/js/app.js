@@ -27,7 +27,7 @@ var app = {
 var MQTT = {
     client: null,
     connect : function() {
-        that = this;
+        
         this.client = new Paho.MQTT.Client(
                     window.location.hostname,
                     config.port,
@@ -39,18 +39,22 @@ var MQTT = {
             this.options.userName = config.username;
             this.options.password = config.password;
         }
+        that = this;
         this.client.connect({
             timeout: config.timeout,
             useSSL: config.useTLS,
             cleanSession: config.cleansession,
             //onSuccess: this.onConnect,
-            onSuccess: that.onConnect,
+            onSuccess: function() {
+                that.client.subscribe(config.topic, {qos: 0});
+            },
             onFailure: function (message) {
-                setTimeout(that.connect, config.reconnectTimeout);
+                setTimeout(MQTT.connect, config.reconnectTimeout);
             }
         });
     },
     onConnect : function() {
+        console.log(this.client);
         this.client.subscribe(config.topic, {qos: 0});
     },
     onConnectionLost: function(response) {
