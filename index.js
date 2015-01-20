@@ -227,13 +227,13 @@ router.route("/logs")
                 }
             });
         } else { // all
-            return Log.find({}, function(err, logs) {
+            return Log.find({}, {limit: 100, sort:{_id: -1}},function(err, logs) {
                 if (!err) {
                     res.json(logs);
                 } else {
                     res.json(500, { message: "Fail to get logs" });
                 }
-            }).limit(20);
+            });
         }
     })
 
@@ -256,7 +256,7 @@ mqttclnt.on("connect", function(){
     console.log("connected to mqtt broker");
     mqttclnt.subscribe(config.topic_sub, function(){
         mqttclnt.on("message", function(topic, payload, packet){
-            console.log("Received '" + payload + "' on '" + topic + "'");
+            //console.log("Received '" + payload + "' on '" + topic + "'");
             switch (topic) {
                 case config.topic_qr:
                     latest["qrcode"] = payload.toString();
