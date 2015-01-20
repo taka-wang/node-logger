@@ -35,12 +35,8 @@ var app = {
         var context = {title : "Beacon"};
         app.ctlMap.container.html(app.template.beacon(context));
     },
-    render_scale: function(value) {
-        var context = {
-            payload: value ? value : "",
-            time: value ? new Date().toLocaleString() : ""
-        };
-        if (value) context.payload = value;
+    render_scale: function() {
+        var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) :{};
         app.ctlMap.container.html(app.template.scale(context));
     },
     render_qrcode: function() {
@@ -50,9 +46,9 @@ var app = {
     bindEvent: function() {
         console.log("bindEvent");
         $(document).on("scale-change", function(e, obj) {
-            console.log("scale-change trigger");
-            console.log(obj);
-            app.render_scale(obj);
+            var context = { payload: obj, time: new Date().toLocaleString() };
+            localStorage.setItem("scale", JSON.stringify(context));
+            if (app.defaults.active == "scale") app.render_scale();
         });
 
         $(document).on("pagechange", function(e, page, obj) {
