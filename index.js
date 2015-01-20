@@ -243,7 +243,7 @@ router.route("/reboot")
         function execute(command, callback){
             exec(command, function(error, stdout, stderr){ callback(stdout); });
         }
-        execute('/sbin/shutdown -r now', function(callback){
+        execute('/sbin/reboot', function(callback){
             res.json({ message: "rebooting.." });
         });
     })
