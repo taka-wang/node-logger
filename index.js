@@ -227,7 +227,7 @@ router.route("/logs")
                 }
             });
         } else { // all
-            var q = Log.find({}).sort('-created_at').limit(1000);
+            var q = Log.find({}).sort("-created_at").limit(1000);
             return q.execFind(function(err, logs) {
                 if (!err) {
                     res.json(logs);
@@ -235,16 +235,6 @@ router.route("/logs")
                     res.json(500, { message: "Fail to get logs" });
                 }
             });
-
-            /*
-            return Log.find({}, function(err, logs) {
-                if (!err) {
-                    res.json(logs);
-                } else {
-                    res.json(500, { message: "Fail to get logs" });
-                }
-            });
-            */
         }
     })
 
