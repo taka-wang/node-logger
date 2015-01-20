@@ -1,7 +1,7 @@
 var config = (function () { return {
 
     port     : 9001,
-    topic    : "#",        // topic to subscribe to
+    topic    : "/lab3/#",        // topic to subscribe to
     useTLS   : false,
     cleansession : true,
     timeout  : 3,
