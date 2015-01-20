@@ -35,8 +35,12 @@ var app = {
         var context = {title : "Beacon"};
         app.ctlMap.container.html(app.template.beacon(context));
     },
-    render_scale: function() {
-        var context = {title : "Scale"};
+    render_scale: function(value) {
+        var context = {
+            payload: value ? value : "",
+            time: value ? new Date().toLocaleString() : ""
+        };
+        if (value) context.payload = value;
         app.ctlMap.container.html(app.template.scale(context));
     },
     render_qrcode: function() {
@@ -45,6 +49,12 @@ var app = {
     },
     bindEvent: function() {
         console.log("bindEvent");
+        $(document).on("scale-change", function(e, obj) {
+            console.log("scale-change trigger");
+            console.log(obj);
+            app.render_scale(obj);
+        });
+
         $(document).on("pagechange", function(e, page, obj) {
             app.defaults.active = page;
             obj.parent().addClass("active").siblings().removeClass("active");

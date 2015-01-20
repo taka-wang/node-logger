@@ -32,6 +32,11 @@ var mqtt = {
     onMessageArrived: function(message) {
         var topic = message.destinationName;
         var payload = message.payloadString;
+        switch (topic) {
+            case "/lab3/scale/":
+                $(document).trigger("scale-change", payload);
+                break;
+        }
         console.log(topic + " : " + payload);
     }
 };
