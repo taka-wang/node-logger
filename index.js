@@ -233,7 +233,7 @@ router.route("/logs")
                 } else {
                     res.json(500, { message: "Fail to get logs" });
                 }
-            });
+            }).limit(20);
         }
     })
 
