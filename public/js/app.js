@@ -59,7 +59,7 @@ var MQTT = {
     },
     onConnectionLost: function(response) {
         console.log(response);
-        setTimeout(this.connect, config.reconnectTimeout);
+        setTimeout(MQTT.connect, config.reconnectTimeout);
     },
     onMessageArrived: function(message) {
         var topic = message.destinationName;
