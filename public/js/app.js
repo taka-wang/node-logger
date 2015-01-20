@@ -30,39 +30,39 @@ var MQTT = {
         timeout: config.timeout,
         useSSL: config.useTLS,
         cleanSession: config.cleansession,
-        onSuccess: MQTT.onConnect,
+        onSuccess: this.onConnect,
         onFailure: function (message) {
-            setTimeout(MQTT.connect, config.reconnectTimeout);
+            setTimeout(this.connect, config.reconnectTimeout);
         }
     },
     connect : function() {
-        MQTT.client = new Paho.MQTT.Client(
+        this.client = new Paho.MQTT.Client(
                     window.location.hostname,
                     config.port,
                     "web_" + parseInt(Math.random() * 100,
                     10));
-        MQTT.client.onConnectionLost = MQTT.onConnectionLost;
-        MQTT.client.onMessageArrived = MQTT.onMessageArrived;
+        this.client.onConnectionLost = this.onConnectionLost;
+        this.client.onMessageArrived = this.onMessageArrived;
         if (config.username != null) {
-            MQTT.options.userName = config.username;
-            MQTT.options.password = config.password;
+            this.options.userName = config.username;
+            this.options.password = config.password;
         }
         console.log("connecting");
-        MQTT.client.connect(MQTT.options);
+        this.client.connect(this.options);
     },
     onConnect : function() {
-        MQTT.client.subscribe(config.topic, {qos: 0});
+        this.client.subscribe(config.topic, {qos: 0});
     },
     onConnectionLost: function(response) {
         console.log(response);
-        setTimeout(MQTT.connect, config.reconnectTimeout);
+        setTimeout(this.connect, config.reconnectTimeout);
     },
     onMessageArrived: function(message) {
         var topic = message.destinationName;
         var payload = message.payloadString;
         console.log(topic + " : " + payload);
     }
-}
+};
 
 
 $(function(){
