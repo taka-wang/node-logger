@@ -4,6 +4,7 @@
 */
 
 var mqtt         = require("mqtt") 
+    , config     = require("./config.json") 
     , mqttclnt   = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port })
     , Log        = require("./model/log")
     , Beacon     = require("./model/beacon")
