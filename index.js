@@ -250,7 +250,7 @@ router.route("/command/:cmd")
                 });
                 break;
             case "shutdown":
-                execute("/sbin/shutdown –h now", function(callback){
+                execute("/sbin/shutdown -h now", function(callback){
                     res.json({ message: "shutdown now" });
                 });
                 break;
