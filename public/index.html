@@ -61,9 +61,12 @@
         <h1>{{title}}</h1>
     </script>
     <script id="scale-template" type="text/x-handlebars-template">
-        {{#unless payload}}<div class="scale-med">Mettler Toledo Scale</div>{{/unless}}
+        {{#unless payload}}
+            <div class="scale-med">Mettler Toledo Scale</div>
+        {{/unless}}
         <div>
-            <div class="scale-main">{{payload}}{{#if payload}} g{{/if}}</div><div class="scale-sub">{{time}}</div>
+            <div class="scale-main">{{payload}}{{#if payload}} g{{/if}}</div>
+            <div class="scale-sub">{{time}}</div>
         </div>
     </script>
     <script id="qrcode-template" type="text/x-handlebars-template">
