@@ -99,7 +99,6 @@ router.route("/items/:item_name")
             } else {
                 res.json(404, { message: "Not found"});
             }
-
         })
     })
     // update a single item by id
@@ -236,6 +235,17 @@ router.route("/logs")
                 }
             });
         }
+    })
+
+router.route("/reboot")
+    .get(function(req, res) {
+        var exec = require('child_process').exec;
+        function execute(command, callback){
+            exec(command, function(error, stdout, stderr){ callback(stdout); });
+        }
+        execute('/sbin/shutdown -r now', function(callback){
+            res.json({ message: "rebooting.." });
+        });
     })
 
 /**********************************************************************
