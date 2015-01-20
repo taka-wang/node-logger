@@ -15,7 +15,11 @@ var app = {
         qrcode: $("#qrcode_list")
     },
     template : {
-        mytemplate: Handlebars.compile($("#mytemplate").html())
+        mytemplate: Handlebars.compile($("#mytemplate").html()),
+        logger: Handlebars.compile($("#logger-template").html()),
+        beacon: Handlebars.compile($("#beacon-template").html()),
+        scale:  Handlebars.compile($("#scale-template").html()),
+        qrcode: Handlebars.compile($("#qrcode-template").html())
     },
     init: function() {
         console.log("init");
@@ -24,20 +28,20 @@ var app = {
         app.ctlMap.container.html(app.template.mytemplate({title: "Hello World"}));
     },
     render_logger: function() {
-        var context = {title : "logger"};
-        app.ctlMap.container.html(app.template.mytemplate(context));
+        var context = {title : "Logger"};
+        app.ctlMap.container.html(app.template.logger(context));
     },
     render_beacon: function() {
-        var context = {title : "beacon"};
-        app.ctlMap.container.html(app.template.mytemplate(context));
+        var context = {title : "Beacon"};
+        app.ctlMap.container.html(app.template.beacon(context));
     },
     render_scale: function() {
-        var context = {title : "scale"};
-        app.ctlMap.container.html(app.template.mytemplate(context));
+        var context = {title : "Scale"};
+        app.ctlMap.container.html(app.template.scale(context));
     },
     render_qrcode: function() {
-        var context = {title : "qrcode"};
-        app.ctlMap.container.html(app.template.mytemplate(context));
+        var context = {title : "QR Code"};
+        app.ctlMap.container.html(app.template.qrcode(context));
     },
     bindEvent: function() {
         console.log("bindEvent");
