@@ -31,9 +31,10 @@ mqttclnt.on("connect", function(){
                     break;
                 case config.topic_scale:
                     latest["scale"] = payload.toString();
-                    if (config.tainan) { // publish new log
+                    if (config.tainan && latest["qrcode"].length > 0 && latest["nearest"].length > 0) { // publish new log
                         mqttclnt.publish(config.topic_log, JSON.stringify(latest), function(){
-                            console.log("pub");
+                            latest["qrcode"] = "";
+                            latest["nearest"]= "";
                         });
                     }
                     break;
