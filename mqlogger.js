@@ -16,10 +16,6 @@ var mqtt         = require("mqtt")
         qrcode: ""
     }
 
-/**********************************************************************
-* MQTT
-**********************************************************************/
-
 mqttclnt.on("connect", function(){
     console.log("connected to mqtt broker");
     mqttclnt.subscribe(config.topic_sub, function(){
