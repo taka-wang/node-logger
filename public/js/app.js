@@ -25,7 +25,7 @@ var app = {
 };
 
 var MQTT = {
-    client,
+    client: null,
     options : {
         timeout: config.timeout,
         useSSL: config.useTLS,
