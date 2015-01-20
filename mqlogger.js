@@ -3,7 +3,8 @@
  * @author Taka Wang
 */
 
-var mqttclnt   = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port })
+var mqtt         = require("mqtt") 
+    , mqttclnt   = mqtt.connect({ host: config.mqtt_server, port: config.mqtt_port })
     , Log        = require("./model/log")
     , Beacon     = require("./model/beacon")
     , Item       = require("./model/item")
