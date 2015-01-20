@@ -237,15 +237,27 @@ router.route("/logs")
         }
     })
 
-router.route("/reboot")
-    .get(function(req, res) {
-        var exec = require('child_process').exec;
-        function execute(command, callback){
-            exec(command, function(error, stdout, stderr){ callback(stdout); });
+router.route("/command/:cmd")
+    .post(function(req, res) {
+        var exec = require("child_process").exec;
+        function execute(command, callback) {
+            exec(command, function(error, stdout, stderr) { callback(stdout); });
         }
-        execute('/sbin/reboot', function(callback){
-            res.json({ message: "rebooting.." });
-        });
+        switch (req.params.id) {
+            case "reboot":
+                execute("/sbin/reboot", function(callback){
+                    res.json({ message: "rebooting.." });
+                });
+                break;
+            case "shutdown":
+                execute("/sbin/shutdown –h now", function(callback){
+                    res.json({ message: "shutdown now" });
+                });
+                break;
+            default:
+                //do nothing
+                break;
+        }
     })
 
 /**********************************************************************
