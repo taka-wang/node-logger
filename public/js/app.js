@@ -31,58 +31,53 @@ var app = {
         //render default
         app.ctlMap.container.html(app.template.mytemplate({title: "Hello World"}));
     },
-    render_logger: function() {
-        var context = {title : "Logger"};
-        app.ctlMap.container.html(app.template.logger(context));
+    render: function(type) {
+        switch (type) {
+            case "logger":
+                var context = {title : "Logger"};
+                app.ctlMap.container.html(app.template.logger(context));
+                break;
+            case "beacon":
+                var context = {title : "Beacon"};
+                app.ctlMap.container.html(app.template.beacon(context));
+                break;
+            case "scale":
+                var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
+                app.ctlMap.container.html(app.template.scale(context));
+                break;
+            case "qrcode":
+                var context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
+                app.ctlMap.container.html(app.template.qrcode(context));
+                break;
+        }
     },
-    render_beacon: function() {
-        var context = {title : "Beacon"};
-        app.ctlMap.container.html(app.template.beacon(context));
-    },
-    render_scale: function() {
-        var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
-        app.ctlMap.container.html(app.template.scale(context));
-    },
-    render_qrcode: function() {
-        var context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
-        app.ctlMap.container.html(app.template.qrcode(context));
-    },
+
     bindEvent: function() {
         console.log("bindEvent");
 
-        $(document).on("scale-change", function(e, obj) {
-            var context = { payload: obj, time: new Date().toLocaleString() };
-            localStorage.setItem("scale", JSON.stringify(context));
-            if (app.defaults.active == "scale") app.render_scale();
-        });
-
-        $(document).on("qrcode-change", function(e, obj) {
-            var context = { payload: obj, time: new Date().toLocaleString() };
-            localStorage.setItem("qrcode", JSON.stringify(context));
-            if (app.defaults.active == "qrcode") app.render_qrcode();
-        });
-
-        $(document).on("mqtt", function(e, type, obj) {
-
+        $(document).on("mqttchange", function(e, type, obj) {
+            var context = null;
+            switch (type) {
+                case "logger":
+                    break;
+                case "beacon":
+                    break;
+                case "scale":
+                    context = { payload: obj, time: new Date().toLocaleString() };
+                    localStorage.setItem("scale", JSON.stringify(context));
+                    break;
+                case "qrcode":
+                    context = { payload: obj, time: new Date().toLocaleString() };
+                    localStorage.setItem("qrcode", JSON.stringify(context));
+                    break;
+            }
+            if (app.defaults.active == type) app.render(type);
         });
 
         $(document).on("pagechange", function(e, page, obj) {
             app.defaults.active = page;
             obj.parent().addClass("active").siblings().removeClass("active");
-            switch (page) {
-                case "logger":
-                    app.render_logger();
-                    break;
-                case "beacon":
-                    app.render_beacon();
-                    break;
-                case "scale":
-                    app.render_scale();
-                    break;
-                case "qrcode":
-                    app.render_qrcode();
-                    break;
-            }
+            app.render(app.defaults.active);
         });
 
         app.ctlMap.logger.click(function() {

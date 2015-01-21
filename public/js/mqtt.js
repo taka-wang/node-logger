@@ -34,11 +34,19 @@ var mqtt = {
         var payload = message.payloadString;
         switch (topic) {
             case "/lab3/scale/":
-                $(document).trigger("scale-change", payload);
+                $(document).trigger("mqttchange", ["scale", payload]);
                 break;
             case "/lab3/qr/":
-                $(document).trigger("qrcode-change", payload);
+                $(document).trigger("mqttchange", ["qrcode", payload]);
                 break;
+            case "/lab3/ble/nearest/":
+                break;
+            case "/lab3/ble/rssi/":
+                break;
+            case "/lab3/log/"
+                break;
+            default:
+                // do nothing
         }
         console.log(topic + " : " + payload);
     }
