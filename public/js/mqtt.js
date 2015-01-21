@@ -1,3 +1,8 @@
+/**
+ * @mqtt lib
+ * @author Taka Wang
+ * depend on mqttws31.js and config.js
+*/
 var mqtt = {
     client: null,
     connect : function() {    
@@ -33,6 +38,10 @@ var mqtt = {
         var topic = message.destinationName;
         var payload = message.payloadString;
         console.log(topic + " : " + payload);
+        mqtt.handler(topic, payload);       
+    },
+    // application handler - change here
+    handler: function(topic, payload) {
         switch (topic) {
             case "/lab3/scale/":
                 $(document).trigger("mqttchange", ["scale", payload]);
@@ -52,6 +61,5 @@ var mqtt = {
             default:
                 // do nothing
         }
-        
     }
 };
