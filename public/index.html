@@ -62,9 +62,14 @@
         <div id="div-rssi"></div>
     </script>
     <script id="nearest-template" type="text/x-handlebars-template">
-        <div>
-            <div class="mqtt-title">{{id}}{{#if id}}{{/if}}</div>
-            <div class="mqtt-sub">{{time}}</div>
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Nearest</h3>
+            </div>
+            <div class="panel-body">
+                <div class="mqtt-title">{{id}}{{#if id}}{{/if}}</div>
+                <div class="mqtt-sub">{{time}}</div>
+            </div>
         </div>
     </script>
     <script id="rssi-template" type="text/x-handlebars-template">
