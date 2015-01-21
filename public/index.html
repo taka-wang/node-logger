@@ -76,22 +76,24 @@
         <!-- TODO -->
     </script>
     <script id="scale-template" type="text/x-handlebars-template">
-        {{#unless scale}}
-            <div class="mqtt-title">Mettler Toledo Scale</div>
-        {{/unless}}
-        <div class="well">
+        {{#if scale}}
+            <div class="well">
             <div class="mqtt-main">{{scale}}{{#if scale}} g{{/if}}</div>
             <div class="mqtt-sub">{{time}}</div>
-        </div>
+            </div>
+        {{else}}
+            <div class="mqtt-title">Mettler Toledo Scale</div>
+        {{/if}}
     </script>
     <script id="qrcode-template" type="text/x-handlebars-template">
-        {{#unless payload}}
+        {{#if payload}}
+            <div class="well">
+                <div class="mqtt-main">{{payload}}</div>
+                <div class="mqtt-sub">{{time}}</div>
+            </div>
+        {{else}}
             <div class="mqtt-title">QR Code</div>
-        {{/unless}}
-        <div>
-            <div class="mqtt-main">{{payload}}</div>
-            <div class="mqtt-sub">{{time}}</div>
-        </div>
+        {{/if}}
     </script>    
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/bootstrap.min.js"></script>
