@@ -76,6 +76,14 @@ var app = {
             switch (type) {
                 case "logger":
                     break;
+                case "scale":
+                    context = { scale: obj, time: new Date().toLocaleString() };
+                    localStorage.setItem("scale", JSON.stringify(context));
+                    break;
+                case "qrcode":
+                    context = { payload: obj, time: new Date().toLocaleString() };
+                    localStorage.setItem("qrcode", JSON.stringify(context));
+                    break;
                 case "nearest":
                     var nearest = JSON.parse(obj);
                     context = { id: nearest.id, val: nearest.val, time: new Date().toLocaleString() };
@@ -87,14 +95,6 @@ var app = {
                     context.push(JSON.parse(obj));
                     localStorage.setItem("rssi", JSON.stringify(context.slice(0, 30)));
                     if (app.defaults.active == "beacon") return app.render(type);
-                case "scale":
-                    context = { scale: obj, time: new Date().toLocaleString() };
-                    localStorage.setItem("scale", JSON.stringify(context));
-                    break;
-                case "qrcode":
-                    context = { payload: obj, time: new Date().toLocaleString() };
-                    localStorage.setItem("qrcode", JSON.stringify(context));
-                    break;
             }
             if (app.defaults.active == type) app.render(type);
         });
