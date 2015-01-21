@@ -48,8 +48,9 @@ var app = {
                 app.ctlMap.container.html(app.template.beacon(context));
                 context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
                 $("#div-nearest").html(app.template.nearest(context));
-                context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
-                console.log(context);
+                context = (localStorage["rssi"]) ? {rssi: JSON.parse(localStorage["rssi"])} : {rssi: []};
+                $("#div-rssi").html(app.template.rssi(context));
+                //console.log(context);
                 break;
             case "scale":
                 var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
@@ -88,7 +89,9 @@ var app = {
                     break;
                 case "rssi": // append new rssi to object array (limit 30)
                     context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : [];
-                    context.push(JSON.parse(obj));
+                    obj = JSON.parse(obj);
+                    obj.time = new Date().toLocaleString();
+                    context.push(obj);
                     localStorage.setItem("rssi", JSON.stringify(context.slice(0, 30)));
                     type = "beacon";
                     break;

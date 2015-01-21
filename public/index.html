@@ -69,7 +69,11 @@
                 </tr>
             </thead>
             <tbody>
-            <!--dynamic insert-->
+                {{#rssi}}
+                    <td>{{time}}</td>
+                    <td>{{id}}</td>
+                    <td>{{val}}</td>
+                {{/rssi}}
             </tbody>
         </table>
         </div>
