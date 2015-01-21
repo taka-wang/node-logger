@@ -79,11 +79,13 @@ var app = {
                 case "qrcode":
                     context = { payload: obj, time: new Date().toLocaleString() };
                     localStorage.setItem("qrcode", JSON.stringify(context));
+                    type = "beacon";
                     break;
                 case "nearest":
                     var nearest = JSON.parse(obj);
                     context = { id: nearest.id, val: nearest.val, time: new Date().toLocaleString() };
                     localStorage.setItem("nearest", JSON.stringify(context));
+                    type = "beacon";
                 case "rssi": // append new rssi to object array (limit 30)
                     context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : [];
                     context.push(JSON.parse(obj));
