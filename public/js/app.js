@@ -74,8 +74,8 @@ var app = {
                     if (app.defaults.active == "beacon") return app.render(type);
                 case "rssi":
                     context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : [];
-                    context.append(JSON.parse(obj));
-                    localStorage.setItem("rssi", JSON.stringify(context));
+                    context.push(JSON.parse(obj));
+                    localStorage.setItem("rssi", JSON.stringify(context.slice(0, 30)));
                     if (app.defaults.active == "beacon") return app.render(type);
                 case "scale":
                     context = { payload: obj, time: new Date().toLocaleString() };
