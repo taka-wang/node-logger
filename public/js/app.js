@@ -15,21 +15,23 @@ var app = {
         qrcode: $("#qrcode_list")
     },
     template : {
-        mytemplate: Handlebars.compile($("#mytemplate").html()),
+        default: Handlebars.compile($("#default-template").html()),
         logger: Handlebars.compile($("#logger-template").html()),
         beacon: Handlebars.compile($("#beacon-template").html()),
         scale:  Handlebars.compile($("#scale-template").html()),
         qrcode: Handlebars.compile($("#qrcode-template").html())
     },
     clear_storage: function() {
+        localStorage.removeItem("nearest");
+        localStorage.removeItem("rssi");
         localStorage.removeItem("scale");
+        localStorage.removeItem("qrcode");
     },
     init: function() {
         console.log("init");
         app.clear_storage();
         app.bindEvent();
-        //render default
-        app.ctlMap.container.html(app.template.mytemplate({title: "Hello World"}));
+        app.render("default");
     },
     render: function(type) {
         switch (type) {
@@ -57,6 +59,8 @@ var app = {
                 var context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
                 app.ctlMap.container.html(app.template.qrcode(context));
                 break;
+            default:
+                app.ctlMap.container.html(app.template.default({title: "Welcome"}));
         }
     },
 
