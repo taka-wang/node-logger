@@ -1,7 +1,7 @@
 .mqtt-title {
     text-align: center;
     font-size: 64px;
-    color: #2E9AFE;
+    color: #999999;
 }
 
 .mqtt-main {
@@ -38,7 +38,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #1c1e22;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
