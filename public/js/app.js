@@ -40,11 +40,11 @@ var app = {
         app.ctlMap.container.html(app.template.beacon(context));
     },
     render_scale: function() {
-        var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) :{};
+        var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
         app.ctlMap.container.html(app.template.scale(context));
     },
     render_qrcode: function() {
-        var context = {title : "QR Code"};
+        var context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
         app.ctlMap.container.html(app.template.qrcode(context));
     },
     bindEvent: function() {
@@ -54,6 +54,12 @@ var app = {
             var context = { payload: obj, time: new Date().toLocaleString() };
             localStorage.setItem("scale", JSON.stringify(context));
             if (app.defaults.active == "scale") app.render_scale();
+        });
+
+        $(document).on("qrcode-change", function(e, obj) {
+            var context = { payload: obj, time: new Date().toLocaleString() };
+            localStorage.setItem("qrcode", JSON.stringify(context));
+            if (app.defaults.active == "qrcode") app.render_qrcode();
         });
 
         $(document).on("mqtt", function(e, type, obj) {
