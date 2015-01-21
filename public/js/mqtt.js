@@ -32,6 +32,7 @@ var mqtt = {
     onMessageArrived: function(message) {
         var topic = message.destinationName;
         var payload = message.payloadString;
+        console.log(topic + " : " + payload);
         switch (topic) {
             case "/lab3/scale/":
                 $(document).trigger("mqttchange", ["scale", payload]);
@@ -51,6 +52,6 @@ var mqtt = {
             default:
                 // do nothing
         }
-        console.log(topic + " : " + payload);
+        
     }
 };
