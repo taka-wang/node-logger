@@ -69,10 +69,12 @@ var app = {
                 case "logger":
                     break;
                 case "nearest":
-                    context = { payload: obj, time: new Date().toLocaleString() };
+                    var nearest = JSON.parse(obj);
+                    context = { id: nearest.id, val: nearest.val, time: new Date().toLocaleString() };
                     localStorage.setItem("nearest", JSON.stringify(context));
                     if (app.defaults.active == "beacon") return app.render(type);
                 case "rssi":
+                    // append new rssi to object array (limit 30)
                     context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : [];
                     context.push(JSON.parse(obj));
                     localStorage.setItem("rssi", JSON.stringify(context.slice(0, 30)));
