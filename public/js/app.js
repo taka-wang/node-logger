@@ -46,14 +46,10 @@ var app = {
             case "beacon":
                 var context = {title : "Beacon"};
                 app.ctlMap.container.html(app.template.beacon(context));
-                break;
-            case "nearest":
-                var context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
+                context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
                 $("#div-nearest").html(app.template.nearest(context));
-                break;
-            case "rssi":
-                var context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
-                console.log(context);
+                context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
+                //todo
                 break;
             case "scale":
                 var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
@@ -88,13 +84,10 @@ var app = {
                     var nearest = JSON.parse(obj);
                     context = { id: nearest.id, val: nearest.val, time: new Date().toLocaleString() };
                     localStorage.setItem("nearest", JSON.stringify(context));
-                    if (app.defaults.active == "beacon") return app.render(type);
-                case "rssi":
-                    // append new rssi to object array (limit 30)
+                case "rssi": // append new rssi to object array (limit 30)
                     context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : [];
                     context.push(JSON.parse(obj));
                     localStorage.setItem("rssi", JSON.stringify(context.slice(0, 30)));
-                    if (app.defaults.active == "beacon") return app.render(type);
             }
             if (app.defaults.active == type) app.render(type);
         });
