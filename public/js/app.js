@@ -47,7 +47,7 @@ var app = {
                 var context = {title : "Beacon"};
                 app.ctlMap.container.html(app.template.beacon(context));
                 context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
-                $("#div-nearest").html(app.template.nearest(context));
+                $("#div-nearest").addClass("jumbotron").html(app.template.nearest(context));
                 context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
                 //todo
                 break;
