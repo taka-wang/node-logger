@@ -63,7 +63,7 @@
     </script>
     <script id="nearest-template" type="text/x-handlebars-template">
         <div>
-            <div class="mqtt-main">{{id}}{{#if id}}{{/if}}</div>
+            <div class="mqtt-title">{{id}}{{#if id}}{{/if}}</div>
             <div class="mqtt-sub">{{time}}</div>
         </div>
     </script>
@@ -71,11 +71,11 @@
         <!-- TODO -->
     </script>
     <script id="scale-template" type="text/x-handlebars-template">
-        {{#unless payload}}
+        {{#unless scale}}
             <div class="mqtt-title">Mettler Toledo Scale</div>
         {{/unless}}
         <div>
-            <div class="mqtt-main">{{payload}}{{#if payload}} g{{/if}}</div>
+            <div class="mqtt-main">{{scale}}{{#if scale}} g{{/if}}</div>
             <div class="mqtt-sub">{{time}}</div>
         </div>
     </script>

@@ -50,7 +50,6 @@ var app = {
             case "nearest":
                 var context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
                 $("#div-nearest").html(app.template.nearest(context));
-                //app.ctlMap.nearest.html(app.template.nearest(context));
                 break;
             case "rssi":
                 var context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
@@ -89,7 +88,7 @@ var app = {
                     localStorage.setItem("rssi", JSON.stringify(context.slice(0, 30)));
                     if (app.defaults.active == "beacon") return app.render(type);
                 case "scale":
-                    context = { payload: obj, time: new Date().toLocaleString() };
+                    context = { scale: obj, time: new Date().toLocaleString() };
                     localStorage.setItem("scale", JSON.stringify(context));
                     break;
                 case "qrcode":
