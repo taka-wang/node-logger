@@ -36,6 +36,9 @@ var mqtt = {
             case "/lab3/scale/":
                 $(document).trigger("scale-change", payload);
                 break;
+            case "/lab3/qr/":
+                $(document).trigger("qrcode-change", payload);
+                break;
         }
         console.log(topic + " : " + payload);
     }
