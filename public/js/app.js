@@ -49,7 +49,7 @@ var app = {
                 context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
                 $("#div-nearest").html(app.template.nearest(context));
                 context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
-                //todo
+                console.log(context);
                 break;
             case "scale":
                 var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};

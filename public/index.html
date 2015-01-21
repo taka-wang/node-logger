@@ -59,7 +59,20 @@
     </script>
     <script id="beacon-template" type="text/x-handlebars-template">
         <div id="div-nearest"></div>
-        <div id="div-rssi"></div>
+        <div id="div-rssi">
+        <table id="tbl-rssi" class="table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>ID</th>
+                    <th>RSSI</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!--dynamic insert-->
+            </tbody>
+        </table>
+        </div>
     </script>
     <script id="nearest-template" type="text/x-handlebars-template">
         <div class="panel panel-danger">
