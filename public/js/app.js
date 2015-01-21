@@ -8,18 +8,20 @@ var app = {
         active: ""
     },
     ctlMap : {
-        container: $("#container"),
-        logger: $("#logger_list"),
-        beacon: $("#beacon_list"),
-        scale:  $("#scale_list"),
-        qrcode: $("#qrcode_list")
+        container:  $("#container"),
+        logger:     $("#logger_list"),
+        beacon:     $("#beacon_list"),
+        scale:      $("#scale_list"),
+        qrcode:     $("#qrcode_list")
     },
     template : {
         default: Handlebars.compile($("#default-template").html()),
-        logger: Handlebars.compile($("#logger-template").html()),
-        beacon: Handlebars.compile($("#beacon-template").html()),
-        scale:  Handlebars.compile($("#scale-template").html()),
-        qrcode: Handlebars.compile($("#qrcode-template").html())
+        logger:  Handlebars.compile($("#logger-template").html()),
+        beacon:  Handlebars.compile($("#beacon-template").html()),
+        nearest: Handlebars.compile($("#nearest-template").html()),
+        rssi:    Handlebars.compile($("#rssi-template").html()),
+        scale:   Handlebars.compile($("#scale-template").html()),
+        qrcode:  Handlebars.compile($("#qrcode-template").html())
     },
     clear_storage: function() {
         localStorage.removeItem("nearest");
