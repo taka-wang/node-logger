@@ -41,6 +41,14 @@ var app = {
                 var context = {title : "Beacon"};
                 app.ctlMap.container.html(app.template.beacon(context));
                 break;
+            case "nearest":
+                var context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
+                console.log(context);
+                break;
+            case "rssi":
+                var context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
+                console.log(context);
+                break;
             case "scale":
                 var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
                 app.ctlMap.container.html(app.template.scale(context));
@@ -60,8 +68,15 @@ var app = {
             switch (type) {
                 case "logger":
                     break;
-                case "beacon":
-                    break;
+                case "nearest":
+                    context = { payload: obj, time: new Date().toLocaleString() };
+                    localStorage.setItem("nearest", JSON.stringify(context));
+                    if (app.defaults.active == "beacon") return app.render(type);
+                case "rssi":
+                    context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : [];
+                    context.append(JSON.parse(obj));
+                    localStorage.setItem("rssi", JSON.stringify(context));
+                    if (app.defaults.active == "beacon") return app.render(type);
                 case "scale":
                     context = { payload: obj, time: new Date().toLocaleString() };
                     localStorage.setItem("scale", JSON.stringify(context));

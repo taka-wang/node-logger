@@ -40,10 +40,13 @@ var mqtt = {
                 $(document).trigger("mqttchange", ["qrcode", payload]);
                 break;
             case "/lab3/ble/nearest/":
+                $(document).trigger("mqttchange", ["nearest", payload]);
                 break;
             case "/lab3/ble/rssi/":
+                $(document).trigger("mqttchange", ["rssi", payload]);
                 break;
-            case "/lab3/log/"
+            case "/lab3/log/":
+                $(document).trigger("mqttchange", ["logger", payload]);
                 break;
             default:
                 // do nothing
