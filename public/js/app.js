@@ -11,8 +11,8 @@ var app = {
         container:  $("#container"),
         logger:     $("#logger_list"),
         beacon:     $("#beacon_list"),
-        nearest:    $("#div-nearest"),
-        rssi:       $("#div-rssi"),
+        //nearest:    $("#div-nearest"),
+        //rssi:       $("#div-rssi"),
         scale:      $("#scale_list"),
         qrcode:     $("#qrcode_list")
     },
@@ -49,7 +49,8 @@ var app = {
                 break;
             case "nearest":
                 var context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
-                app.ctlMap.nearest.html(app.template.nearest(context));
+                $("#div-nearest").html(app.template.nearest(context));
+                //app.ctlMap.nearest.html(app.template.nearest(context));
                 break;
             case "rssi":
                 var context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
