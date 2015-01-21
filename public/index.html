@@ -77,9 +77,14 @@
     </script>
     <script id="scale-template" type="text/x-handlebars-template">
         {{#if scale}}
-            <div class="well">
-            <div class="mqtt-main">{{scale}}{{#if scale}} g{{/if}}</div>
-            <div class="mqtt-sub">{{time}}</div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Mettler Toledo Scale</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="mqtt-title">{{scale}}{{#if scale}} g{{/if}}</div>
+                    <div class="mqtt-sub">{{time}}</div>
+                </div>
             </div>
         {{else}}
             <div class="mqtt-title">Mettler Toledo Scale</div>
@@ -87,9 +92,14 @@
     </script>
     <script id="qrcode-template" type="text/x-handlebars-template">
         {{#if payload}}
-            <div class="well">
-                <div class="mqtt-main">{{payload}}</div>
-                <div class="mqtt-sub">{{time}}</div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Item</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="mqtt-title">{{payload}}</div>
+                    <div class="mqtt-sub">{{time}}</div>
+                </div>
             </div>
         {{else}}
             <div class="mqtt-title">QR Code</div>
