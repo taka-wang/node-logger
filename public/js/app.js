@@ -38,32 +38,33 @@ var app = {
         app.render("default");
     },
     render: function(type) {
+        var context = null;
         switch (type) {
             case "logger":
-                var context = {title : "Logger"};
+                context = {title : "Logger"};
                 app.ctlMap.container.html(app.template.logger(context));
                 break;
             case "beacon":
-                var context = {title : "Beacon"};
+                context = {title : "Beacon"};
+                context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
                 app.ctlMap.container.html(app.template.beacon(context));
                 context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
                 $("#div-nearest").html(app.template.nearest(context));
-                context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
-                console.log(context);
-                console.log("---TAKA----");
-                console.log(app.template.rssi(context));
-                $("#tbl-rssi").prepend(app.template.rssi(context));
+                
+                //console.log(context);
+                //$("#tbl-rssi").prepend(app.template.rssi(context));
                 break;
             case "scale":
-                var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
+                context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
                 app.ctlMap.container.html(app.template.scale(context));
                 break;
             case "qrcode":
-                var context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
+                context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
                 app.ctlMap.container.html(app.template.qrcode(context));
                 break;
             default:
-                app.ctlMap.container.html(app.template.default({title: "Welcome"}));
+                context = {title: "Welcome"};
+                app.ctlMap.container.html(app.template.default(context));
         }
     },
 
