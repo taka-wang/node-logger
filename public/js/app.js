@@ -51,7 +51,7 @@ var app = {
                 $("#div-nearest").html(app.template.nearest(context));
                 context = (localStorage["rssi"]) ? { rssi: JSON.parse(localStorage["rssi"])} : {rssi:[]};
                 $("#div-rssi").html(app.template.rssi(context));
-                $("#div-rssi > tbody > tr:first-child").addClass("danger");
+                $("#div-rssi > tr:nth-child(2)").addClass("info");
                 break;
             case "scale":
                 context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
