@@ -137,8 +137,6 @@ var app = {
             var context = null;
             switch (type) {
                 case "logger":
-                    //context = (localStorage["logger"]) ? JSON.parse(localStorage["logger"]) : [];
-                    //obj = JSON.parse(obj);
                     break;
                 case "scale":
                     context = { scale: obj, time: new Date().toLocaleString() };
