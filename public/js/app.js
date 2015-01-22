@@ -73,7 +73,6 @@ var app = {
             }
         });
     },
-    },
     get_items: function() {
         $.ajax({
             type: "GET",
