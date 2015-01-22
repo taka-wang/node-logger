@@ -7,7 +7,8 @@ var app = {
     defaults: {
         active:  "",
         beacons: {},
-        items:   {}
+        items:   {},
+        logs:    []
     },
     ctlMap : {
         container:  $("#container"),
@@ -69,6 +70,8 @@ var app = {
                                         ? data[i].qrcode : app.defaults.items[data[i].qrcode];
                     data[i].created_at = new Date(data[i].created_at).toLocaleString();
                 }
+                app.defaults.logs = data;
+                console.log(app.defaults.logs);
                 if (callback) callback({log: data});
             },
             error: function(xhr, type){
