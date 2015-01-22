@@ -44,9 +44,12 @@ var app = {
             url: "/api/beacons",
             dataType: 'json',
             success: function(data) {
-                console.log(data);
-                app.defaults.beacons = data;
-                localStorage.setItem("beacons", JSON.stringify(data));
+                var map = {}
+                for (var i = 0; i < data.length; i++) {
+                    map[data[i].id] = data[i].name;
+                };
+                app.defaults.beacons = map;
+
             },
             error: function(xhr, type){
                 console.log("Fail!");
