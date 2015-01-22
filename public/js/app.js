@@ -60,6 +60,7 @@ var app = {
             timeout: 5000,
             cache: false, // do not cache
             url: "/api/logs",
+            async: false,
             dataType: 'json',
             success: function(data) {
                 for (var i = 0; i < data.length; i++) {
