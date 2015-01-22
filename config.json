@@ -2,7 +2,7 @@
     "tainan"        : true,
     "mqtt_server"   : "localhost",
     "mqtt_port"     : 1883,
-    "web_port"      : 3002,
+    "web_port"      : 80,
     "mongodb_server": "mongodb://localhost/lab3",
     "topic_sub"     : "/lab3/#",
     "topic_qr"      : "/lab3/qr/",
