@@ -104,8 +104,12 @@ var app = {
                     localStorage.setItem("qrcode", JSON.stringify(context));
                     break;
                 case "nearest":
-                    var nearest = JSON.parse(obj);
-                    context = { id: nearest.id, val: nearest.val, time: new Date().toLocaleString() };
+                    var nearest = JSON.parse(obj);                 
+                    context = { 
+                        id: (typeof app.defaults.beacons[nearest.id] == "undefined") ? nearest.id : app.defaults.beacons[nearest.id], 
+                        val: nearest.val, 
+                        time: new Date().toLocaleString() 
+                    };
                     localStorage.setItem("nearest", JSON.stringify(context));
                     type = "beacon";
                     break;
