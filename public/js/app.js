@@ -167,7 +167,7 @@ var app = {
             default:
                 app.get_beacons();
                 app.get_items();
-                context = {title: "Welcome D2D"};
+                context = {title: "Welcome to D2D"};
                 app.ctlMap.container.html(app.template.default(context));
         }
     },
