@@ -117,6 +117,7 @@ var app = {
                     context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : [];
                     obj = JSON.parse(obj);
                     obj.time = new Date().toLocaleString();
+                    obj.id = (typeof app.defaults.beacons[obj.id] == "undefined") ? obj.id : app.defaults.beacons[obj.id];
                     context.unshift(obj);
                     localStorage.setItem("rssi", JSON.stringify(context.slice(0, 30)));
                     type = "beacon";
