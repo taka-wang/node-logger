@@ -73,7 +73,7 @@ var app = {
                     delete data[i].__v;
                 }
                 if (callback) callback({log: data});
-                data.unshift({"scale": "Scale", "nearest": "Who", "qrcode": "Item", "created_at": "Time"});
+                data.unshift({"scale": "Scale (g)", "nearest": "Who", "qrcode": "Item", "created_at": "Time"});
                 app.defaults.logs = data;
             },
             error: function(xhr, type){
