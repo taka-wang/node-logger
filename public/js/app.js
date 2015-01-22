@@ -7,8 +7,7 @@ var app = {
     defaults: {
         active:  "",
         beacons: {},
-        items:   {},
-        loggers: []
+        items:   {}
     },
     ctlMap : {
         container:  $("#container"),
