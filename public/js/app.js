@@ -49,7 +49,7 @@ var app = {
                 app.ctlMap.container.html(app.template.beacon(context));
                 context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
                 $("#div-nearest").html(app.template.nearest(context));
-                context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
+                context = (localStorage["rssi"]) ? { rssi: JSON.parse(localStorage["rssi"])} : {rssi:[]};
                 console.log(context);
                 console.log(app.template.rssi(context));
                 $("#div-rssi").html(app.template.rssi(context));
