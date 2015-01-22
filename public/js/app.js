@@ -72,9 +72,9 @@ var app = {
                     delete data[i]._id;
                     delete data[i].__v;
                 }
+                if (callback) callback({log: data});
                 data.unshift({"scale": "Scale", "nearest": "Who", "qrcode": "Item", "created_at": "Time"});
                 app.defaults.logs = data;
-                if (callback) callback({log: data});
             },
             error: function(xhr, type){
                 console.log("Fail!");
@@ -103,7 +103,7 @@ var app = {
         var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;      
         var CSV = '';    
         //Set Report title in first row or line
-        CSV += ReportTitle + '\r\n\n';
+        //CSV += ReportTitle + '\r\n\n';
         //This condition will generate the Label/Header
         if (ShowLabel) {
             var row = "";         
