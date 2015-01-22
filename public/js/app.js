@@ -114,6 +114,8 @@ var app = {
             var context = null;
             switch (type) {
                 case "logger":
+                    console.log("---LOGGER----");
+                    console.log(obj);
                     break;
                 case "scale":
                     context = { scale: obj, time: new Date().toLocaleString() };
