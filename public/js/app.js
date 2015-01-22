@@ -74,7 +74,7 @@ var app = {
                 }
                 data.unshift({"scale": "Scale", "nearest": "Who", "qrcode": "Item", "created_at": "Time"});
                 app.defaults.logs = data;
-                app.json2csv(data, new Date().toLocaleString(), false);
+                app.json2csv(data, new Date().toLocaleString(), true);
                 if (callback) callback({log: data});
             },
             error: function(xhr, type){
