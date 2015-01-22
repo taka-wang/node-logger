@@ -41,7 +41,7 @@ var app = {
             type: "GET",
             timeout: 1000,
             cache: false, // do not cache
-            url: window.location.hostname + "/api/window.location.hostname",
+            url: "/api/window.location.hostname",
             dataType: 'json',
             success: function(data) {
                 console.log(data);
