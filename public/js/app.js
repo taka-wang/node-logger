@@ -117,8 +117,7 @@ var app = {
                     break;
                 case "qrcode":
                     context = { 
-                        payload: obj, 
-                        payload: (typeof app.defaults.items[obj] == "undefined") ? obj : app.defaults.items[obj]; 
+                        payload: (typeof app.defaults.items[obj] == "undefined") ? obj : app.defaults.items[obj], 
                         time: new Date().toLocaleString() 
                     };
                     localStorage.setItem("qrcode", JSON.stringify(context));
