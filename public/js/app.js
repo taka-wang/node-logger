@@ -5,7 +5,8 @@
 */
 var app = {
     defaults: {
-        active: ""
+        active: "",
+        beacons:[]
     },
     ctlMap : {
         container:  $("#container"),
@@ -35,6 +36,23 @@ var app = {
         app.bindEvent();
         app.render("default");
     },
+    get_beacons: function() {
+        $.ajax({
+            type: "GET",
+            timeout: 1000,
+            cache: false, // do not cache
+            url: window.location.hostname + "/api/window.location.hostname",
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                app.defaults.beacons = data;
+                localStorage.setItem("beacons", JSON.stringify(data));
+            },
+            error: function(xhr, type){
+                console.log("Fail!");
+            }
+        });
+    },
     render: function(type) {
         var context = null;
         switch (type) {
@@ -60,6 +78,7 @@ var app = {
                 app.ctlMap.container.html(app.template.qrcode(context));
                 break;
             default:
+                app.get_beacons();
                 context = {title: "Welcome"};
                 app.ctlMap.container.html(app.template.default(context));
         }
