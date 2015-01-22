@@ -50,6 +50,7 @@ var app = {
                 context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
                 $("#div-nearest").html(app.template.nearest(context));
                 context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
+                console.log(context);
                 console.log(app.template.rssi(context));
                 $("#div-rssi").html(app.template.rssi(context));
                 //$("#tbl-rssi").prepend(app.template.rssi(context));
