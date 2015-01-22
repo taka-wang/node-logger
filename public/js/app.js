@@ -74,7 +74,6 @@ var app = {
                 }
                 data.unshift({"scale": "Scale", "nearest": "Who", "qrcode": "Item", "created_at": "Time"});
                 app.defaults.logs = data;
-                app.json2csv(data, new Date().toLocaleString(), true);
                 if (callback) callback({log: data});
             },
             error: function(xhr, type){
@@ -194,7 +193,7 @@ var app = {
         console.log("bindEvent");
 
         $(document).on("click", "#btn-export", function(){
-            alert("TODO");
+            app.json2csv(app.defaults.logs, new Date().toISOString(), false);
         });
         
         $(document).on("mqttchange", function(e, type, obj) {
