@@ -106,6 +106,10 @@ var app = {
     bindEvent: function() {
         console.log("bindEvent");
 
+        $(document).on("click", "#btn-export", function(){
+            alert("TODO");
+        });
+        
         $(document).on("mqttchange", function(e, type, obj) {
             var context = null;
             switch (type) {
