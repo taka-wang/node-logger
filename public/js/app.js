@@ -58,7 +58,7 @@ var app = {
     get_loggers: function() {
         $.ajax({
             type: "GET",
-            timeout: 1000,
+            timeout: 5000,
             cache: false, // do not cache
             url: "/api/logs",
             dataType: 'json',
