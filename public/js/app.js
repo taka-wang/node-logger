@@ -6,7 +6,8 @@
 var app = {
     defaults: {
         active: "",
-        beacons:[]
+        beacons:{},
+        items:  {}
     },
     ctlMap : {
         container:  $("#container"),
@@ -44,12 +45,26 @@ var app = {
             url: "/api/beacons",
             dataType: 'json',
             success: function(data) {
-                var map = {}
-                for (var i = 0; i < data.length; i++) {
-                    map[data[i].id] = data[i].name;
-                };
-                app.defaults.beacons = map;
-
+                data.forEach(function(beacon) {
+                    app.defaults.beacons[beacon.id] = beacon.name;
+                });
+            },
+            error: function(xhr, type){
+                console.log("Fail!");
+            }
+        });
+    },
+    get_items: function() {
+        $.ajax({
+            type: "GET",
+            timeout: 1000,
+            cache: false, // do not cache
+            url: "/api/items",
+            dataType: 'json',
+            success: function(data) {
+                data.forEach(function(element) {
+                    app.defaults.beacons[element.qrcode] = element.item;
+                });
             },
             error: function(xhr, type){
                 console.log("Fail!");
@@ -82,6 +97,7 @@ var app = {
                 break;
             default:
                 app.get_beacons();
+                app.get_items();
                 context = {title: "Welcome"};
                 app.ctlMap.container.html(app.template.default(context));
         }
@@ -100,7 +116,11 @@ var app = {
                     localStorage.setItem("scale", JSON.stringify(context));
                     break;
                 case "qrcode":
-                    context = { payload: obj, time: new Date().toLocaleString() };
+                    context = { 
+                        payload: obj, 
+                        payload: (typeof app.defaults.items[obj] == "undefined") ? obj : app.defaults.items[obj]; 
+                        time: new Date().toLocaleString() 
+                    };
                     localStorage.setItem("qrcode", JSON.stringify(context));
                     break;
                 case "nearest":
