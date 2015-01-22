@@ -50,10 +50,7 @@ var app = {
                 context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
                 $("#div-nearest").html(app.template.nearest(context));
                 context = (localStorage["rssi"]) ? { rssi: JSON.parse(localStorage["rssi"])} : {rssi:[]};
-                console.log(context);
-                console.log(app.template.rssi(context));
                 $("#div-rssi").html(app.template.rssi(context));
-                //$("#tbl-rssi").prepend(app.template.rssi(context));
                 break;
             case "scale":
                 context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
@@ -95,7 +92,7 @@ var app = {
                     context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : [];
                     obj = JSON.parse(obj);
                     obj.time = new Date().toLocaleString();
-                    context.push(obj);
+                    context.unshift(obj);
                     localStorage.setItem("rssi", JSON.stringify(context.slice(0, 30)));
                     type = "beacon";
                     break;
