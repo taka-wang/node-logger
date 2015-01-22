@@ -46,12 +46,12 @@ var app = {
                 break;
             case "beacon":
                 context = {title : "Beacon"};
-                context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
                 app.ctlMap.container.html(app.template.beacon(context));
                 context = (localStorage["nearest"]) ? JSON.parse(localStorage["nearest"]) : {};
                 $("#div-nearest").html(app.template.nearest(context));
-                
-                //console.log(context);
+                context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
+                console.log(app.template.rssi(context));
+                $("#div-rssi").html(app.template.rssi(context));
                 //$("#tbl-rssi").prepend(app.template.rssi(context));
                 break;
             case "scale":

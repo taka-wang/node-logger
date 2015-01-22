@@ -59,26 +59,7 @@
     </script>
     <script id="beacon-template" type="text/x-handlebars-template">
         <div id="div-nearest"></div>
-        <div id="div-rssi">
-            <table id="tbl-rssi" class="table">
-                <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>ID</th>
-                        <th>RSSI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#rssi}}
-                    <tr>
-                        <td>{{time}}</td>
-                        <td>{{id}}</td>
-                        <td>{{val}}</td>
-                    </tr>
-                    {{/rssi}}
-                </tbody>
-            </table>
-        </div>
+        <div id="div-rssi"></div>
     </script>
     <script id="nearest-template" type="text/x-handlebars-template">
         <div class="panel panel-danger">
@@ -92,7 +73,24 @@
         </div>
     </script>
     <script id="rssi-template" type="text/x-handlebars-template">
-        <!-- TODO -->
+        <table id="tbl-rssi" class="table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>ID</th>
+                    <th>RSSI</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#rssi}}
+                <tr>
+                    <td>{{time}}</td>
+                    <td>{{id}}</td>
+                    <td>{{val}}</td>
+                </tr>
+                {{/rssi}}
+            </tbody>
+        </table>
     </script>
     <script id="scale-template" type="text/x-handlebars-template">
         {{#if scale}}
