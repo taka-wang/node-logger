@@ -98,6 +98,7 @@ var app = {
         switch (type) {
             case "logger":
                 var logs = app.get_loggers(function(context) {
+                    console.log(context);
                     console.log(app.template.logger(context));
                     app.ctlMap.container.html(app.template.logger(context));
                 });
