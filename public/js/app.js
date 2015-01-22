@@ -69,7 +69,7 @@ var app = {
                                         ? data[i].qrcode : app.defaults.items[data[i].qrcode];
                     data[i].created_at = new Date(data[i].created_at).toLocaleString();
                 }
-                if (callback) callback(data);
+                if (callback) callback({log: data});
             },
             error: function(xhr, type){
                 console.log("Fail!");
