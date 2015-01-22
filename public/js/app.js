@@ -69,9 +69,12 @@ var app = {
                     data[i].qrcode  = (typeof app.defaults.items[data[i].qrcode] == "undefined") 
                                         ? data[i].qrcode : app.defaults.items[data[i].qrcode];
                     data[i].created_at = new Date(data[i].created_at).toLocaleString();
+                    delete data[i]._id;
+                    delete data[i].__v;
                 }
+                data.unshift({"scale": "Scale", "nearest": "Who", "qrcode": "Item", "created_at": "Time"});
                 app.defaults.logs = data;
-                app.json2csv(data, "Hello", false);
+                app.json2csv(data, new Date().toLocaleString(), false);
                 if (callback) callback({log: data});
             },
             error: function(xhr, type){
@@ -131,7 +134,7 @@ var app = {
         }   
         
         //Generate a file name
-        var fileName = "MyReport_";
+        var fileName = "D2D_";
         //this will remove the blank-spaces from the title and replace it with an underscore
         fileName += ReportTitle.replace(/ /g,"_");           
         //Initialize file format you want csv or xls
