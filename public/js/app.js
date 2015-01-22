@@ -41,7 +41,7 @@ var app = {
             type: "GET",
             timeout: 1000,
             cache: false, // do not cache
-            url: "/api/window.location.hostname",
+            url: "/api/beacons",
             dataType: 'json',
             success: function(data) {
                 console.log(data);
