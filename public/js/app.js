@@ -5,9 +5,10 @@
 */
 var app = {
     defaults: {
-        active: "",
-        beacons:{},
-        items:  {}
+        active:  "",
+        beacons: {},
+        items:   {},
+        loggers: []
     },
     ctlMap : {
         container:  $("#container"),
@@ -54,6 +55,25 @@ var app = {
             }
         });
     },
+    get_loggers: function() {
+        $.ajax({
+            type: "GET",
+            timeout: 1000,
+            cache: false, // do not cache
+            url: "/api/beacons",
+            dataType: 'json',
+            success: function(data) {
+                data.forEach(function(log) {
+                    //app.defaults.beacons[beacon.id] = beacon.name;
+                    console.log(log);
+                });
+            },
+            error: function(xhr, type){
+                console.log("Fail!");
+            }
+        });
+    },
+    },
     get_items: function() {
         $.ajax({
             type: "GET",
@@ -75,6 +95,7 @@ var app = {
         var context = null;
         switch (type) {
             case "logger":
+                app.get_loggers();
                 context = {title : "Logger"};
                 app.ctlMap.container.html(app.template.logger(context));
                 break;
@@ -114,8 +135,8 @@ var app = {
             var context = null;
             switch (type) {
                 case "logger":
-                    console.log("---LOGGER----");
-                    console.log(obj);
+                    //context = (localStorage["logger"]) ? JSON.parse(localStorage["logger"]) : [];
+                    //obj = JSON.parse(obj);
                     break;
                 case "scale":
                     context = { scale: obj, time: new Date().toLocaleString() };
