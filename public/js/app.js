@@ -63,10 +63,14 @@ var app = {
             url: "/api/logs",
             dataType: 'json',
             success: function(data) {
-                data.forEach(function(log) {
-                    //app.defaults.beacons[beacon.id] = beacon.name;
-                    console.log(log);
-                });
+                for (var i = 0; i < data.length; i++) {
+                    data[i].nearest = (typeof app.defaults.beacons[data[i].nearest] == "undefined") 
+                                        ? data[i].nearest : app.defaults.beacons[data[i].nearest]; 
+                    data[i].qrcode  = (typeof app.defaults.items[data[i].qrcode] == "undefined") 
+                                        ? data[i].qrcode : app.defaults.items[data[i].qrcode];
+                    data[i].created_at = new Date(data[i].created_at).toLocaleString();
+                }
+                return data;
             },
             error: function(xhr, type){
                 console.log("Fail!");
@@ -94,7 +98,8 @@ var app = {
         var context = null;
         switch (type) {
             case "logger":
-                app.get_loggers();
+                var logs = app.get_loggers();
+                console.log(logs);
                 context = {title : "Logger"};
                 app.ctlMap.container.html(app.template.logger(context));
                 break;
