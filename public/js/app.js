@@ -63,7 +63,7 @@ var app = {
             dataType: 'json',
             success: function(data) {
                 data.forEach(function(element) {
-                    app.defaults.beacons[element.qrcode] = element.item;
+                    app.defaults.items[element.qrcode] = element.item;
                 });
             },
             error: function(xhr, type){
