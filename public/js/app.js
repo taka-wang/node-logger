@@ -52,7 +52,7 @@ var app = {
                 console.log(context);
                 console.log("---TAKA----");
                 console.log(app.template.rssi(context));
-                $("#div-rssi").html(app.template.rssi(context));
+                $("#tbl-rssi").prepend(app.template.rssi(context));
                 break;
             case "scale":
                 var context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
