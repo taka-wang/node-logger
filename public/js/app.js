@@ -60,7 +60,7 @@ var app = {
             type: "GET",
             timeout: 1000,
             cache: false, // do not cache
-            url: "/api/beacons",
+            url: "/api/logs",
             dataType: 'json',
             success: function(data) {
                 data.forEach(function(log) {
