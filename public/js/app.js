@@ -69,6 +69,7 @@ var app = {
                                         ? data[i].qrcode : app.defaults.items[data[i].qrcode];
                     data[i].created_at = new Date(data[i].created_at).toLocaleString();
                 }
+                console.log(data);
                 return data;
             },
             error: function(xhr, type){
