@@ -54,13 +54,12 @@ var app = {
             }
         });
     },
-    get_loggers: function() {
+    get_loggers: function(callback) {
         $.ajax({
             type: "GET",
             timeout: 5000,
             cache: false, // do not cache
             url: "/api/logs",
-            async: false,
             dataType: 'json',
             success: function(data) {
                 for (var i = 0; i < data.length; i++) {
@@ -70,8 +69,7 @@ var app = {
                                         ? data[i].qrcode : app.defaults.items[data[i].qrcode];
                     data[i].created_at = new Date(data[i].created_at).toLocaleString();
                 }
-                console.log(data);
-                return data;
+                if (callback) callback(data);
             },
             error: function(xhr, type){
                 console.log("Fail!");
@@ -99,10 +97,10 @@ var app = {
         var context = null;
         switch (type) {
             case "logger":
-                var logs = app.get_loggers();
-                console.log(logs);
-                context = {title : "Logger"};
-                app.ctlMap.container.html(app.template.logger(context));
+                var logs = app.get_loggers(function(context) {
+                    console.log(app.template.logger(context));
+                    app.ctlMap.container.html(app.template.logger(context));
+                });
                 break;
             case "beacon":
                 context = {title : "Beacon"};
