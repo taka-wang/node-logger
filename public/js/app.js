@@ -11,8 +11,6 @@ var app = {
         container:  $("#container"),
         logger:     $("#logger_list"),
         beacon:     $("#beacon_list"),
-        //nearest:    $("#div-nearest"),
-        //rssi:       $("#div-rssi"),
         scale:      $("#scale_list"),
         qrcode:     $("#qrcode_list")
     },

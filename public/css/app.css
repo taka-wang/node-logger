@@ -20,6 +20,10 @@
     font-size: 32px;
 }
 
+#btn-export {
+    margin: 10px;
+}
+
 /* Toggle Styles */
 
 #wrapper {

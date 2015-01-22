@@ -56,6 +56,27 @@
     </script>
     <script id="logger-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
+        <a href="#" class="btn btn-success pull-right" id="btn-export">Export</a>
+        <table id="tbl-log" class="table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Scale</th>
+                    <th>Who</th>
+                    <th>Item</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each log}}
+                <tr>
+                    <td>{{created_at}}</td>
+                    <td>{{scale}}</td>
+                    <td>{{nearest}}</td>
+                    <td>{{qrcode}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </script>
     <script id="beacon-template" type="text/x-handlebars-template">
         <div id="div-nearest"></div>
