@@ -50,6 +50,8 @@ var app = {
                 $("#div-nearest").html(app.template.nearest(context));
                 context = (localStorage["rssi"]) ? JSON.parse(localStorage["rssi"]) : {};
                 console.log(context);
+                console.log("---TAKA----");
+                console.log(app.template.rssi(context));
                 $("#div-rssi").html(app.template.rssi(context));
                 break;
             case "scale":
