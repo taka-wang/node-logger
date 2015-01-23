@@ -247,10 +247,10 @@ var app = {
         app.ctlMap.qrcode.click(function() {
             $(document).trigger("pagechange", ["qrcode", $(this)]);
         });
-        app.ctlMap.qrcode.click(function() {
+        app.ctlMap.smgr.click(function() {
             $(document).trigger("pagechange", ["smgr", $(this)]);
         });
-        app.ctlMap.qrcode.click(function() {
+        app.ctlMap.qmgr.click(function() {
             $(document).trigger("pagechange", ["qmgr", $(this)]);
         });
     },
