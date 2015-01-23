@@ -183,6 +183,7 @@ var app = {
                 $("#tbl-item").editableTableWidget();
                 $("#tbl-item td").on("change", function(evt, newVale) {
                     console.log(evt);
+                    console.log(evt.target.cellIndex);
                     console.log(newVale);
                     console.log($(this).parent().parent().children().index($(this).parent()));
                 });
