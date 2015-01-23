@@ -87,7 +87,7 @@ router.route("/items")
 router.route("/items/:item_name")
     // read a single item by id
     .get(function(req, res) {
-        return Item.findOne({ "item" : req.params.item_name}, function(err, item) {
+        return Item.findOne({ "qrcode" : req.params.item_name}, function(err, item) {
             if (item) {
                 if (!err) {
                     res.json(item);
@@ -101,9 +101,9 @@ router.route("/items/:item_name")
     })
     // update a single item by id
     .put(function(req, res) {
-        return Item.findOne({ "item" : req.params.item_name}, function(err, item) {
-            if (item && req.body.qrcode) {
-                item.qrcode = req.body.qrcode;
+        return Item.findOne({ "qrcode" : req.params.item_name}, function(err, item) {
+            if (item && req.body.item) {
+                item.item = req.body.item;
                 return item.save(function(err) {
                     if (!err) {
                         res.json({ message: "Item updated" });
@@ -118,7 +118,7 @@ router.route("/items/:item_name")
     })
     // delete a single item by id
     .delete(function(req, res) {
-        return Item.findOne({ "item" : req.params.item_name}, function(err, item) {
+        return Item.findOne({ "qrcode" : req.params.item_name}, function(err, item) {
             if (item) {
                 return item.remove(function(err) {
                     if (!err) {
