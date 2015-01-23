@@ -169,11 +169,11 @@ var app = {
                 break;
             case "bmgr":
                 context = {title: "BMGR"};
-                app.ctlMap.container.html(app.template.default(context));
+                app.ctlMap.container.html(app.template.bmgr(context));
                 break;
             case "qmgr":
                 context = {title: "QMGR"};
-                app.ctlMap.container.html(app.template.default(context));
+                app.ctlMap.container.html(app.template.qmgr(context));
                 break;
             default:
                 app.get_beacons();
