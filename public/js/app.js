@@ -134,9 +134,17 @@ var app = {
         });
     },
     delete_item: function(qrcode, item) {
-        console.log("TODO");
-        console.log(qrcode);
-        console.log(item);
+        $.ajax({
+            type: "DELETE",
+            timeout: 1000,
+            url: "/api/items/" + qrcode,
+            success: function(result) {
+                console.log(result);
+            },
+            error: function(xhr, type){
+                console.log("Fail!");
+            }
+        });
     },
     update_item: function(qrcode, item) {
 
