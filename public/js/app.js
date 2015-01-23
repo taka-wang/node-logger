@@ -134,7 +134,9 @@ var app = {
         });
     },
     delete_item: function(qrcode, item) {
-
+        console.log("TODO");
+        console.log(qrcode);
+        console.log(item);
     },
     update_item: function(qrcode, item) {
 
@@ -224,18 +226,9 @@ var app = {
                         app.ctlMap.container.html(app.template.qmgr(context));
 
                         $("[id^=btn-qr-]").click(function() {
-                            //console.log($(this).attr('id'));
-                            //console.log($(this).parent().parent().children()[1].val()); //QR
-
-                            console.log(
-                                $.trim($(this).parent().parent().children().eq(0).html())
-                            );
-
-                            console.log(
-                                $.trim($(this).parent().parent().children().eq(1).html())
-                            );
-
-
+                            var qrcode = $.trim($(this).parent().parent().children().eq(0).html(),
+                                item   = $.trim($(this).parent().parent().children().eq(1).html();
+                            app.delete_item(qrcode, item);
                         });
                         
                         $("#tbl-item").editableTableWidget();
