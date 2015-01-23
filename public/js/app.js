@@ -182,7 +182,7 @@ var app = {
                 }
                 app.ctlMap.container.html(app.template.qmgr(context));
                 $("[id^=btn-qr-]").click(function() {
-                    console.log($this);
+                    console.log($(this));
                 });
                 $("#tbl-item").editableTableWidget();
                 $("#tbl-item td").on("change", function(evt, newVale) {
