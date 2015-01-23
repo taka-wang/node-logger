@@ -102,6 +102,30 @@ var app = {
             }
         });
     },
+    add_item: function(qrcode, item) {
+        $.ajax({
+            type: "POST",
+            timeout: 1000,
+            cache: false, // do not cache
+            url: "/api/items",
+            data: { 
+                qrcode: qrcode, 
+                item: item
+            }
+        })
+        .done(function(msg) {
+            $("#alert-item-success").removeClass("hidden").delay(1000).queue(function(){
+                $(this).addClass("hidden").dequeue();
+                $("#itemModal").modal("toggle"); //dismiss
+                app.render("qmgr");
+            });
+        })
+        .fail (function( jqXHR, textStatus ) {
+            $("#alert-item-fail").removeClass("hidden").delay(3000).queue(function(){
+                $(this).addClass("hidden").dequeue();
+            });
+        });
+    },
     json2csv: function(JSONData, ReportTitle, ShowLabel) {
         var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;      
         var CSV = '';    
@@ -215,35 +239,14 @@ var app = {
 
     bindEvent: function() {
         console.log("bindEvent");
+
         $(document).on("click", "#btn-export", function(){
             app.json2csv(app.defaults.logs, new Date().toISOString(), false);
         });
         
-
-        $("#btn-save-item").click(function() {
+        $("#btn-save-item-modal").click(function() {
             if ( $("#inputQR").val().length > 0 && $("#inputQR").val().length > 0 ) {
-                $.ajax({
-                    type: "POST",
-                    timeout: 1000,
-                    cache: false, // do not cache
-                    url: "/api/items",
-                    data: { 
-                        qrcode: $("#inputQR").val(), 
-                        item: $("#inputItem").val()
-                    }
-                })
-                .done(function(msg) {
-                    $("#alert-item-success").removeClass("hidden").delay(1000).queue(function(){
-                        $(this).addClass("hidden").dequeue();
-                        $("#itemModal").modal("toggle");
-                        app.render("qmgr");
-                    });
-                })
-                .fail (function( jqXHR, textStatus ) {
-                    $("#alert-item-fail").removeClass("hidden").delay(3000).queue(function(){
-                        $(this).addClass("hidden").dequeue();
-                    });
-                });
+                app.add_item($("#inputQR").val(), $("#inputItem").val());
             } else {
                 $("#alert-item-fail").removeClass("hidden");
             }
