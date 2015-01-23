@@ -225,7 +225,8 @@ var app = {
 
                         $("[id^=btn-qr-]").click(function() {
                             //console.log($(this).attr('id'));
-                            console.log($(this).parent().parent().children());
+                            console.log($(this).parent().parent().children().index(0).textContent); //QR
+                            console.log($(this).parent().parent().children().index(1).textContent); //ITEM
 
 
 
