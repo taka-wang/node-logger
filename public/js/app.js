@@ -173,24 +173,36 @@ var app = {
                 break;
             case "qmgr": //QRCODE item
                 context = {title: "Item Management", item: []};
-                var idx = 0;
-                for (var key in app.defaults.items) {
-                    if (app.defaults.items.hasOwnProperty(key)) {
-                        context.item.push({"qrcode": key, "item": app.defaults.items[key], "idx": "btn-qr-"+idx })
+                $.ajax({
+                    type: "GET",
+                    timeout: 5000,
+                    cache: false, // do not cache
+                    url: "/api/items",
+                    dataType: 'json',
+                    success: function(data) {
+                        for (var i = 0; i < data.length; i++) {
+                            data[i].idx = "btn-qr-" + i;
+                            context.item.push(data[i]);
+                        }
+                        app.ctlMap.container.html(app.template.qmgr(context));
+
+                        $("[id^=btn-qr-]").click(function() {
+                            console.log($(this).attr('id'));
+                        });
+                        
+                        $("#tbl-item").editableTableWidget();
+                        
+                        $("#tbl-item td").on("change", function(evt, newVale) {
+                            if (evt.target.cellIndex == 0) return false; // reject change
+                            console.log(evt);
+                            console.log(evt.target.cellIndex);
+                            console.log(newVale);
+                            console.log($(this).parent().parent().children().index($(this).parent()));
+                        });
+                    },
+                    error: function(xhr, type){
+                        app.ctlMap.container.html(app.template.qmgr(context));
                     }
-                    idx++;
-                }
-                app.ctlMap.container.html(app.template.qmgr(context));
-                $("[id^=btn-qr-]").click(function() {
-                    console.log($(this).attr('id'));
-                });
-                $("#tbl-item").editableTableWidget();
-                $("#tbl-item td").on("change", function(evt, newVale) {
-                    if (evt.target.cellIndex == 0) return false; // reject change
-                    console.log(evt);
-                    console.log(evt.target.cellIndex);
-                    console.log(newVale);
-                    console.log($(this).parent().parent().children().index($(this).parent()));
                 });
                 break;
             default:
