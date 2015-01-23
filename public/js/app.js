@@ -207,6 +207,11 @@ var app = {
             app.json2csv(app.defaults.logs, new Date().toISOString(), false);
         });
         
+
+        $("#btn-save-item").click(function() {
+            $("#itemModal").modal("toggle");
+        });
+
         $(document).on("mqttchange", function(e, type, obj) {
             var context = null;
             switch (type) {
