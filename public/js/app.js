@@ -209,9 +209,26 @@ var app = {
         
 
         $("#btn-save-item").click(function() {
-            console.log($("#inputQR").val());
-            console.log($("#inputItem").val());
-            $("#itemModal").modal("toggle");
+            if ( $("#inputQR").val().length > 0 && $("#inputQR").val().length > 0 ) {
+                $.ajax({
+                    type: "POST",
+                    timeout: 1000,
+                    cache: false, // do not cache
+                    url: "/api/items",
+                    data: { 
+                        qrcode: $("#inputQR").val(), 
+                        item: $("#inputItem").val()
+                    }
+                })
+                .done(function(msg) {
+                    $("#itemModal").modal("toggle");
+                })
+                .fail (function( jqXHR, textStatus ) {
+                    alert( "Request failed: " + textStatus );
+                });
+            } else {
+                console.log("FAIL");
+            }
         });
 
         $(document).on("mqttchange", function(e, type, obj) {
