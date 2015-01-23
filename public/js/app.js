@@ -176,7 +176,7 @@ var app = {
                 var idx = 0;
                 for (var key in app.defaults.items) {
                     if (app.defaults.items.hasOwnProperty(key)) {
-                        context.item.push({"qrcode": key, "item": app.defaults.items[key], "idx": idx })
+                        context.item.push({"qrcode": key, "item": app.defaults.items[key], "idx": "btn-qr-"+idx })
                     }
                     idx++;
                 }
