@@ -124,6 +124,7 @@ var app = {
                 $(this).addClass("hidden").dequeue();
                 app.ctlMap.item_modal.modal("toggle"); //dismiss
                 app.render("qmgr");
+                app.get_items(); // update item array
             });
         })
         .fail (function( jqXHR, textStatus ) {
@@ -131,6 +132,12 @@ var app = {
                 $(this).addClass("hidden").dequeue();
             });
         });
+    },
+    delete_item: function(qrcode, item) {
+
+    },
+    update_item: function(qrcode, item) {
+
     },
     json2csv: function(JSONData, ReportTitle, ShowLabel) {
         var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;      
