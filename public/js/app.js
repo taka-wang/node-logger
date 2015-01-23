@@ -17,7 +17,13 @@ var app = {
         scale:      $("#scale_list"),
         qrcode:     $("#qrcode_list"),
         bmgr  :     $("#beacon_mgr_list"),
-        qmgr  :     $("#qrcode_mgr_list")
+        qmgr  :     $("#qrcode_mgr_list"),
+
+        item_modal: $("#itemModal"),
+        aItemFail:  $("#alert-item-fail"),
+        aItemOk:    $("#alert-item-success"),
+        inputQR:    $("#inputQR"),
+        inputItem:  $("#inputItem"),
     },
     template : {
         default: Handlebars.compile($("#default-template").html()),
@@ -114,14 +120,14 @@ var app = {
             }
         })
         .done(function(msg) {
-            $("#alert-item-success").removeClass("hidden").delay(1000).queue(function(){
+            app.ctlMap.aItemOk.removeClass("hidden").delay(1000).queue(function(){
                 $(this).addClass("hidden").dequeue();
-                $("#itemModal").modal("toggle"); //dismiss
+                app.ctlMap.item_modal.modal("toggle"); //dismiss
                 app.render("qmgr");
             });
         })
         .fail (function( jqXHR, textStatus ) {
-            $("#alert-item-fail").removeClass("hidden").delay(3000).queue(function(){
+            app.ctlMap.aItemFail.removeClass("hidden").delay(3000).queue(function(){
                 $(this).addClass("hidden").dequeue();
             });
         });
@@ -245,10 +251,10 @@ var app = {
         });
         
         $("#btn-save-item-modal").click(function() {
-            if ( $("#inputQR").val().length > 0 && $("#inputQR").val().length > 0 ) {
-                app.add_item($("#inputQR").val(), $("#inputItem").val());
+            if ( app.ctlMap.inputItem.val().length > 0 && app.ctlMap.inputQR.val().length > 0 ) {
+                app.add_item(app.ctlMap.inputQR.val(), app.ctlMap.inputItem.val());
             } else {
-                $("#alert-item-fail").removeClass("hidden");
+                app.ctlMap.aItemFail.removeClass("hidden");
             }
         });
 
