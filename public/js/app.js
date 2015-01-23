@@ -173,14 +173,13 @@ var app = {
                 break;
             case "qmgr": //QRCODE item
                 context = {title: "Item Management", item: []};
-                var id = 1;
                 for (var key in app.defaults.items) {
                     if (app.defaults.items.hasOwnProperty(key)) {
-                        context.item.push({"num": id, "qrcode": key, "item": app.defaults.items[key] })
+                        context.item.push({"qrcode": key, "item": app.defaults.items[key] })
                     }
-                    id++;
                 }
                 app.ctlMap.container.html(app.template.qmgr(context));
+
                 $("#tbl-item").editableTableWidget();
                 $("#tbl-item td").on("change", function(evt, newVale) {
                     console.log(evt);
