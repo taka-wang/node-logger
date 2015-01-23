@@ -182,6 +182,7 @@ var app = {
 
                 $("#tbl-item").editableTableWidget();
                 $("#tbl-item td").on("change", function(evt, newVale) {
+                    if (evt.target.cellIndex == 0) return false; // reject change
                     console.log(evt);
                     console.log(evt.target.cellIndex);
                     console.log(newVale);
