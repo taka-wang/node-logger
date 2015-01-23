@@ -245,7 +245,7 @@ var app = {
                         });
                         
                         // UPDATE
-                        $("#tbl-item td").on("change", function(evt, newVale) {
+                        $("#tbl-item td").on("change", function(evt, newValue) {
                             if (evt.target.cellIndex != 1) return false; // reject change
                             var qrcode = $.trim($(evt.target).prev().html());
                             app.update_item(qrcode, newValue);
