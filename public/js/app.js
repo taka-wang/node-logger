@@ -233,18 +233,21 @@ var app = {
                         }
                         app.ctlMap.container.html(app.template.qmgr(context));
 
+                        $("#tbl-item").editableTableWidget();
+                        
+                        // DELETE
                         $("[id^=btn-qr-]").click(function() {
                             var qrcode = $.trim($(this).parent().parent().children().eq(0).html()),
                                 item   = $.trim($(this).parent().parent().children().eq(1).html());
-                            app.delete_item(qrcode, item);
+                            app.delete_item(qrcode, item); // delete item
                         });
                         
-                        $("#tbl-item").editableTableWidget();
-                        
+                        // UPDATE
                         $("#tbl-item td").on("change", function(evt, newVale) {
                             if (evt.target.cellIndex != 1) return false; // reject change
                             console.log(evt);
                             console.log(evt.target.cellIndex);
+                            console.dir(evt.target.previousSibling.html());
                             console.log(newVale);
                             console.log($(this).parent().parent().children().index($(this).parent()));
                         });
