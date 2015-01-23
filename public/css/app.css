@@ -25,7 +25,7 @@
 }
 
 #tbl-item > tbody > tr > td {
-    vertical-align: center;
+    vertical-align: center !important;
 }
 
 
