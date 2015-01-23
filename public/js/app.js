@@ -223,7 +223,7 @@ var app = {
                     }
                 })
                 .done(function(msg) {
-                    $("#alert-item-success").removeClass("hidden").delay(1000).queue(function(){
+                    $("#alert-item-success").removeClass("hidden").delay(3000).queue(function(){
                         $(this).addClass("hidden").dequeue();
                     });
                     $("#itemModal").modal("toggle");
