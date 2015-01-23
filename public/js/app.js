@@ -209,8 +209,6 @@ var app = {
         
 
         $("#btn-save-item").click(function() {
-            $("#alert-item-success").addClass("hidden");
-            $("#alert-item-fail").addClass("hidden");
             if ( $("#inputQR").val().length > 0 && $("#inputQR").val().length > 0 ) {
                 $.ajax({
                     type: "POST",
@@ -226,6 +224,7 @@ var app = {
                     $("#alert-item-success").removeClass("hidden").delay(1000).queue(function(){
                         $(this).addClass("hidden").dequeue();
                         $("#itemModal").modal("toggle");
+                        app.render("qmgr");
                     });
                 })
                 .fail (function( jqXHR, textStatus ) {
