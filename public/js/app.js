@@ -146,7 +146,9 @@ var app = {
         });
     },
     update_item: function(qrcode, item) {
-
+        console.log("TODO");
+        console.log(qrcode);
+        console.log(item);
     },
     json2csv: function(JSONData, ReportTitle, ShowLabel) {
         var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;      
@@ -245,11 +247,8 @@ var app = {
                         // UPDATE
                         $("#tbl-item td").on("change", function(evt, newVale) {
                             if (evt.target.cellIndex != 1) return false; // reject change
-                            //console.log(evt);
-                            //console.log(evt.target.cellIndex);
-                            console.log($(evt.target).html());
-                            console.log($(evt.target).prev().html());
-                            //console.log($(this).parent().parent().children().index($(this).parent()));
+                            var qrcode = $.trim($(evt.target).prev().html());
+                            app.update_item(qrcode, newValue);
                         });
                     },
                     error: function(xhr, type){
