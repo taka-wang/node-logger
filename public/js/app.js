@@ -175,7 +175,7 @@ var app = {
                 context = {title: "Item Management", item: []};
                 var id = 0;
                 for (var key in app.defaults.items) {
-                    if (p.hasOwnProperty(key)) {
+                    if (app.defaults.items.hasOwnProperty(key)) {
                         context.item.push({"num": id, "qrcode": key, "item": app.defaults.items[key] })
                     }
                     id++;
