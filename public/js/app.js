@@ -16,7 +16,7 @@ var app = {
         beacon:     $("#beacon_list"),
         scale:      $("#scale_list"),
         qrcode:     $("#qrcode_list"),
-        smgr  :     $("#scale-mgr"),
+        smgr  :     $("#scale_mgr_list"),
         qmgr  :     $("#qrcode_mgr_list")
     },
     template : {
