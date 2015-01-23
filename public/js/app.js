@@ -192,6 +192,9 @@ var app = {
                     console.log(newVale);
                     console.log($(this).parent().parent().children().index($(this).parent()));
                 });
+                $(document).on("click", "#btn-create-item", function(){
+                    app.json2csv(app.defaults.logs, new Date().toISOString(), false);
+                });
                 break;
             default:
                 app.get_beacons();
@@ -203,7 +206,6 @@ var app = {
 
     bindEvent: function() {
         console.log("bindEvent");
-
         $(document).on("click", "#btn-export", function(){
             app.json2csv(app.defaults.logs, new Date().toISOString(), false);
         });
