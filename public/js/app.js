@@ -225,8 +225,8 @@ var app = {
                 .done(function(msg) {
                     $("#alert-item-success").removeClass("hidden").delay(3000).queue(function(){
                         $(this).addClass("hidden").dequeue();
+                        $("#itemModal").modal("toggle");
                     });
-                    $("#itemModal").modal("toggle");
                 })
                 .fail (function( jqXHR, textStatus ) {
                     $("#alert-item-fail").removeClass("hidden").delay(3000).queue(function(){
