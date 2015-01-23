@@ -171,8 +171,15 @@ var app = {
                 context = {title: "BMGR"};
                 app.ctlMap.container.html(app.template.bmgr(context));
                 break;
-            case "qmgr":
-                context = {title: "QMGR"};
+            case "qmgr": //QRCODE item
+                context = {title: "Item Management", item: []};
+                var id = 0;
+                for (var key in app.defaults.items) {
+                    if (p.hasOwnProperty(key)) {
+                        context.item.push({"num": id, "qrcode": key, "item": app.defaults.items[key] })
+                    }
+                    id++;
+                }
                 app.ctlMap.container.html(app.template.qmgr(context));
                 break;
             default:
