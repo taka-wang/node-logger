@@ -173,7 +173,7 @@ var app = {
                 break;
             case "qmgr": //QRCODE item
                 context = {title: "Item Management", item: []};
-                var id = 0;
+                var id = 1;
                 for (var key in app.defaults.items) {
                     if (app.defaults.items.hasOwnProperty(key)) {
                         context.item.push({"num": id, "qrcode": key, "item": app.defaults.items[key] })
@@ -181,6 +181,12 @@ var app = {
                     id++;
                 }
                 app.ctlMap.container.html(app.template.qmgr(context));
+                $("#tbl-item").editableTableWidget();
+                $("#tbl-item td").on("change", function(evt, newVale) {
+                    console.log(evt);
+                    console.log(newVale);
+                    console.log($(this).parent().parent().children().index($(this).parent()));
+                });
                 break;
             default:
                 app.get_beacons();
