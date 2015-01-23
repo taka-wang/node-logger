@@ -209,6 +209,8 @@ var app = {
         
 
         $("#btn-save-item").click(function() {
+            console.log($("#inputQR").val());
+            console.log($("#inputItem").val());
             $("#itemModal").modal("toggle");
         });
 
