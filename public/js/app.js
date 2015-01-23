@@ -224,7 +224,11 @@ var app = {
                         app.ctlMap.container.html(app.template.qmgr(context));
 
                         $("[id^=btn-qr-]").click(function() {
-                            console.log($(this).attr('id'));
+                            //console.log($(this).attr('id'));
+                            console.log($(this).parent().parent().children());
+
+
+
                         });
                         
                         $("#tbl-item").editableTableWidget();
