@@ -209,6 +209,8 @@ var app = {
         
 
         $("#btn-save-item").click(function() {
+            $("#alert-item-success").addClass("hidden");
+            $("#alert-item-fail").addClass("hidden");
             if ( $("#inputQR").val().length > 0 && $("#inputQR").val().length > 0 ) {
                 $.ajax({
                     type: "POST",
@@ -221,13 +223,14 @@ var app = {
                     }
                 })
                 .done(function(msg) {
+                    $("#alert-item-success").removeClass("hidden");
                     $("#itemModal").modal("toggle");
                 })
                 .fail (function( jqXHR, textStatus ) {
-                    alert( "Request failed: " + textStatus );
+                    $("#alert-item-fail").removeClass("hidden");
                 });
             } else {
-                console.log("FAIL");
+                $("#alert-item-fail").removeClass("hidden");
             }
         });
 

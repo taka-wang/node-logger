@@ -28,6 +28,9 @@
     vertical-align: center !important;
 }
 
+.hidden {
+    display: none;
+}
 
 
 /* Toggle Styles */
