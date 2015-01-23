@@ -173,10 +173,12 @@ var app = {
                 break;
             case "qmgr": //QRCODE item
                 context = {title: "Item Management", item: []};
+                var idx = 0;
                 for (var key in app.defaults.items) {
                     if (app.defaults.items.hasOwnProperty(key)) {
-                        context.item.push({"qrcode": key, "item": app.defaults.items[key] })
+                        context.item.push({"qrcode": key, "item": app.defaults.items[key], "idx": idx })
                     }
+                    idx++;
                 }
                 app.ctlMap.container.html(app.template.qmgr(context));
 

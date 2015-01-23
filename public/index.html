@@ -177,6 +177,7 @@
                 <tr>
                     <th>QR code</th>
                     <th>Item</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -184,6 +185,9 @@
                 <tr>
                     <td>{{qrcode}}</td>
                     <td>{{item}}</td>
+                    <td>
+                    <a href="#" class="btn btn-danger" id="btn-qrcode-" + {{idx}}>Delete</a>
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>
