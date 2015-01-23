@@ -247,8 +247,8 @@ var app = {
                             if (evt.target.cellIndex != 1) return false; // reject change
                             //console.log(evt);
                             //console.log(evt.target.cellIndex);
-                            console.log($(event.target).parent().children().eq(0).html());
-                            console.log($(event.target).parent().children().eq(1).html());
+                            console.log($(event.target).children().eq(0).html());
+                            console.log($(event.target).children().eq(1).html());
                             //console.log($(this).parent().parent().children().index($(this).parent()));
                         });
                     },
