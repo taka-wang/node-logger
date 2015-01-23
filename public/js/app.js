@@ -124,7 +124,6 @@ var app = {
                 $(this).addClass("hidden").dequeue();
                 app.ctlMap.item_modal.modal("toggle"); //dismiss
                 app.render("qmgr");
-                app.get_items(); // update item array
             });
         })
         .fail (function( jqXHR, textStatus ) {
@@ -139,10 +138,10 @@ var app = {
             timeout: 1000,
             url: "/api/items/" + qrcode,
             success: function(result) {
-                console.log(result);
+                app.render("qmgr");
             },
-            error: function(xhr, type){
-                console.log("Fail!");
+            error: function(xhr, type) {
+                alert("Fail");
             }
         });
     },
@@ -230,6 +229,7 @@ var app = {
                         for (var i = 0; i < data.length; i++) {
                             data[i].idx = "btn-qr-" + i;
                             context.item.push(data[i]);
+                            app.defaults.items[data[i].qrcode] = data[i].item; // update array
                         }
                         app.ctlMap.container.html(app.template.qmgr(context));
 
