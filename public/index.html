@@ -35,7 +35,7 @@
                     <a id="qrcode_list" href="#qrcode">Item</a>
                 </li>
                 <li>
-                    <a id="scale_mgr_list" href="#scale-mgr">Scale Management</a>
+                    <a id="beacon_mgr_list" href="#scale-mgr">Beacon Management</a>
                 </li>
                 <li>
                     <a id="qrcode_mgr_list" href="#qrcode-mgr">Item Management</a>
@@ -149,11 +149,53 @@
             <div class="mqtt-title">QR Code</div>
         {{/if}}
     </script>
-    <script id="scale-mgr-template" type="text/x-handlebars-template">
+    <script id="beacon-mgr-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
+        <a href="#" class="btn btn-success pull-right" id="btn-create-beacon">Create</a>
+        <table id="tbl-beacon" class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Create_At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each beacon}}
+                <tr>
+                    <td>{{num}}</td>
+                    <td>{{id}}</td>
+                    <td>{{name}}</td>
+                    <td>{{created_at}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </script>    
     <script id="qrcode-mgr-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
+        <a href="#" class="btn btn-success pull-right" id="btn-create-item">Create</a>
+        <table id="tbl-item" class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>QR code</th>
+                    <th>Item</th>
+                    <th>Create_At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each item}}
+                <tr>
+                    <td>{{num}}</td>
+                    <td>{{qrcode}}</td>
+                    <td>{{item}}</td>
+                    <td>{{created_at}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </script>
     <!-- /template -->
     
@@ -163,6 +205,7 @@
     <script src="js/config.js"></script>
     <script src="js/mqttws31.js"></script>
     <script src="js/mqtt.js"></script>
+    <script src="js/mindmup-editabletable.js"></script>
     <script src="js/app.js"></script>
 </body>
 

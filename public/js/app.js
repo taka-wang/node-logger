@@ -16,7 +16,7 @@ var app = {
         beacon:     $("#beacon_list"),
         scale:      $("#scale_list"),
         qrcode:     $("#qrcode_list"),
-        smgr  :     $("#scale_mgr_list"),
+        bmgr  :     $("#beacon_mgr_list"),
         qmgr  :     $("#qrcode_mgr_list")
     },
     template : {
@@ -27,7 +27,7 @@ var app = {
         rssi:    Handlebars.compile($("#rssi-template").html()),
         scale:   Handlebars.compile($("#scale-template").html()),
         qrcode:  Handlebars.compile($("#qrcode-template").html()),
-        smgr:    Handlebars.compile($("#scale-mgr-template").html()),
+        bmgr:    Handlebars.compile($("#beacon-mgr-template").html()),
         qmgr:    Handlebars.compile($("#qrcode-mgr-template").html())
     },
     clear_storage: function() {
@@ -167,8 +167,8 @@ var app = {
                 context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
                 app.ctlMap.container.html(app.template.qrcode(context));
                 break;
-            case "smgr":
-                context = {title: "SMGR"};
+            case "bmgr":
+                context = {title: "BMGR"};
                 app.ctlMap.container.html(app.template.default(context));
                 break;
             case "qmgr":
@@ -247,8 +247,8 @@ var app = {
         app.ctlMap.qrcode.click(function() {
             $(document).trigger("pagechange", ["qrcode", $(this)]);
         });
-        app.ctlMap.smgr.click(function() {
-            $(document).trigger("pagechange", ["smgr", $(this)]);
+        app.ctlMap.bmgr.click(function() {
+            $(document).trigger("pagechange", ["bmgr", $(this)]);
         });
         app.ctlMap.qmgr.click(function() {
             $(document).trigger("pagechange", ["qmgr", $(this)]);
