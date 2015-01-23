@@ -247,7 +247,7 @@ var app = {
                             if (evt.target.cellIndex != 1) return false; // reject change
                             console.log(evt);
                             console.log(evt.target.cellIndex);
-                            console.dir(evt.target.prev());
+                            console.dir(evt.target.previousSibling);
                             console.log(newVale);
                             console.log($(this).parent().parent().children().index($(this).parent()));
                         });
