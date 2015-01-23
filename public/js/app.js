@@ -15,7 +15,9 @@ var app = {
         logger:     $("#logger_list"),
         beacon:     $("#beacon_list"),
         scale:      $("#scale_list"),
-        qrcode:     $("#qrcode_list")
+        qrcode:     $("#qrcode_list"),
+        smgr  :     $("#scale-mgr"),
+        qmgr  :     $("#qrcode_mgr_list")
     },
     template : {
         default: Handlebars.compile($("#default-template").html()),
@@ -24,7 +26,9 @@ var app = {
         nearest: Handlebars.compile($("#nearest-template").html()),
         rssi:    Handlebars.compile($("#rssi-template").html()),
         scale:   Handlebars.compile($("#scale-template").html()),
-        qrcode:  Handlebars.compile($("#qrcode-template").html())
+        qrcode:  Handlebars.compile($("#qrcode-template").html()),
+        smgr:    Handlebars.compile($("#scale-mgr-template").html()),
+        qmgr:    Handlebars.compile($("#qrcode-mgr-template").html())
     },
     clear_storage: function() {
         localStorage.removeItem("nearest");
@@ -163,6 +167,14 @@ var app = {
                 context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
                 app.ctlMap.container.html(app.template.qrcode(context));
                 break;
+            case "smgr":
+                context = {title: "SMGR"};
+                app.ctlMap.container.html(app.template.default(context));
+                break;
+            case "qmgr":
+                context = {title: "QMGR"};
+                app.ctlMap.container.html(app.template.default(context));
+                break;
             default:
                 app.get_beacons();
                 app.get_items();
@@ -234,6 +246,12 @@ var app = {
         });
         app.ctlMap.qrcode.click(function() {
             $(document).trigger("pagechange", ["qrcode", $(this)]);
+        });
+        app.ctlMap.qrcode.click(function() {
+            $(document).trigger("pagechange", ["smgr", $(this)]);
+        });
+        app.ctlMap.qrcode.click(function() {
+            $(document).trigger("pagechange", ["qmgr", $(this)]);
         });
     },
     destroy: function() {

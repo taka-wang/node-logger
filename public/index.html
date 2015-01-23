@@ -34,6 +34,12 @@
                 <li>
                     <a id="qrcode_list" href="#qrcode">Item</a>
                 </li>
+                <li>
+                    <a id="scale_mgr_list" href="#scale-mgr">Scale Management</a>
+                </li>
+                <li>
+                    <a id="qrcode_mgr_list" href="#qrcode-mgr">Item Management</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -142,7 +148,15 @@
         {{else}}
             <div class="mqtt-title">QR Code</div>
         {{/if}}
+    </script>
+    <script id="scale-mgr-template" type="text/x-handlebars-template">
+        <h1>{{title}}</h1>
     </script>    
+    <script id="qrcode-mgr-template" type="text/x-handlebars-template">
+        <h1>{{title}}</h1>
+    </script>
+    <!-- /template -->
+    
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/handlebars-v2.0.0.js"></script>
