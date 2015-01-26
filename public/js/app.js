@@ -12,18 +12,19 @@ var app = {
     },
     ctlMap : {
         container:  $("#container"),
-        logger:     $("#logger_list"),
-        beacon:     $("#beacon_list"),
-        scale:      $("#scale_list"),
-        qrcode:     $("#qrcode_list"),
-        bmgr  :     $("#beacon_mgr_list"),
-        qmgr  :     $("#qrcode_mgr_list"),
+        logger:     $("#li_logger"),
+        beacon:     $("#li_beacon"),
+        scale:      $("#li_scale"),
+        qrcode:     $("#li_qrcode"),
+        bmgr  :     $("#li_beacon_mgr"),
+        qmgr  :     $("#li_qrcode_mgr"),
 
         item_modal: $("#itemModal"),
         aItemFail:  $("#alert-item-fail"),
         aItemOk:    $("#alert-item-success"),
         inputQR:    $("#inputQR"),
         inputItem:  $("#inputItem"),
+        btnSaveItem:$("#btn-save-item-modal")
     },
     template : {
         default: Handlebars.compile($("#default-template").html()),
@@ -263,7 +264,6 @@ var app = {
                 app.ctlMap.container.html(app.template.default(context));
         }
     },
-
     bindEvent: function() {
         console.log("bindEvent");
 
@@ -271,7 +271,7 @@ var app = {
             app.json2csv(app.defaults.logs, new Date().toISOString(), false);
         });
         
-        $("#btn-save-item-modal").click(function() {
+        app.ctlMap.btnSaveItem.click(function() {
             if ( app.ctlMap.inputItem.val().length > 0 && app.ctlMap.inputQR.val().length > 0 ) {
                 app.add_item(app.ctlMap.inputQR.val(), app.ctlMap.inputItem.val());
             } else {
@@ -322,6 +322,10 @@ var app = {
             app.defaults.active = page;
             obj.parent().addClass("active").siblings().removeClass("active");
             app.render(app.defaults.active);
+        });
+
+        $("ul.sidebar-nav li").click(function() {
+            console.log($(this).attr("id"));
         });
 
         app.ctlMap.logger.click(function() {
