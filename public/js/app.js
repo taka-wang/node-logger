@@ -280,6 +280,8 @@ var app = {
                             var rex = new RegExp($(this).val(), 'i');
                             $('#tbl-log tr').hide();
                             $('#tbl-log tr').filter(function () {
+                                console.log($(this).text());
+                                console.log(rex.test($(this).text()));
                                 return rex.test($(this).text());
                             }).show();
                         }
