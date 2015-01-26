@@ -320,7 +320,7 @@ var app = {
 
         $(document).on("pagechange", function(e, page, obj) {
             app.defaults.active = page;
-            obj.parent().addClass("active").siblings().removeClass("active");
+            obj.addClass("active").siblings().removeClass("active");
             app.render(app.defaults.active);
         });
 
