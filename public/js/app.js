@@ -147,7 +147,7 @@ var app = {
                 app.rende("qmgr");
             },
             error: function(xhr, type) {
-                alert("Fail");
+                alert("Fail to delete item!");
             }
         });
     },
@@ -163,12 +163,9 @@ var app = {
                 app.rende("qmgr");
             },
             error: function(xhr, type) {
-                alert("Fail");
+                alert("Fail to update item!");
             }
         });
-        console.log("TODO");
-        console.log(qrcode);
-        console.log(item);
     },
     json2csv: function(JSONData, ReportTitle, ShowLabel) {
         var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;      
