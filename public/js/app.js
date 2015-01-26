@@ -8,38 +8,39 @@ var app = {
         active:  "",
         beacons: {},
         items:   {},
-        logs:    []
+        logs:    [] // work log
     },
     ctlMap : {
         container:      $("#container"),
-        li:             $("ul.sidebar-nav li"),
+        li:             $("ul.sidebar-nav li"), // nav list
         //
         item_modal:     $("#itemModal"),
         aItemFail:      $("#alert-item-fail"),
         aItemOk:        $("#alert-item-success"),
         inputQR:        $("#inputQR"),
         inputItem:      $("#inputItem"),
-        btnSaveItem:    $("#btn-save-item-modal"),
+        btnSaveItem:    $("#btn-save-item-modal"), // add new item button
         //
         beacon_modal:   $("#beaconModal"),
         aBeaconFail:    $("#alert-beacon-fail"),
         aBeaconOk:      $("#alert-beacon-success"),
         inputID:        $("#inputID"),
         inputName:      $("#inputName"),
-        btnSaveBeacon:  $("#btn-save-beacon-modal")
+        btnSaveBeacon:  $("#btn-save-beacon-modal") // add new beacon button
     },
     template : {
-        default: Handlebars.compile($("#default-template").html()),
-        logger:  Handlebars.compile($("#logger-template").html()),
-        beacon:  Handlebars.compile($("#beacon-template").html()),
-        nearest: Handlebars.compile($("#nearest-template").html()),
-        rssi:    Handlebars.compile($("#rssi-template").html()),
-        scale:   Handlebars.compile($("#scale-template").html()),
-        qrcode:  Handlebars.compile($("#qrcode-template").html()),
-        bmgr:    Handlebars.compile($("#beacon-mgr-template").html()),
-        qmgr:    Handlebars.compile($("#qrcode-mgr-template").html())
+        default:    Handlebars.compile($("#default-template").html()),
+        logger:     Handlebars.compile($("#logger-template").html()),
+        beacon:     Handlebars.compile($("#beacon-template").html()),
+        nearest:    Handlebars.compile($("#nearest-template").html()),
+        rssi:       Handlebars.compile($("#rssi-template").html()),
+        scale:      Handlebars.compile($("#scale-template").html()),
+        qrcode:     Handlebars.compile($("#qrcode-template").html()),
+        beacon_mgr: Handlebars.compile($("#beacon-mgr-template").html()),
+        item_mgr:   Handlebars.compile($("#qrcode-mgr-template").html())
     },
     clear_storage: function() {
+        console.log("clear_storage");
         localStorage.removeItem("nearest");
         localStorage.removeItem("rssi");
         localStorage.removeItem("scale");
@@ -52,6 +53,7 @@ var app = {
         app.rende("Welcome to D2D");
     },
     get_beacons: function(successHandler, errHandler) {
+        console.log("get_beacons");
         $.ajax({
             type: "GET",
             timeout: 1000,
@@ -63,6 +65,7 @@ var app = {
         });
     },
     add_beacon: function(id, name) {
+        console.log("add_beacon");
         $.ajax({
             type: "POST",
             timeout: 1000,
@@ -77,7 +80,7 @@ var app = {
             app.ctlMap.aBeaconOk.removeClass("hidden").delay(1000).queue(function(){
                 $(this).addClass("hidden").dequeue();
                 app.ctlMap.beacon_modal.modal("toggle"); //dismiss
-                app.rende("bmgr");
+                app.rende("beacon_mgr");
             });
         })
         .fail (function( jqXHR, textStatus ) {
@@ -87,13 +90,14 @@ var app = {
         });
     },
     delete_beacon: function(id, name) {
+        console.log("delete_beacon");
         $.ajax({
             type: "DELETE",
             timeout: 1000,
             url: "/api/beacons/" + id,
             success: function(result) {
                 delete app.defaults.beacons[id];
-                app.rende("bmgr");
+                app.rende("beacon_mgr");
             },
             error: function(xhr, type) {
                 alert("Fail to delete beacon!");
@@ -101,6 +105,7 @@ var app = {
         });
     },
     update_beacon: function(id, name) {
+        console.log("update_beacon");
         $.ajax({
             type: "PUT",
             timeout: 1000,
@@ -109,14 +114,15 @@ var app = {
                 name: name
             },
             success: function(result) {
-                app.rende("bmgr");
+                app.rende("beacon_mgr");
             },
             error: function(xhr, type) {
                 alert("Fail to update beacon!");
             }
         });
     },
-    get_loggers: function(callback) {
+    get_logs: function(callback) {
+        console.log("get_logs");
         $.ajax({
             type: "GET",
             timeout: 5000,
@@ -143,6 +149,7 @@ var app = {
         });
     },
     get_items: function(successHandler, errHandler) {
+        console.log("get_items");
         $.ajax({
             type: "GET",
             timeout: 5000,
@@ -154,6 +161,7 @@ var app = {
         });
     },
     add_item: function(qrcode, item) {
+        console.log("add_item");
         $.ajax({
             type: "POST",
             timeout: 1000,
@@ -168,7 +176,7 @@ var app = {
             app.ctlMap.aItemOk.removeClass("hidden").delay(1000).queue(function(){
                 $(this).addClass("hidden").dequeue();
                 app.ctlMap.item_modal.modal("toggle"); //dismiss
-                app.rende("qmgr");
+                app.rende("item_mgr");
             });
         })
         .fail (function( jqXHR, textStatus ) {
@@ -178,13 +186,14 @@ var app = {
         });
     },
     delete_item: function(qrcode, item) {
+        console.log("delete_item");
         $.ajax({
             type: "DELETE",
             timeout: 1000,
             url: "/api/items/" + qrcode,
             success: function(result) {
                 delete app.defaults.items[qrcode];
-                app.rende("qmgr");
+                app.rende("item_mgr");
             },
             error: function(xhr, type) {
                 alert("Fail to delete item!");
@@ -192,6 +201,7 @@ var app = {
         });
     },
     update_item: function(qrcode, item) {
+        console.log("update_item");
         $.ajax({
             type: "PUT",
             timeout: 1000,
@@ -200,7 +210,7 @@ var app = {
                 item: item
             },
             success: function(result) {
-                app.rende("qmgr");
+                app.rende("item_mgr");
             },
             error: function(xhr, type) {
                 alert("Fail to update item!");
@@ -208,6 +218,7 @@ var app = {
         });
     },
     json2csv: function(JSONData, ReportTitle, ShowLabel) {
+        console.log("json2csv");
         var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;      
         var CSV = '';    
         if (ShowLabel) {
@@ -249,10 +260,11 @@ var app = {
         document.body.removeChild(link);
     },
     rende: function(type) {
+        console.log("rende - " + type);
         var context = null;
         switch (type) {
             case "logger":
-                var logs = app.get_loggers(function(context) {
+                var logs = app.get_logs(function(context) {
                     app.ctlMap.container.html(app.template.logger(context));
                 });
                 break;
@@ -272,7 +284,7 @@ var app = {
                 context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
                 app.ctlMap.container.html(app.template.qrcode(context));
                 break;
-            case "bmgr":
+            case "beacon_mgr":
                 context = {title: "Beacon Management", beacon: []};
                 app.get_beacons(                    
                     function(data) { //success handler
@@ -281,7 +293,7 @@ var app = {
                             context.beacon.push(data[i]);
                             app.defaults.beacons[data[i].id] = data[i].name; // update array
                         }
-                        app.ctlMap.container.html(app.template.bmgr(context));
+                        app.ctlMap.container.html(app.template.beacon_mgr(context));
 
                         $("#tbl-beacon").editableTableWidget();
                         
@@ -300,11 +312,11 @@ var app = {
                         });
                     }, 
                     function(xhr, type) { // error handler
-                        app.ctlMap.container.html(app.template.bmgr(context));
+                        app.ctlMap.container.html(app.template.beacon_mgr(context));
                     }
                 );
                 break;
-            case "qmgr": //QRCODE item
+            case "item_mgr": //QRCODE item
                 context = {title: "Item Management", item: []};
                 app.get_items(                    
                     function(data) { //success handler
@@ -313,7 +325,7 @@ var app = {
                             context.item.push(data[i]);
                             app.defaults.items[data[i].qrcode] = data[i].item; // update array
                         }
-                        app.ctlMap.container.html(app.template.qmgr(context));
+                        app.ctlMap.container.html(app.template.item_mgr(context));
 
                         $("#tbl-item").editableTableWidget();
                         
@@ -332,7 +344,7 @@ var app = {
                         });
                     }, 
                     function(xhr, type) { // error handler
-                        app.ctlMap.container.html(app.template.qmgr(context));
+                        app.ctlMap.container.html(app.template.item_mgr(context));
                     }
                 );
                 break;
@@ -445,10 +457,10 @@ var app = {
                     $(document).trigger("pagechange", ["qrcode", $(this)]);
                     break;
                 case "li_beacon_mgr":
-                    $(document).trigger("pagechange", ["bmgr", $(this)]);
+                    $(document).trigger("pagechange", ["beacon_mgr", $(this)]);
                     break;
                 case "li_qrcode_mgr":
-                    $(document).trigger("pagechange", ["qmgr", $(this)]);
+                    $(document).trigger("pagechange", ["item_mgr", $(this)]);
                     break;
             }
         });
