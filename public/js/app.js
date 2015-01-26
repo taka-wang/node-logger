@@ -42,7 +42,7 @@ var app = {
         console.log("init");
         app.clear_storage();
         app.bindEvent();
-        app.render("default");
+        app.rende("default");
     },
     get_beacons: function() {
         $.ajax({
@@ -128,7 +128,7 @@ var app = {
             app.ctlMap.aItemOk.removeClass("hidden").delay(1000).queue(function(){
                 $(this).addClass("hidden").dequeue();
                 app.ctlMap.item_modal.modal("toggle"); //dismiss
-                app.render("qmgr");
+                app.rende("qmgr");
             });
         })
         .fail (function( jqXHR, textStatus ) {
@@ -143,7 +143,7 @@ var app = {
             timeout: 1000,
             url: "/api/items/" + qrcode,
             success: function(result) {
-                app.render("qmgr");
+                app.rende("qmgr");
             },
             error: function(xhr, type) {
                 alert("Fail");
@@ -196,7 +196,7 @@ var app = {
         link.click();
         document.body.removeChild(link);
     },
-    render: function(type) {
+    rende: function(type) {
         var context = null;
         switch (type) {
             case "logger":
@@ -319,13 +319,13 @@ var app = {
                     type = "beacon";
                     break;
             }
-            if (app.defaults.active == type) app.render(type);
+            if (app.defaults.active == type) app.rende(type);
         });
 
         $(document).on("pagechange", function(e, page, obj) {
             app.defaults.active = page;
             obj.addClass("active").siblings().removeClass("active");
-            app.render(app.defaults.active);
+            app.rende(app.defaults.active);
         });
 
         app.ctlMap.li.click(function() {
