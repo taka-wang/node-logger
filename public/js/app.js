@@ -325,9 +325,30 @@ var app = {
         });
 
         $("ul.sidebar-nav li").click(function() {
-            console.log($(this).children('a').attr('id'));
+            var id = $(this).children('a').attr('id');
+            switch (id) {
+                case "li_logger":
+                    $(document).trigger("pagechange", ["logger", $(this)]);
+                    break;
+                case "li_beacon":
+                    $(document).trigger("pagechange", ["beacon", $(this)]);
+                    break;
+                case "li_scale":
+                    $(document).trigger("pagechange", ["scale", $(this)]);
+                    break;
+                case "li_qrcode":
+                    $(document).trigger("pagechange", ["qrcode", $(this)]);
+                    break;
+                case "li_beacon_mgr":
+                    $(document).trigger("pagechange", ["bmgr", $(this)]);
+                    break;
+                case "li_qrcode_mgr":
+                    $(document).trigger("pagechange", ["qmgr", $(this)]);
+                    break;
+            }
         });
 
+/*
         app.ctlMap.logger.click(function() {
             $(document).trigger("pagechange", ["logger", $(this)]);
         });
@@ -346,6 +367,7 @@ var app = {
         app.ctlMap.qmgr.click(function() {
             $(document).trigger("pagechange", ["qmgr", $(this)]);
         });
+*/
     },
     destroy: function() {
         console.log("destroy");
