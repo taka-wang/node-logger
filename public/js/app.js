@@ -270,8 +270,20 @@ var app = {
                 var logs = app.get_logs(function(context) {
                     app.ctlMap.container.html(app.template.logger(context));
                 });
-                $('.input-daterange').datepicker({
-                    todayBtn: "linked"
+                //bind datepicker
+                $("#datepicker").datepicker({
+                    todayHighlight: true
+                }).on("changeDate", function(ev) {
+                    ev.target.name == "start" ? _start = ev.date : _end = ev.date
+                    console.log(_start);
+                    console.log(_end);
+                    /*
+                    if (_start && _end) {
+                        console.log("date change");
+                        app.render_req(moment(_start).utc().unix(), 
+                            moment(_end).add(1, "days").startOf("day").utc().unix());
+                    }
+                    */
                 });
                 break;
             case "beacon":
