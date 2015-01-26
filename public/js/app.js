@@ -42,7 +42,7 @@ var app = {
         console.log("init");
         app.clear_storage();
         app.bindEvent();
-        app.rende("default");
+        app.rende("Welcome to D2D");
     },
     get_beacons: function(successHandler, errHandler) {
         $.ajax({
@@ -277,7 +277,7 @@ var app = {
                         console.log("Fail!");
                     }
                 );
-                context = {title: "Welcome to D2D"};
+                context = {title: type};
                 app.ctlMap.container.html(app.template.default(context));
         }
     },
