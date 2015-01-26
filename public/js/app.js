@@ -12,14 +12,14 @@ var app = {
     },
     ctlMap : {
         container:      $("#container"),
-        li:             $("ul.sidebar-nav li"), // nav list
+        li:             $("ul.sidebar-nav li"),     // nav list
         //
         item_modal:     $("#itemModal"),
         aItemFail:      $("#alert-item-fail"),
         aItemOk:        $("#alert-item-success"),
         inputQR:        $("#inputQR"),
         inputItem:      $("#inputItem"),
-        btnSaveItem:    $("#btn-save-item-modal"), // add new item button
+        btnSaveItem:    $("#btn-save-item-modal"),  // add new item button
         //
         beacon_modal:   $("#beaconModal"),
         aBeaconFail:    $("#alert-beacon-fail"),
@@ -39,6 +39,15 @@ var app = {
         beacon_mgr: Handlebars.compile($("#beacon-mgr-template").html()),
         item_mgr:   Handlebars.compile($("#qrcode-mgr-template").html())
     },
+    init: function() {
+        console.log("init");
+        app.clear_storage();
+        app.bindEvent();
+        app.rende("default");
+    },
+    destroy: function() {
+        console.log("destroy");
+    },
     clear_storage: function() {
         console.log("clear_storage");
         localStorage.removeItem("nearest");
@@ -46,11 +55,32 @@ var app = {
         localStorage.removeItem("scale");
         localStorage.removeItem("qrcode");
     },
-    init: function() {
-        console.log("init");
-        app.clear_storage();
-        app.bindEvent();
-        app.rende("Welcome to D2D");
+    get_logs: function(callback) {
+        console.log("get_logs");
+        $.ajax({
+            type: "GET",
+            timeout: 5000,
+            cache: false, // do not cache
+            url: "/api/logs",
+            dataType: 'json',
+            success: function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    data[i].nearest = (typeof app.defaults.beacons[data[i].nearest] == "undefined") 
+                                        ? data[i].nearest : app.defaults.beacons[data[i].nearest]; 
+                    data[i].qrcode  = (typeof app.defaults.items[data[i].qrcode] == "undefined") 
+                                        ? data[i].qrcode : app.defaults.items[data[i].qrcode];
+                    data[i].created_at = new Date(data[i].created_at).toLocaleString();
+                    delete data[i]._id;
+                    delete data[i].__v;
+                }
+                if (callback) callback({log: data});
+                data.unshift({"scale": "Scale (g)", "nearest": "Who", "qrcode": "Item", "created_at": "Time"});
+                app.defaults.logs = data;
+            },
+            error: function(xhr, type){
+                console.log("Fail!");
+            }
+        });
     },
     get_beacons: function(successHandler, errHandler) {
         console.log("get_beacons");
@@ -118,33 +148,6 @@ var app = {
             },
             error: function(xhr, type) {
                 alert("Fail to update beacon!");
-            }
-        });
-    },
-    get_logs: function(callback) {
-        console.log("get_logs");
-        $.ajax({
-            type: "GET",
-            timeout: 5000,
-            cache: false, // do not cache
-            url: "/api/logs",
-            dataType: 'json',
-            success: function(data) {
-                for (var i = 0; i < data.length; i++) {
-                    data[i].nearest = (typeof app.defaults.beacons[data[i].nearest] == "undefined") 
-                                        ? data[i].nearest : app.defaults.beacons[data[i].nearest]; 
-                    data[i].qrcode  = (typeof app.defaults.items[data[i].qrcode] == "undefined") 
-                                        ? data[i].qrcode : app.defaults.items[data[i].qrcode];
-                    data[i].created_at = new Date(data[i].created_at).toLocaleString();
-                    delete data[i]._id;
-                    delete data[i].__v;
-                }
-                if (callback) callback({log: data});
-                data.unshift({"scale": "Scale (g)", "nearest": "Who", "qrcode": "Item", "created_at": "Time"});
-                app.defaults.logs = data;
-            },
-            error: function(xhr, type){
-                console.log("Fail!");
             }
         });
     },
@@ -369,7 +372,7 @@ var app = {
                         console.log("Fail!");
                     }
                 );
-                context = {title: type};
+                context = {title: "Welcome to D2D"};
                 app.ctlMap.container.html(app.template.default(context));
         }
     },
@@ -464,9 +467,6 @@ var app = {
                     break;
             }
         });
-    },
-    destroy: function() {
-        console.log("destroy");
     }
 };
 
