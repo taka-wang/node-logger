@@ -46,6 +46,11 @@
 
     <script id="logger-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
+        <div class="input-daterange" id="datepicker" >
+            <input type="text" class="input-small" name="start" />
+            <span class="add-on" style="vertical-align: top;height:20px">to</span>
+            <input type="text" class="input-small" name="end" />
+        </div>
         <a href="#" class="btn btn-success pull-right" id="btn-export">Export</a>
         <table id="tbl-log" class="table">
             <thead>
