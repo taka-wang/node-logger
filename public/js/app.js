@@ -253,7 +253,7 @@ var app = {
                 app.ctlMap.container.html(app.template.qrcode(context));
                 break;
             case "bmgr":
-                context = {title: "Beacon Management", beacons: []};
+                context = {title: "Beacon Management", beacon: []};
                 app.get_beacons(                    
                     function(data) { //success handler
                         for (var i = 0; i < data.length; i++) {
