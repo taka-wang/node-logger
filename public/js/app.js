@@ -87,14 +87,34 @@ var app = {
         });
     },
     delete_beacon: function(id, name) {
-        console.log("TODO-DELETE");
-        console.log(id);
-        console.log(name);
+        $.ajax({
+            type: "DELETE",
+            timeout: 1000,
+            url: "/api/beacons/" + id,
+            success: function(result) {
+                delete app.defaults.beacons[id];
+                app.rende("bmgr");
+            },
+            error: function(xhr, type) {
+                alert("Fail to delete beacon!");
+            }
+        });
     },
     update_beacon: function(id, name) {
-        console.log("TODO-UPDATE");
-        console.log(id);
-        console.log(name);
+        $.ajax({
+            type: "PUT",
+            timeout: 1000,
+            url: "/api/beacons/" + id,
+            data: { 
+                name: name
+            },
+            success: function(result) {
+                app.rende("bmgr");
+            },
+            error: function(xhr, type) {
+                alert("Fail to update beacon!");
+            }
+        });
     },
     get_loggers: function(callback) {
         $.ajax({
