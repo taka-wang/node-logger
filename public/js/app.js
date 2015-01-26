@@ -385,7 +385,7 @@ var app = {
                         console.log("Fail!");
                     }
                 );
-                context = {title: "Welcome to D2D"};
+                context = {title: "Dare to Dream"};
                 app.ctlMap.container.html(app.template.default(context));
         }
     },
