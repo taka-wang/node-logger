@@ -291,7 +291,7 @@ var app = {
         switch (type) {
             case "logger":
                 var logs = app.get_logs(function(context) {
-                    var spinner = loadAnimation("Spin")
+                    var spinner = app.loadAnimation("Spin")
                     app.ctlMap.container.html(app.template.logger(context));
                     spinner.stop();
                     /*
