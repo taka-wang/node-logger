@@ -325,7 +325,7 @@ var app = {
         });
 
         $("ul.sidebar-nav li").click(function() {
-            console.log($(this));
+            console.log($(this).children('a').attr('id'));
         });
 
         app.ctlMap.logger.click(function() {
