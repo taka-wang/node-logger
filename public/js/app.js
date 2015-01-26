@@ -259,7 +259,7 @@ var app = {
                         for (var i = 0; i < data.length; i++) {
                             data[i].idx = "btn-beacon-" + i;
                             context.beacons.push(data[i]);
-                            app.beacons.items[data[i].qrcode] = data[i].item; // update array
+                            app.defaults.beacons[data[i].id] = data[i].name; // update array
                         }
                         app.ctlMap.container.html(app.template.bmgr(context));
 
