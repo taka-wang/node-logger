@@ -12,12 +12,7 @@ var app = {
     },
     ctlMap : {
         container:  $("#container"),
-        logger:     $("#li_logger"),
-        beacon:     $("#li_beacon"),
-        scale:      $("#li_scale"),
-        qrcode:     $("#li_qrcode"),
-        bmgr  :     $("#li_beacon_mgr"),
-        qmgr  :     $("#li_qrcode_mgr"),
+
 
         item_modal: $("#itemModal"),
         aItemFail:  $("#alert-item-fail"),
@@ -347,27 +342,6 @@ var app = {
                     break;
             }
         });
-
-/*
-        app.ctlMap.logger.click(function() {
-            $(document).trigger("pagechange", ["logger", $(this)]);
-        });
-        app.ctlMap.beacon.click(function() {
-            $(document).trigger("pagechange", ["beacon", $(this)]);
-        });
-        app.ctlMap.scale.click(function() {
-            $(document).trigger("pagechange", ["scale", $(this)]);
-        });
-        app.ctlMap.qrcode.click(function() {
-            $(document).trigger("pagechange", ["qrcode", $(this)]);
-        });
-        app.ctlMap.bmgr.click(function() {
-            $(document).trigger("pagechange", ["bmgr", $(this)]);
-        });
-        app.ctlMap.qmgr.click(function() {
-            $(document).trigger("pagechange", ["qmgr", $(this)]);
-        });
-*/
     },
     destroy: function() {
         console.log("destroy");
