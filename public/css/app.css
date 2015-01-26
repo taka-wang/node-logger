@@ -41,6 +41,10 @@
     color: #FFF;
 }
 
+.label {
+    margin-left: 5px;
+}
+
 /* Toggle Styles */
 
 #wrapper {

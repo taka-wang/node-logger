@@ -47,6 +47,45 @@
     <!-- template -->
     <script id="default-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
+        <hr>
+        <div class="panel panel-warning">
+            <div class="panel-heading">Items</div>
+            <div class="panel-body">
+                <p><span class="label label-info">GET</span> /items</p>
+                <p><span class="label label-success">POST</span> /items <span class="label label-danger"> qrcode</span><span class="label label-danger"> item</span></p>
+                <p><span class="label label-info">GET</span> /items/:qrcode</p>
+                <p><span class="label label-warning">PUT</span> /items/:qrcode<span class="label label-danger"> item</span></p>
+                <p><span class="label label-danger">DELETE</span> /items/:qrcode</p>
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">Beacons</div>
+            <div class="panel-body">
+                <p><span class="label label-info">GET</span> /beacons</p>
+                <p><span class="label label-success">POST</span> /beacons <span class="label label-danger"> id</span><span class="label label-danger"> name</span></p>
+                <p><span class="label label-info">GET</span> /beacons/:id</p>
+                <p><span class="label label-warning">PUT</span> /beacons/:id<span class="label label-danger"> name</span></p>
+                <p><span class="label label-danger">DELETE</span> /beacons/:id</p>
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Logs</div>
+            <div class="panel-body">
+                <p><span class="label label-info">GET</span> /logs</p>
+            </div>
+        </div>
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">Reboot</div>
+            <div class="panel-body">
+                <p><span class="label label-success">POST</span> /reboot</p>
+            </div>
+        </div>
+
+
+
     </script>
 
     <script id="logger-template" type="text/x-handlebars-template">
