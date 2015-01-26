@@ -96,21 +96,15 @@ var app = {
             }
         });
     },
-    get_items: function() {
+    get_items: function(s, e) {
         $.ajax({
             type: "GET",
             timeout: 1000,
             cache: false, // do not cache
             url: "/api/items",
             dataType: 'json',
-            success: function(data) {
-                data.forEach(function(element) {
-                    app.defaults.items[element.qrcode] = element.item;
-                });
-            },
-            error: function(xhr, type){
-                console.log("Fail!");
-            }
+            success: s,
+            error: e
         });
     },
     add_item: function(qrcode, item) {
@@ -275,7 +269,14 @@ var app = {
                 break;
             default:
                 app.get_beacons();
-                app.get_items();
+                app.get_items(function(data) {
+                    console.dir(data);
+                    data.forEach(function(element) {
+                        app.defaults.items[element.qrcode] = element.item;
+                    });
+                }, function(xhr, type){
+                    console.log("Fail!");
+                });
                 context = {title: "Welcome to D2D"};
                 app.ctlMap.container.html(app.template.default(context));
         }
