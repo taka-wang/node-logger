@@ -44,21 +44,15 @@ var app = {
         app.bindEvent();
         app.rende("default");
     },
-    get_beacons: function() {
+    get_beacons: function(successHandler, errHandler) {
         $.ajax({
             type: "GET",
             timeout: 1000,
             cache: false, // do not cache
             url: "/api/beacons",
             dataType: 'json',
-            success: function(data) {
-                data.forEach(function(beacon) {
-                    app.defaults.beacons[beacon.id] = beacon.name;
-                });
-            },
-            error: function(xhr, type){
-                console.log("Fail!");
-            }
+            success: successHandler,
+            error: errHandler
         });
     },
     add_beacon: function(id, name) {
@@ -96,15 +90,15 @@ var app = {
             }
         });
     },
-    get_items: function(s, e) {
+    get_items: function(successHandler, errHandler) {
         $.ajax({
             type: "GET",
-            timeout: 1000,
+            timeout: 5000,
             cache: false, // do not cache
             url: "/api/items",
             dataType: 'json',
-            success: s,
-            error: e
+            success: successHandler,
+            error: errHandler
         });
     },
     add_item: function(qrcode, item) {
@@ -232,13 +226,8 @@ var app = {
                 break;
             case "qmgr": //QRCODE item
                 context = {title: "Item Management", item: []};
-                $.ajax({
-                    type: "GET",
-                    timeout: 5000,
-                    cache: false, // do not cache
-                    url: "/api/items",
-                    dataType: 'json',
-                    success: function(data) {
+                app.get_items(                    
+                    function(data) { //success handler
                         for (var i = 0; i < data.length; i++) {
                             data[i].idx = "btn-qr-" + i;
                             context.item.push(data[i]);
@@ -261,22 +250,33 @@ var app = {
                             var qrcode = $.trim($(evt.target).prev().html());
                             app.update_item(qrcode, newValue);
                         });
-                    },
-                    error: function(xhr, type){
+                    }, 
+                    function(xhr, type) { // error handler
                         app.ctlMap.container.html(app.template.qmgr(context));
                     }
-                });
+                );
                 break;
             default:
-                app.get_beacons();
-                app.get_items(function(data) {
-                    console.dir(data);
-                    data.forEach(function(element) {
-                        app.defaults.items[element.qrcode] = element.item;
-                    });
-                }, function(xhr, type){
-                    console.log("Fail!");
-                });
+                app.get_beacons(
+                    function(data) {
+                        data.forEach(function(beacon) {
+                            app.defaults.beacons[beacon.id] = beacon.name;
+                        });
+                    },
+                    function(xhr, type) {
+                        console.log("Fail!");
+                    }
+                );
+                app.get_items(
+                    function(data) {
+                        data.forEach(function(element) {
+                            app.defaults.items[element.qrcode] = element.item;
+                        });
+                    }, 
+                    function(xhr, type){
+                        console.log("Fail!");
+                    }
+                );
                 context = {title: "Welcome to D2D"};
                 app.ctlMap.container.html(app.template.default(context));
         }
