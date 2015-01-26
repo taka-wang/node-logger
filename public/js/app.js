@@ -274,8 +274,16 @@ var app = {
                         todayHighlight: true
                     }).on("changeDate", function(ev) {
                         ev.target.name == "start" ? _start = ev.date : _end = ev.date
-                        console.log(_start);
-                        console.log(_end);
+                        if (_start && _end) {
+                            console.log(_start);
+                            console.log(_end);
+                            var rex = new RegExp($(this).val(), 'i');
+                            $('#tbl-log tr').hide();
+                            $('#tbl-log tr').filter(function () {
+                                return rex.test($(this).text());
+                            }).show();
+                        }
+                        
                         /*
                         if (_start && _end) {
                             console.log("date change");
