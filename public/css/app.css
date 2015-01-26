@@ -32,6 +32,11 @@
     display: none;
 }
 
+.datepicker{
+    background-color: #fff;
+    color: #000;
+}
+
 /* Toggle Styles */
 
 #wrapper {
