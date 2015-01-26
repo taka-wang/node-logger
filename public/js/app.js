@@ -11,15 +11,22 @@ var app = {
         logs:    []
     },
     ctlMap : {
-        container:  $("#container"),
-        li:         $("ul.sidebar-nav li"),
-
-        item_modal: $("#itemModal"),
-        aItemFail:  $("#alert-item-fail"),
-        aItemOk:    $("#alert-item-success"),
-        inputQR:    $("#inputQR"),
-        inputItem:  $("#inputItem"),
-        btnSaveItem:$("#btn-save-item-modal")
+        container:      $("#container"),
+        li:             $("ul.sidebar-nav li"),
+        //
+        item_modal:     $("#itemModal"),
+        aItemFail:      $("#alert-item-fail"),
+        aItemOk:        $("#alert-item-success"),
+        inputQR:        $("#inputQR"),
+        inputItem:      $("#inputItem"),
+        btnSaveItem:    $("#btn-save-item-modal"),
+        //
+        beacon_modal:   $("#beaconModal"),
+        aBeaconFail:    $("#alert-beacon-fail"),
+        aBeaconOk:      $("#alert-beacon-success"),
+        inputID:        $("#inputID"),
+        inputName:      $("#inputName"),
+        btnSaveBeacon:  $("#btn-save-beacon-modal")
     },
     template : {
         default: Handlebars.compile($("#default-template").html()),
@@ -56,7 +63,28 @@ var app = {
         });
     },
     add_beacon: function(id, name) {
-        console.log("TODO");
+        $.ajax({
+            type: "POST",
+            timeout: 1000,
+            cache: false, // do not cache
+            url: "/api/beacons",
+            data: { 
+                name: name, 
+                id: id
+            }
+        })
+        .done(function(msg) {
+            app.ctlMap.aBeaconOk.removeClass("hidden").delay(1000).queue(function(){
+                $(this).addClass("hidden").dequeue();
+                app.ctlMap.beacon_modal.modal("toggle"); //dismiss
+                app.rende("bmgr");
+            });
+        })
+        .fail (function( jqXHR, textStatus ) {
+            app.ctlMap.aItemFail.removeClass("hidden").delay(3000).queue(function(){
+                $(this).addClass("hidden").dequeue();
+            });
+        });
     },
     delete_beacon: function(id, name) {
 
