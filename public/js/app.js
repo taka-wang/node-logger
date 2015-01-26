@@ -270,6 +270,9 @@ var app = {
                 var logs = app.get_logs(function(context) {
                     app.ctlMap.container.html(app.template.logger(context));
                 });
+                $('.input-daterange').datepicker({
+                    todayBtn: "linked"
+                });
                 break;
             case "beacon":
                 context = {title : "Beacon"};
