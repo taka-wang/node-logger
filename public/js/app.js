@@ -258,7 +258,7 @@ var app = {
                     function(data) { //success handler
                         for (var i = 0; i < data.length; i++) {
                             data[i].idx = "btn-beacon-" + i;
-                            context.beacons.push(data[i]);
+                            context.beacon.push(data[i]);
                             app.defaults.beacons[data[i].id] = data[i].name; // update array
                         }
                         app.ctlMap.container.html(app.template.bmgr(context));
