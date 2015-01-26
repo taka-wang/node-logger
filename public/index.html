@@ -7,42 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="taka.wang">
-    <title>Lab</title>
-    <link href="css/bootstrap.min.css"    rel="stylesheet">
+    <title>D2D Lab</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
 </head>
 
 <body>
+
     <div id="wrapper">
-        <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        D2D Lab
-                    </a>
-                </li>
-                <li>
-                    <a id="logger_list" href="#logger">Work Log</a>
-                </li>
-                <li>
-                    <a id="beacon_list" href="#proximity">Proximity</a>
-                </li>
-                <li>
-                    <a id="scale_list" href="#scale">Scale</a>
-                </li>
-                <li>
-                    <a id="qrcode_list" href="#qrcode">Item</a>
-                </li>
-                <li>
-                    <a id="beacon_mgr_list" href="#scale-mgr">Beacon Management</a>
-                </li>
-                <li>
-                    <a id="qrcode_mgr_list" href="#qrcode-mgr">Item Management</a>
-                </li>
+                <li class="sidebar-brand"><a href="#">D2D Lab</a></li>
+                <li><a id="logger_list" href="#logger">Work Log</a></li>
+                <li><a id="beacon_list" href="#proximity">Proximity</a></li>
+                <li><a id="scale_list" href="#scale">Scale</a></li>
+                <li><a id="qrcode_list" href="#qrcode">Item</a></li>
+                <li><a id="beacon_mgr_list" href="#scale-mgr">Beacon Management</a></li>
+                <li><a id="qrcode_mgr_list" href="#qrcode-mgr">Item Management</a></li>
             </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
+        </div><!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -53,13 +36,14 @@
                     </div>
                 </div>
             </div>
-        </div><!-- /#wrapper -->
-    </div>
+        </div>
+    </div><!-- /#wrapper -->
 
     <!-- template -->
     <script id="default-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
     </script>
+
     <script id="logger-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
         <a href="#" class="btn btn-success pull-right" id="btn-export">Export</a>
@@ -83,11 +67,13 @@
                 {{/each}}
             </tbody>
         </table>
-    </script>
+    </script><!-- /#logger-template -->
+    
     <script id="beacon-template" type="text/x-handlebars-template">
         <div id="div-nearest"></div>
         <div id="div-rssi"></div>
     </script>
+    
     <script id="nearest-template" type="text/x-handlebars-template">
         <div class="panel panel-danger">
             <div class="panel-heading">
@@ -98,7 +84,8 @@
                 <div class="mqtt-sub">{{time}}</div>
             </div>
         </div>
-    </script>
+    </script><!-- /#nearest-template -->
+
     <script id="rssi-template" type="text/x-handlebars-template">
         <table id="tbl-rssi" class="table">
             <thead>
@@ -118,7 +105,8 @@
                 {{/each}}
             </tbody>
         </table>
-    </script>
+    </script><!-- /#rssi-template -->
+
     <script id="scale-template" type="text/x-handlebars-template">
         {{#if scale}}
             <div class="panel panel-danger">
@@ -133,7 +121,8 @@
         {{else}}
             <div class="mqtt-title">Mettler Toledo Scale</div>
         {{/if}}
-    </script>
+    </script><!-- /#scale-template -->
+
     <script id="qrcode-template" type="text/x-handlebars-template">
         {{#if payload}}
             <div class="panel panel-danger">
@@ -148,7 +137,8 @@
         {{else}}
             <div class="mqtt-title">QR Code</div>
         {{/if}}
-    </script>
+    </script><!-- /#qrcode-template -->
+
     <script id="beacon-mgr-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
         <a href="#" class="btn btn-success pull-right" id="btn-create-beacon">Create</a>
@@ -168,7 +158,8 @@
                 {{/each}}
             </tbody>
         </table>
-    </script>    
+    </script><!-- /#beacon-mgr-template -->
+
     <script id="qrcode-mgr-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
         <a href="#" class="btn btn-success pull-right" id="btn-create-item" data-toggle="modal" data-target="#itemModal">Create</a>
@@ -192,8 +183,10 @@
                 {{/each}}
             </tbody>
         </table>
-    </script>
+    </script><!-- /#qrcode-mgr-template -->
+
     <!-- /template -->
+
     <!-- modal -->
     <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -228,8 +221,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><!-- /#itemModal -->
     <!-- /modal -->
+
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/handlebars-v2.0.0.js"></script>
