@@ -47,13 +47,14 @@
 
     <script id="logger-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
-        <div class="input-daterange input-group" id="datepicker">
-            <span class="input-group-addon">From</span>
-            <input id="start_day" type="text" class="input-sm form-control" name="start" />
-            <span class="input-group-addon">To</span>
-            <input id="end_day" type="text" class="input-sm form-control" name="end" />
+        <div class="input-daterange" id="datepicker">
+            <span class="add-on">From</span>
+            <input id="start_day" type="text" class="input-small" name="start" />
+            <span class="add-on" style="vertical-align: top;height:20px">to</span>
+            <input id="end_day" type="text" class="input-small" name="end" />
             <a href="#" class="btn btn-success pull-right" id="btn-export">Export</a>
         </div>
+
         <table id="tbl-log" class="table">
             <thead>
                 <tr>
