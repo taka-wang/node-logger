@@ -157,7 +157,7 @@ var app = {
             url: "/api/items/" + qrcode,
             data: { 
                 item: item
-            }
+            },
             success: function(result) {
                 app.rende("qmgr");
             },
