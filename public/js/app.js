@@ -293,7 +293,7 @@ var app = {
                 var logs = app.get_logs(function(context) {
                     var spinner = app.loadAnimation("Spin")
                     app.ctlMap.container.html(app.template.logger(context));
-                    spinner.stop();
+                    //spinner.stop();
                     /*
                     //bind datepicker
                     $("#datepicker").datepicker({
