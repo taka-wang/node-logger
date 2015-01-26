@@ -143,6 +143,7 @@ var app = {
             timeout: 1000,
             url: "/api/items/" + qrcode,
             success: function(result) {
+                delete app.defaults.items[qrcode];
                 app.rende("qmgr");
             },
             error: function(xhr, type) {
