@@ -268,7 +268,11 @@ var app = {
         switch (type) {
             case "logger":
                 var logs = app.get_logs(function(context) {
+                    var target = document.getElementById('container');
+                    var spinner = new Spinner().spin();
+                    target.appendChild(spinner.el);
                     app.ctlMap.container.html(app.template.logger(context));
+                    spinner.stop();
                     /*
                     //bind datepicker
                     $("#datepicker").datepicker({
