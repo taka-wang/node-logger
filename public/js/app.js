@@ -12,7 +12,7 @@ var app = {
     },
     ctlMap : {
         container:  $("#container"),
-
+        li:         $("ul.sidebar-nav li"),
 
         item_modal: $("#itemModal"),
         aItemFail:  $("#alert-item-fail"),
@@ -60,6 +60,15 @@ var app = {
                 console.log("Fail!");
             }
         });
+    },
+    add_beacon: function(id, name) {
+        console.log("TODO");
+    },
+    delete_beacon: function(id, name) {
+
+    },
+    update_beacon: function(id, name) {
+
     },
     get_loggers: function(callback) {
         $.ajax({
@@ -319,7 +328,7 @@ var app = {
             app.render(app.defaults.active);
         });
 
-        $("ul.sidebar-nav li").click(function() {
+        app.ctlMap.li.click(function() {
             var id = $(this).children('a').attr('id');
             switch (id) {
                 case "li_logger":
