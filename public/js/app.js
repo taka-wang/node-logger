@@ -151,6 +151,20 @@ var app = {
         });
     },
     update_item: function(qrcode, item) {
+        $.ajax({
+            type: "PUT",
+            timeout: 1000,
+            url: "/api/items/" + qrcode,
+            data: { 
+                item: item
+            }
+            success: function(result) {
+                app.rende("qmgr");
+            },
+            error: function(xhr, type) {
+                alert("Fail");
+            }
+        });
         console.log("TODO");
         console.log(qrcode);
         console.log(item);
