@@ -315,6 +315,14 @@ var app = {
         $(document).on("click", "#btn-export", function(){
             app.json2csv(app.defaults.logs, new Date().toISOString(), false);
         });
+
+        app.ctlMap.btnSaveBeacon.click(function() {
+            if ( app.ctlMap.inputID.val().length > 0 && app.ctlMap.inputName.val().length > 0 ) {
+                app.add_beacon(app.ctlMap.inputID.val(), app.ctlMap.inputName.val());
+            } else {
+                app.ctlMap.aBeaconFail.removeClass("hidden");
+            }
+        });
         
         app.ctlMap.btnSaveItem.click(function() {
             if ( app.ctlMap.inputItem.val().length > 0 && app.ctlMap.inputQR.val().length > 0 ) {
