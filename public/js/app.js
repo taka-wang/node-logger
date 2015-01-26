@@ -87,10 +87,14 @@ var app = {
         });
     },
     delete_beacon: function(id, name) {
-
+        console.log("TODO-DELETE");
+        console.log(id);
+        console.log(name);
     },
     update_beacon: function(id, name) {
-
+        console.log("TODO-UPDATE");
+        console.log(id);
+        console.log(name);
     },
     get_loggers: function(callback) {
         $.ajax({
@@ -249,8 +253,36 @@ var app = {
                 app.ctlMap.container.html(app.template.qrcode(context));
                 break;
             case "bmgr":
-                context = {title: "BMGR"};
-                app.ctlMap.container.html(app.template.bmgr(context));
+                context = {title: "Beacon Management", beacons: []};
+                app.get_beacons(                    
+                    function(data) { //success handler
+                        for (var i = 0; i < data.length; i++) {
+                            data[i].idx = "btn-beacon-" + i;
+                            context.beacons.push(data[i]);
+                            app.beacons.items[data[i].qrcode] = data[i].item; // update array
+                        }
+                        app.ctlMap.container.html(app.template.bmgr(context));
+
+                        $("#tbl-beacon").editableTableWidget();
+                        
+                        // DELETE
+                        $("[id^=btn-beacon-]").click(function() {
+                            var id = $.trim($(this).parent().parent().children().eq(0).html()),
+                                name   = $.trim($(this).parent().parent().children().eq(1).html());
+                            app.delete_beacon(id, name); // delete item
+                        });
+                        
+                        // UPDATE
+                        $("#tbl-beacon td").on("change", function(evt, newValue) {
+                            if (evt.target.cellIndex != 1) return false; // reject change
+                            var id = $.trim($(evt.target).prev().html());
+                            app.update_beacon(id, newValue);
+                        });
+                    }, 
+                    function(xhr, type) { // error handler
+                        app.ctlMap.container.html(app.template.bmgr(context));
+                    }
+                );
                 break;
             case "qmgr": //QRCODE item
                 context = {title: "Item Management", item: []};
