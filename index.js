@@ -7,7 +7,6 @@ var express      = require("express")               // call express
     , app        = express()                        // define our app using express
     , server     = require("http").Server(app) 
     , bodyParser = require("body-parser") 
-    , moment     = require("moment") 
     , config     = require("./config.json") 
     , port       = process.env.PORT || config.web_port
     , router     = express.Router()                 //routes for api
@@ -18,7 +17,7 @@ var express      = require("express")               // call express
     , latest     = {
         scale: 0,
         nearest: "",
-        qrcode: ""
+        qrcode:  ""
     }
 
 /**********************************************************************
@@ -49,11 +48,6 @@ router.route("/")
         res.json({ message: "API works" });
     });
 
-router.route("/last")
-    .get(function(req, res) {
-        res.json(latest);
-    });
-
 router.route("/items")
     // read a list of items
     .get(function(req, res) {
@@ -70,7 +64,7 @@ router.route("/items")
         if (req.body.qrcode && req.body.item) {
             var item = new Item({
                 qrcode: req.body.qrcode,
-                item: req.body.item,
+                item:   req.body.item,
             });
             item.save(function(err) {
                 if (!err) {
@@ -84,15 +78,15 @@ router.route("/items")
         }
     });
 
-router.route("/items/:item_name")
+router.route("/items/:qrcode")
     // read a single item by id
     .get(function(req, res) {
-        return Item.findOne({ "qrcode" : req.params.item_name}, function(err, item) {
+        return Item.findOne({ "qrcode" : req.params.qrcode}, function(err, item) {
             if (item) {
                 if (!err) {
                     res.json(item);
                 } else {
-                    res.json(500, { message: err });
+                    res.json(400, { message: err });
                 }
             } else {
                 res.json(404, { message: "Not found"});
@@ -101,7 +95,7 @@ router.route("/items/:item_name")
     })
     // update a single item by id
     .put(function(req, res) {
-        return Item.findOne({ "qrcode" : req.params.item_name}, function(err, item) {
+        return Item.findOne({ "qrcode" : req.params.qrcode}, function(err, item) {
             if (item && req.body.item) {
                 item.item = req.body.item;
                 return item.save(function(err) {
@@ -118,7 +112,7 @@ router.route("/items/:item_name")
     })
     // delete a single item by id
     .delete(function(req, res) {
-        return Item.findOne({ "qrcode" : req.params.item_name}, function(err, item) {
+        return Item.findOne({ "qrcode" : req.params.qrcode}, function(err, item) {
             if (item) {
                 return item.remove(function(err) {
                     if (!err) {
