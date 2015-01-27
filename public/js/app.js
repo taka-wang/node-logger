@@ -456,7 +456,7 @@ var app = {
 
         $(window).hashchange(function() {
             app.defaults.active = location.hash.substring(1);
-            if (app.defaults.active > 0) {
+            if (app.defaults.active.length > 0) {
                 $("#li_" + app.defaults.active).addClass("active").siblings().removeClass("active");
             } else {
                 $("li").removeClass("active");
