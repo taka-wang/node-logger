@@ -31,8 +31,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public")); // serve static files
 app.use("/api", router);                        // prefix router with /api
 app.use(function(req, res, next) {              // Allow CORS
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
     next();
 });
 server.listen(port, function(){
