@@ -185,17 +185,12 @@
                 </div>
             </div>
         {{else}}
-            <div class="mqtt-title">QR Code</div>
+            <h1>QR Code</h1>
         {{/if}}
     </script><!-- /#qrcode-template -->
 
     <script id="beacon-mgr-template" type="text/x-handlebars-template">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h1>{{title}}</h1>
-            </div>
-        </div>
-        
+        <h1>{{title}}</h1>
         <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#beaconModal">Create</a>
         <table id="tbl-beacon" class="table">
             <thead>
@@ -218,11 +213,7 @@
     </script><!-- /#beacon-mgr-template -->
 
     <script id="qrcode-mgr-template" type="text/x-handlebars-template">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h1>{{title}}</h1>
-            </div>
-        </div>
+        <h1>{{title}}</h1>
         <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#itemModal">Create</a>
         <table id="tbl-item" class="table">
             <thead>
