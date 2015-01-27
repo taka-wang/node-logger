@@ -455,29 +455,16 @@ var app = {
             if (app.defaults.active == type) app.rende(type);
         });
 
-/*
-        $(document).on("pagechange", function(e, page, obj) {
-            app.defaults.active = page;
-            obj.addClass("active").siblings().removeClass("active");
-            app.rende(app.defaults.active);
-        });
-*/
         $(window).hashchange(function() {
             app.defaults.active = location.hash.substring(1);
             $("#li_" + app.defaults.active).addClass("active").siblings().removeClass("active");
             app.rende(app.defaults.active);
-            //console.log(location.hash);
+            console.log("DEBUG: " + location.hash);
         });
-/*
-        app.ctlMap.li.click(function() {
-            $(document).trigger("pagechange", [ $(this).children("a").attr("id").substring(3), $(this) ]);
-        });
-*/
     }
 };
 
 $(function(){
     app.init();
-    $(window).hashchange();
     mqtt.connect();
 });
