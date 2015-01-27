@@ -44,7 +44,6 @@ var app = {
         app.clear_storage();
         app.bindEvent();
         $(window).hashchange();
-        //app.rende("default");
     },
     destroy: function() {
         console.log("destroy");
