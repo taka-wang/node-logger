@@ -394,8 +394,6 @@ var app = {
     bindEvent: function() {
         console.log("bindEvent");
 
-
-
         $(document).on("click", "#btn-export", function(){
             app.json2csv(app.defaults.logs, new Date().toISOString(), false);
         });
@@ -456,14 +454,13 @@ var app = {
         });
 
         $(window).hashchange(function() {
-            if (location.hash.length > 0) {
-                app.defaults.active = location.hash.substring(1);
+            app.defaults.active = location.hash.substring(1);
+            if (app.defaults.active > 0) {
                 $("#li_" + app.defaults.active).addClass("active").siblings().removeClass("active");
-                app.rende(app.defaults.active);
             } else {
                 $("li").removeClass("active");
             }
-            console.log("DEBUG: " + location.hash);
+            app.rende(app.defaults.active);
         });
     }
 };
