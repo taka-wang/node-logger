@@ -456,9 +456,13 @@ var app = {
         });
 
         $(window).hashchange(function() {
-            app.defaults.active = location.hash.substring(1);
-            $("#li_" + app.defaults.active).addClass("active").siblings().removeClass("active");
-            app.rende(app.defaults.active);
+            if (location.hash.length > 0) {
+                app.defaults.active = location.hash.substring(1);
+                $("#li_" + app.defaults.active).addClass("active").siblings().removeClass("active");
+                app.rende(app.defaults.active);
+            } else {
+                $("li").removeClass("active");
+            }
             console.log("DEBUG: " + location.hash);
         });
     }
