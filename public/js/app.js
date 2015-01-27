@@ -423,7 +423,7 @@ var app = {
                     context = { scale: obj, time: new Date().toLocaleString() };
                     localStorage.setItem("scale", JSON.stringify(context));
                     break;
-                case "qrcode":
+                case "item":
                     context = { 
                         payload: (typeof app.defaults.items[obj] == "undefined") ? obj : app.defaults.items[obj], 
                         time: new Date().toLocaleString() 

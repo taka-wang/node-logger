@@ -47,7 +47,7 @@ var mqtt = {
                 $(document).trigger("mqttchange", ["scale", payload]);
                 break;
             case "/lab3/qr/":
-                $(document).trigger("mqttchange", ["qrcode", payload]);
+                $(document).trigger("mqttchange", ["item", payload]);
                 break;
             case "/lab3/ble/nearest/":
                 $(document).trigger("mqttchange", ["nearest", payload]);
