@@ -73,7 +73,7 @@ var app = {
                     delete data[i]._id;
                     delete data[i].__v;
                 }
-                if (callback) callback({title: "Work Log", log: data});
+                if (callback) callback({title: "Work Logs", log: data});
                 data.unshift({"scale": "Scale (g)", "nearest": "Who", "qrcode": "Item", "created_at": "Time"});
                 app.defaults.logs = data;
             },
