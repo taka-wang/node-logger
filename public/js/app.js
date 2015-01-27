@@ -89,7 +89,7 @@ var app = {
             timeout: 1000,
             cache: false, // do not cache
             url: "/api/beacons",
-            dataType: 'json',
+            dataType: "json",
             success: successHandler,
             error: errHandler
         });
@@ -158,7 +158,7 @@ var app = {
             timeout: 5000,
             cache: false, // do not cache
             url: "/api/items",
-            dataType: 'json',
+            dataType: "json",
             success: successHandler,
             error: errHandler
         });
@@ -222,7 +222,7 @@ var app = {
     },
     json2csv: function(JSONData, ReportTitle, ShowLabel) {
         console.log("json2csv");
-        var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;      
+        var arrData = typeof JSONData != "object" ? JSON.parse(JSONData) : JSONData;      
         var CSV = '';    
         if (ShowLabel) {
             var row = "";         
@@ -248,7 +248,7 @@ var app = {
         //Generate a file name
         var fileName = "D2D_";
         fileName += ReportTitle.replace(/ /g,"_");           
-        var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);        
+        var uri = "data:text/csv;charset=utf-8," + escape(CSV);        
         //this trick will generate a temp <a /> tag
         var link = document.createElement("a");    
         link.href = uri;
@@ -332,7 +332,7 @@ var app = {
                     }
                 );
                 break;
-            case "item_mgr": //QRCODE item
+            case "item_mgr": 
                 context = {title: "Item Management", item: []};
                 app.get_items(                    
                     function(data) { //success handler
@@ -458,7 +458,9 @@ var app = {
         });
 
         app.ctlMap.li.click(function() {
-            var id = $(this).children('a').attr('id');
+            var id = $(this).children("a").attr("id");
+            $(document).trigger("pagechange", [ id.substring(3), $(this) ]);
+            /*
             switch (id) {
                 case "li_logger":
                     $(document).trigger("pagechange", ["logger", $(this)]);
@@ -475,10 +477,11 @@ var app = {
                 case "li_beacon_mgr":
                     $(document).trigger("pagechange", ["beacon_mgr", $(this)]);
                     break;
-                case "li_qrcode_mgr":
+                case "li_item_mgr":
                     $(document).trigger("pagechange", ["item_mgr", $(this)]);
                     break;
             }
+            */
         });
     }
 };
