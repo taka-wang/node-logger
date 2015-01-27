@@ -394,9 +394,7 @@ var app = {
     bindEvent: function() {
         console.log("bindEvent");
 
-        $(window).hashchange(function() {
-            console.log(location.hash);
-        });
+
 
         $(document).on("click", "#btn-export", function(){
             app.json2csv(app.defaults.logs, new Date().toISOString(), false);
@@ -461,6 +459,11 @@ var app = {
             app.defaults.active = page;
             obj.addClass("active").siblings().removeClass("active");
             app.rende(app.defaults.active);
+        });
+
+        $(window).hashchange(function(e) {
+            console.log(e);
+            console.log(location.hash);
         });
 
         app.ctlMap.li.click(function() {
