@@ -50,6 +50,10 @@ p {
     font-size: 120%;
 }
 
+td {
+    vertical-align: baseline;
+}
+
 /* Toggle Styles */
 
 #wrapper {
