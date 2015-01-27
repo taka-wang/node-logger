@@ -298,7 +298,7 @@ var app = {
                 context = (localStorage["scale"]) ? JSON.parse(localStorage["scale"]) : {};
                 app.ctlMap.container.html(app.template.scale(context));
                 break;
-            case "qrcode":
+            case "item":
                 context = (localStorage["qrcode"]) ? JSON.parse(localStorage["qrcode"]) : {};
                 app.ctlMap.container.html(app.template.qrcode(context));
                 break;
