@@ -29,12 +29,12 @@ app.disable("etag");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public")); // serve static files
-app.use("/api", router);                        // prefix router with /api
 app.use(function(req, res, next) {              // Allow CORS
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
     next();
 });
+app.use("/api", router);                        // prefix router with /api
 server.listen(port, function(){
     console.log("Server on port " + port);
 });
