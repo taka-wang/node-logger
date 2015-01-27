@@ -50,9 +50,11 @@ p {
     font-size: 120%;
 }
 
-td {
+.table>tfoot>tr>td , td {
     vertical-align: baseline;
 }
+
+
 
 /* Toggle Styles */
 
