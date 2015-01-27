@@ -43,7 +43,8 @@ var app = {
         console.log("init");
         app.clear_storage();
         app.bindEvent();
-        app.rende("default");
+        $(window).hashchange();
+        //app.rende("default");
     },
     destroy: function() {
         console.log("destroy");
