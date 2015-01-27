@@ -394,6 +394,10 @@ var app = {
     bindEvent: function() {
         console.log("bindEvent");
 
+        $(window).hashchange(function() {
+            console.log(location.hash);
+        });
+
         $(document).on("click", "#btn-export", function(){
             app.json2csv(app.defaults.logs, new Date().toISOString(), false);
         });
@@ -467,5 +471,6 @@ var app = {
 
 $(function(){
     app.init();
+    $(window).hashchange();
     mqtt.connect();
 });
