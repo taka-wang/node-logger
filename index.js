@@ -6,7 +6,7 @@
 var express      = require("express")               // call express
     , app        = express()                        // define our app using express
     , server     = require("http").Server(app) 
-    , bodyParser = require("body-parser") 
+    , bodyParser = require("body-parser")
     , config     = require("./config.json") 
     , port       = process.env.PORT || config.web_port
     , router     = express.Router()                 //routes for api
