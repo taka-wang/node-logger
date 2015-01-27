@@ -21,13 +21,27 @@
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand" id="li_twitter"><a  href="https://twitter.com/DRCloveIoT" target="_blank">D2D Lab</a></li>
-                <li id="li_logger"><a      href="#logger">Work Logs</a></li>
-                <li id="li_beacon"><a      href="#beacon">Proximity</a></li>
-                <li id="li_item"><a        href="#item">Items</a></li>
-                <li id="li_scale"><a       href="#scale">Scale</a></li>
-                <li id="li_beacon_mgr"><a  href="#beacon_mgr">Beacon Management</a></li>
-                <li id="li_item_mgr"><a    href="#item_mgr">Item Management</a></li>
+                <li class="sidebar-brand" id="li_twitter">
+                    <a  href="https://twitter.com/DRCloveIoT" target="_blank">D2D Lab</a>
+                </li>
+                <li id="li_logger">
+                    <a href="#logger">Work Logs</a>
+                </li>
+                <li id="li_beacon">
+                    <a href="#beacon">Proximity</a>
+                </li>
+                <li id="li_item">
+                    <a href="#item">Items</a>
+                </li>
+                <li id="li_scale">
+                    <a href="#scale">Scale</a>
+                </li>
+                <li id="li_beacon_mgr">
+                    <a href="#beacon_mgr">Beacon Management</a>
+                </li>
+                <li id="li_item_mgr">
+                    <a href="#item_mgr">Item Management</a>
+                </li>
             </ul>
         </div><!-- /#sidebar-wrapper -->
 
@@ -96,7 +110,7 @@
             <input id="end_day" type="text" class="input-small" name="end" />
         </div>
         -->
-        <a href="#" class="btn btn-success pull-right" id="btn-export">Export</a>
+        <a href="#logger" class="btn btn-success pull-right" id="btn-export">Export</a>
 
         <table id="tbl-log" class="table">
             <thead>
@@ -192,7 +206,7 @@
 
     <script id="beacon-mgr-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
-        <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#beaconModal">Create</a>
+        <a href="#beacon-mgr" class="btn btn-success pull-right" data-toggle="modal" data-target="#beaconModal">Create</a>
         <table id="tbl-beacon" class="table">
             <thead>
                 <tr>
@@ -206,7 +220,7 @@
                 <tr>
                     <td>{{id}}</td>
                     <td>{{name}}</td>
-                    <td><a href="#" class="btn btn-danger btn-sm" id={{idx}}>Delete</a></td>
+                    <td><a href="#beacon-mgr" class="btn btn-danger btn-sm" id={{idx}}>Delete</a></td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -215,7 +229,7 @@
 
     <script id="qrcode-mgr-template" type="text/x-handlebars-template">
         <h1>{{title}}</h1>
-        <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#itemModal">Create</a>
+        <a href="#item_mgr" class="btn btn-success pull-right" data-toggle="modal" data-target="#itemModal">Create</a>
         <table id="tbl-item" class="table">
             <thead>
                 <tr>
@@ -229,7 +243,7 @@
                 <tr>
                     <td>{{qrcode}}</td>
                     <td>{{item}}</td>
-                    <td><a href="#" class="btn btn-danger btn-sm" id={{idx}}>Delete</a></td>
+                    <td><a href="#item_mgr" class="btn btn-danger btn-sm" id={{idx}}>Delete</a></td>
                 </tr>
                 {{/each}}
             </tbody>
