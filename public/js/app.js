@@ -462,6 +462,7 @@ var app = {
                 $("li").removeClass("active");
             }
             app.rende(app.defaults.active);
+            console.log("DEBUG: " + location.hash);
         });
     }
 };
