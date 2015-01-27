@@ -114,7 +114,7 @@ var app = {
             });
         })
         .fail (function( jqXHR, textStatus ) {
-            app.ctlMap.aItemFail.removeClass("hidden").delay(3000).queue(function(){
+            app.ctlMap.aBeaconFail.removeClass("hidden").delay(3000).queue(function(){
                 $(this).addClass("hidden").dequeue();
             });
         });
@@ -458,30 +458,7 @@ var app = {
         });
 
         app.ctlMap.li.click(function() {
-            var id = $(this).children("a").attr("id");
-            $(document).trigger("pagechange", [ id.substring(3), $(this) ]);
-            /*
-            switch (id) {
-                case "li_logger":
-                    $(document).trigger("pagechange", ["logger", $(this)]);
-                    break;
-                case "li_beacon":
-                    $(document).trigger("pagechange", ["beacon", $(this)]);
-                    break;
-                case "li_scale":
-                    $(document).trigger("pagechange", ["scale", $(this)]);
-                    break;
-                case "li_qrcode":
-                    $(document).trigger("pagechange", ["qrcode", $(this)]);
-                    break;
-                case "li_beacon_mgr":
-                    $(document).trigger("pagechange", ["beacon_mgr", $(this)]);
-                    break;
-                case "li_item_mgr":
-                    $(document).trigger("pagechange", ["item_mgr", $(this)]);
-                    break;
-            }
-            */
+            $(document).trigger("pagechange", [ $(this).children("a").attr("id").substring(3), $(this) ]);
         });
     }
 };
