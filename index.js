@@ -61,7 +61,7 @@ router.route("/items")
             if (!err) {
                 res.json(items);
             } else {
-                res.json(500, { message: "Fail to get items" });
+                res.json(400, { message: "Fail to get items" });
             }
         });
     })
@@ -76,7 +76,7 @@ router.route("/items")
                 if (!err) {
                     res.json(201, { message: "Item created" });
                 } else {
-                    res.json(500, { message: err });
+                    res.json(400, { message: err });
                 }
             });
         } else {
@@ -140,7 +140,7 @@ router.route("/beacons")
             if (!err) {
                 res.json(beacons);
             } else {
-                res.json(500, { message: "Fail to get beacons" });
+                res.json(400, { message: "Fail to get beacons" });
             }
         });
     })
@@ -155,7 +155,7 @@ router.route("/beacons")
                 if (!err) {
                     res.json(201, { message: "Beacon created" });
                 } else {
-                    res.json(500, { message: err });
+                    res.json(400, { message: err });
                 }
             });
         } else {
@@ -171,7 +171,7 @@ router.route("/beacons/:id")
                 if (!err) {
                     res.json(beacon);
                 } else {
-                    res.json(500, { message: err });
+                    res.json(400, { message: err });
                 }
             } else {
                 res.json(404, { message: "Not found"});
@@ -221,7 +221,7 @@ router.route("/logs")
                 if (!err) {
                     res.json(logs);
                 } else {
-                    res.json(500, { message: "Fail to get logs" });
+                    res.json(400, { message: "Fail to get logs" });
                 }
             });
         } else { // all
@@ -230,7 +230,7 @@ router.route("/logs")
                 if (!err) {
                     res.json(logs);
                 } else {
-                    res.json(500, { message: "Fail to get logs" });
+                    res.json(400, { message: "Fail to get logs" });
                 }
             });
         }

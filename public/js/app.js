@@ -114,6 +114,7 @@ var app = {
             });
         })
         .fail (function( jqXHR, textStatus ) {
+            console.log(textStatus);
             app.ctlMap.aBeaconFail.removeClass("hidden").delay(3000).queue(function(){
                 $(this).addClass("hidden").dequeue();
             });
@@ -183,6 +184,7 @@ var app = {
             });
         })
         .fail (function( jqXHR, textStatus ) {
+            console.log(textStatus);
             app.ctlMap.aItemFail.removeClass("hidden").delay(3000).queue(function(){
                 $(this).addClass("hidden").dequeue();
             });
