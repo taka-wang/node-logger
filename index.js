@@ -7,8 +7,9 @@ var express      = require("express")               // call express
     , app        = express()                        // define our app using express
     , server     = require("http").Server(app) 
     , bodyParser = require("body-parser")
-    , config     = require("./config.json") 
-    , port       = process.env.PORT || config.web_port
+    , config     = require("./config.json")
+    , os         = require("os") 
+    , port       = os.arch() == "arm" ? config.web_port : config.cloud_port
     , router     = express.Router()                 //routes for api
     , Log        = require("./model/log")
     , Beacon     = require("./model/beacon")
