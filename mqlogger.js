@@ -10,6 +10,7 @@ var mqtt         = require("mqtt")
     , Beacon     = require("./model/beacon")
     , Item       = require("./model/item")
     , db         = require("./db") 
+    , os         = require("os")
     , latest     = {
         scale: 0,
         nearest: "",
@@ -30,7 +31,9 @@ mqttclnt.on("connect", function(){
                     break;
                 case config.topic_scale:
                     latest["scale"] = payload.toString();
-                    if (config.tainan && latest["qrcode"].length > 0 && latest["nearest"].length > 0) { // publish new log
+                    if ( os.arch() == "arm" 
+                            && latest["qrcode"].length > 0 
+                            && latest["nearest"].length > 0 ) { // publish new log
                         mqttclnt.publish(config.topic_log, JSON.stringify(latest), function(){
                             latest["qrcode"] = "";
                             latest["nearest"]= "";
