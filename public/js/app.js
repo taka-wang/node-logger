@@ -86,7 +86,7 @@ var app = {
         console.log("get_beacons");
         $.ajax({
             type: "GET",
-            timeout: 1000,
+            timeout: 5000,
             cache: false, // do not cache
             url: "/api/beacons",
             dataType: "json",
@@ -98,7 +98,7 @@ var app = {
         console.log("add_beacon");
         $.ajax({
             type: "POST",
-            timeout: 1000,
+            timeout: 5000,
             cache: false, // do not cache
             url: "/api/beacons",
             data: { 
@@ -124,7 +124,7 @@ var app = {
         console.log("delete_beacon");
         $.ajax({
             type: "DELETE",
-            timeout: 1000,
+            timeout: 5000,
             url: "/api/beacons/" + id,
             success: function(result) {
                 delete app.defaults.beacons[id];
@@ -139,7 +139,7 @@ var app = {
         console.log("update_beacon");
         $.ajax({
             type: "PUT",
-            timeout: 1000,
+            timeout: 5000,
             url: "/api/beacons/" + id,
             data: { 
                 name: name
@@ -168,7 +168,7 @@ var app = {
         console.log("add_item");
         $.ajax({
             type: "POST",
-            timeout: 1000,
+            timeout: 5000,
             cache: false, // do not cache
             url: "/api/items",
             data: { 
@@ -194,7 +194,7 @@ var app = {
         console.log("delete_item");
         $.ajax({
             type: "DELETE",
-            timeout: 1000,
+            timeout: 5000,
             url: "/api/items/" + qrcode,
             success: function(result) {
                 delete app.defaults.items[qrcode];
@@ -209,7 +209,7 @@ var app = {
         console.log("update_item");
         $.ajax({
             type: "PUT",
-            timeout: 1000,
+            timeout: 5000,
             url: "/api/items/" + qrcode,
             data: { 
                 item: item
