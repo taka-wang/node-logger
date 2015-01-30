@@ -267,6 +267,30 @@ var app = {
     rende: function(type) {
         console.log("rende - " + type);
         var context = null;
+        if (Object.keys(app.defaults.beacons).length == 0) {
+            app.get_beacons(
+                function(data) {
+                    data.forEach(function(beacon) {
+                        app.defaults.beacons[beacon.id] = beacon.name;
+                    });
+                },
+                function(xhr, type) {
+                    console.log("Fail!");
+                }
+            );
+        }
+        if (Object.keys(app.defaults.items).length == 0) {
+            app.get_items(
+                function(data) {
+                    data.forEach(function(element) {
+                        app.defaults.items[element.qrcode] = element.item;
+                    });
+                }, 
+                function(xhr, type){
+                    console.log("Fail!");
+                }
+            );
+        }
         switch (type) {
             case "logger":
                 var logs = app.get_logs(function(context) {
@@ -367,26 +391,6 @@ var app = {
                 );
                 break;
             default:
-                app.get_beacons(
-                    function(data) {
-                        data.forEach(function(beacon) {
-                            app.defaults.beacons[beacon.id] = beacon.name;
-                        });
-                    },
-                    function(xhr, type) {
-                        console.log("Fail!");
-                    }
-                );
-                app.get_items(
-                    function(data) {
-                        data.forEach(function(element) {
-                            app.defaults.items[element.qrcode] = element.item;
-                        });
-                    }, 
-                    function(xhr, type){
-                        console.log("Fail!");
-                    }
-                );
                 context = {title: "Dare to Dream"};
                 app.ctlMap.container.html(app.template.default(context));
         }
