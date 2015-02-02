@@ -425,15 +425,18 @@ var app = {
                 case "logger":
                     break;
                 case "scale":
+                    /*
                     if (parseFloat(payload) == 0) {
                         app.defaults.zerocount++;
                     } else {
                         app.defaults.zerocount = 0;
                     }
                     if (app.defaults.zerocount < 2) {
-                        context = { scale: obj, time: new Date().toLocaleString() };
-                        localStorage.setItem("scale", JSON.stringify(context));
+
                     }
+                    */
+                    context = { scale: obj, time: new Date().toLocaleString() };
+                    localStorage.setItem("scale", JSON.stringify(context));
                     break;
                 case "item":
                     context = { 
