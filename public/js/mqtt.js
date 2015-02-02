@@ -44,7 +44,6 @@ var mqtt = {
     handler: function(topic, payload) {
         switch (topic) {
             case "/lab3/scale/":
-                console.log(parseFloat(payload));
                 $(document).trigger("mqttchange", ["scale", payload]);
                 break;
             case "/lab3/qr/":
