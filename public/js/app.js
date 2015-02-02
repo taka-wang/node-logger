@@ -65,12 +65,16 @@ var app = {
             url: "/api/logs",
             dataType: 'json',
             success: function(data) {
+                var options = {
+                    weekday: "long", year: "numeric", month: "short",
+                    day: "numeric", hour: "2-digit", minute: "2-digit"
+                };
                 for (var i = 0; i < data.length; i++) {
                     data[i].nearest = (typeof app.defaults.beacons[data[i].nearest] == "undefined") 
                                         ? data[i].nearest : app.defaults.beacons[data[i].nearest]; 
                     data[i].qrcode  = (typeof app.defaults.items[data[i].qrcode] == "undefined") 
                                         ? data[i].qrcode : app.defaults.items[data[i].qrcode];
-                    data[i].created_at = new Date(data[i].created_at).toUTCString();
+                    data[i].created_at = new Date(data[i].created_at).toLocaleTimeString("en-us", options);
                     delete data[i]._id;
                     delete data[i].__v;
                 }
