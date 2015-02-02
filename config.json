@@ -2,7 +2,7 @@
     "mqtt_server"   : "localhost",
     "mqtt_port"     : 1883,
     "web_port"      : 80,
-    "cloud_port"    : 443,
+    "cloud_port"    : 8081,
     "mongodb_server": "mongodb://localhost/lab3",
     "topic_sub"     : "/lab3/#",
     "topic_qr"      : "/lab3/qr/",
