@@ -31,6 +31,7 @@ mqttclnt.on("connect", function(){
                     break;
                 case config.topic_scale:
                     latest["scale"] = payload.toString();
+                    /*
                     if ( os.arch() == "arm" 
                             && latest["qrcode"].length > 0 
                             && latest["nearest"].length > 0 ) { // publish new log
@@ -38,6 +39,10 @@ mqttclnt.on("connect", function(){
                             latest["qrcode"] = "";
                             latest["nearest"]= "";
                         });
+                    }
+                    */
+                    if (os.arch() == "arm") {
+                        mqttclnt.publish(config.topic_log, JSON.stringify(latest), function() {});
                     }
                     break;
                 case config.topic_log: // write log to mongodb
