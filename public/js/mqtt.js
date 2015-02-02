@@ -46,11 +46,11 @@ var mqtt = {
         switch (topic) {
             case "/lab3/scale/":
                 if (parseFloat(payload) == 0) {
-                    this.zero_count++;
+                    mqtt.zero_count++;
                 } else {
-                    this.zero_count = 0;
+                    mqtt.zero_count = 0;
                 }
-                if (this.zero_count < 2) {
+                if (mqtt.zero_count < 2) {
                     $(document).trigger("mqttchange", ["scale", payload]);
                 }
                 break;
