@@ -47,6 +47,7 @@ mqttclnt.on("connect", function(){
                     break;
                 case config.topic_log: // write log to mongodb
                     var clog = new Log(JSON.parse( payload.toString() ));
+                    console.dir(clog);
                     clog.save(function(err) {
                         if (err) {
                             console.log(err);
