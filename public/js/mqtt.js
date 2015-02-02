@@ -5,6 +5,7 @@
 */
 var mqtt = {
     client: null,
+    zero_count: 0,
     connect : function() {    
         this.client = new Paho.MQTT.Client(
                     window.location.hostname,
@@ -44,6 +45,13 @@ var mqtt = {
     handler: function(topic, payload) {
         switch (topic) {
             case "/lab3/scale/":
+                if (parseFloat(payload) == 0) {
+                    console.log("ZERO");
+                    zero_count++;
+                } else {
+                    zero_count = 0;
+                    console.log("NOT ZERO");
+                }
                 $(document).trigger("mqttchange", ["scale", payload]);
                 break;
             case "/lab3/qr/":
