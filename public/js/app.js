@@ -424,6 +424,11 @@ var app = {
                 case "logger":
                     break;
                 case "scale":
+                    if (parseFloat(obj) == 0) {
+                        console.log("ZERO");
+                    } else {
+                        console.log("NOT ZERO");
+                    }
                     context = { scale: obj, time: new Date().toLocaleString() };
                     localStorage.setItem("scale", JSON.stringify(context));
                     break;
