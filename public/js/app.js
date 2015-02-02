@@ -428,14 +428,16 @@ var app = {
                     
                     if (parseFloat(payload) == 0) {
                         app.defaults.zerocount++;
+                        console.log("ZERO");
                     } else {
                         app.defaults.zerocount = 0;
+                        console.log("NO ZERO");
                     }
                     if (app.defaults.zerocount < 2) {
                         context = { scale: obj, time: new Date().toLocaleString() };
                         localStorage.setItem("scale", JSON.stringify(context));
                     } else {
-                        return
+                        type = "pass";
                     }
                     
                     break;
