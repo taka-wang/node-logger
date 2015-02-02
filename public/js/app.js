@@ -5,6 +5,7 @@
 */
 var app = {
     defaults: {
+        zerocount: 0,
         active:  "",
         beacons: {},
         items:   {},
@@ -424,8 +425,15 @@ var app = {
                 case "logger":
                     break;
                 case "scale":
-                    context = { scale: obj, time: new Date().toLocaleString() };
-                    localStorage.setItem("scale", JSON.stringify(context));
+                    if (parseFloat(payload) == 0) {
+                        app.defaults.zerocount++;
+                    } else {
+                        app.defaults.zerocount = 0;
+                    }
+                    if (app.defaults.zerocount < 2) {
+                        context = { scale: obj, time: new Date().toLocaleString() };
+                        localStorage.setItem("scale", JSON.stringify(context));
+                    }
                     break;
                 case "item":
                     context = { 
