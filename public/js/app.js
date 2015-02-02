@@ -70,7 +70,7 @@ var app = {
                                         ? data[i].nearest : app.defaults.beacons[data[i].nearest]; 
                     data[i].qrcode  = (typeof app.defaults.items[data[i].qrcode] == "undefined") 
                                         ? data[i].qrcode : app.defaults.items[data[i].qrcode];
-                    data[i].created_at = new Date(data[i].created_at).toLocaleString();
+                    data[i].created_at = new Date(data[i].created_at).toUTCString();
                     delete data[i]._id;
                     delete data[i].__v;
                 }
