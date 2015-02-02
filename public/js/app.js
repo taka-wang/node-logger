@@ -426,7 +426,7 @@ var app = {
                     break;
                 case "scale":
                     
-                    if (parseFloat(payload) == 0) {
+                    if (parseFloat(obj) == 0) {
                         app.defaults.zerocount++;
                         console.log("ZERO");
                     } else {
