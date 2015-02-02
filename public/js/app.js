@@ -424,14 +424,11 @@ var app = {
             switch (type) {
                 case "logger":
                     break;
-                case "scale":
-                    
+                case "scale":                    
                     if (parseFloat(obj) == 0) {
                         app.defaults.zerocount++;
-                        console.log("ZERO");
                     } else {
                         app.defaults.zerocount = 0;
-                        console.log("NO ZERO");
                     }
                     if (app.defaults.zerocount < 2) {
                         context = { scale: obj, time: new Date().toLocaleString() };
@@ -439,7 +436,6 @@ var app = {
                     } else {
                         type = "pass";
                     }
-                    
                     break;
                 case "item":
                     context = { 
